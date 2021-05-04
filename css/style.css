@@ -177,8 +177,11 @@ nav ul li a span {
  }
 }
 footer {
- padding:30px 0;
- text-align:center
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   text-align: center;
+   padding: 30px 0;
 }
 footer .logo {
  margin-bottom:15px
@@ -618,4 +621,18 @@ div[role=navigation] {
  .event .content {
   padding:0 10px
  }
+}
+.rounded {
+ clip-path: circle();
+}
+.circleborder {
+ width: 100px;
+ height: 100px;
+ border-radius: 50px;
+ -webkit-border-radius: 50px;
+ -moz-border-radius: 50px;
+ background: url(URL) no-repeat;
+ box-shadow: 0 0 8px #ffffff;
+ -webkit-box-shadow: 0 0 8px #ffffff;
+ -moz-box-shadow: 0 0 8px #ffffff;
 }
