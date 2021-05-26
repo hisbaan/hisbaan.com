@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <!-- start header -->
     <head>
         <title>About</title>
         <meta charset="UTF-8" />
@@ -10,76 +10,117 @@
         <link rel="icon" href="img/favicon.png" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <style>
-         container {
-             padding-left: 1em;
-             padding-right: 1em;
-         }
-        </style>
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+        <script
+            src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+            integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+            crossorigin="anonymous"></script>
+        <script language="JavaScript" src='js/hamburger.js'></script>
     </head>
 
     <body>
 
-        <nav class="text-secondary">
-            <a href="#mobilenav" id="menu-open">
-                <span class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 32 32">
-                        <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z" />
-                    </svg>
-                </span>
-            </a>
-            <a href="index.html">
-                <span>Hisbaan Noorani</span>
-            </a>
-            <ul class="navbar-links">
-                <li> <a aria-current="page" title="Home" class="" href="index.html">HOME</a> </li>
-                <li> <a aria-current="page" title="About" class="active" href="about.html">ABOUT</a> </li>
-                <li> <a aria-current="page" title="Projects" class="" href="projects.html">PROJECTS</a> </li>
-                <li> <a aria-current="page" title="Contact" class="" href="contact.html">CONTACT</a> </li>
-            </ul>
-        </nav>
+        <header>
+            <div class="container">
+                <a class="logo" href="index.html">
+                    <span>Hisbaan Noorani</span>
+                </a>
 
-        <div style="padding-top: 5em; padding-left: 1em; padding-right: 1em;">
+                <nav class="site-nav">
+                    <ul>
+                        <li><a aria-current="page" title="hisbaan.com" class="" href="index.html">Home</a></li>
+                        <li><a aria-current="page" title="About" class="active" href="about.html">About</a></li>
+                        <li><a aria-current="page" title="Projects" class="" href="projects.html">Projects</a></li>
+                        <li><a aria-current="page" title="Contact" class="" href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div class="menu-toggle">
+                    <div class="hamburger">
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- start main page content -->
+        <div class="container">
             <h1>About</h1>
 
             <p>
                 Hi! My name is Hisbaan Noorani. I’m a computer science student at the University of Toronto who is passionate about Linux and open source development. I like working on side projects in my free time, you can check some of them out over <a href="https://github.com/hisbaan">here</a>.
             </p>
+
+            <!-- <p>
+                 Maxime nemo non similique. Qui veritatis reprehenderit ea. Minima iste qui dolore. Voluptatem aperiam consequatur iste consequuntur quia.
+                 </p>
+                 <p>
+                 Sit omnis asperiores consequatur. Cum reprehenderit distinctio fugiat omnis repellat sint nihil. Mollitia quis repellat consequatur quaerat soluta ducimus.
+                 </p>
+                 <p>
+                 Eum in iure optio qui ut qui. Sed eligendi nisi eligendi quia et sed. Aspernatur nam esse sapiente mollitia explicabo.
+                 </p>
+                 <p>
+                 Nesciunt quaerat dignissimos nihil sequi officia sunt. Pariatur eius dolor ipsa quidem. Porro aspernatur consequatur placeat et ab ratione quae. Consequatur non molestias sed debitis dicta. Nobis veniam iure in. Sed perspiciatis quo quibusdam ipsam mollitia sed adipisci voluptatem.
+                 </p>
+                 <p>
+                 Minima vero rerum rem nam rem soluta. Rerum tenetur expedita id eligendi illum. Odit rerum nihil officiis. Corrupti eum odit qui reprehenderit vero aut occaecati.
+                 </p>
+                 <p>
+                 Maxime nemo non similique. Qui veritatis reprehenderit ea. Minima iste qui dolore. Voluptatem aperiam consequatur iste consequuntur quia.
+                 </p>
+                 <p>
+                 Sit omnis asperiores consequatur. Cum reprehenderit distinctio fugiat omnis repellat sint nihil. Mollitia quis repellat consequatur quaerat soluta ducimus.
+                 </p>
+                 <p>
+                 Eum in iure optio qui ut qui. Sed eligendi nisi eligendi quia et sed. Aspernatur nam esse sapiente mollitia explicabo.
+                 </p>
+                 <p>
+                 Nesciunt quaerat dignissimos nihil sequi officia sunt. Pariatur eius dolor ipsa quidem. Porro aspernatur consequatur placeat et ab ratione quae. Consequatur non molestias sed debitis dicta. Nobis veniam iure in. Sed perspiciatis quo quibusdam ipsam mollitia sed adipisci voluptatem.
+                 </p>
+                 <p>
+                 Minima vero rerum rem nam rem soluta. Rerum tenetur expedita id eligendi illum. Odit rerum nihil officiis. Corrupti eum odit qui reprehenderit vero aut occaecati.
+                 </p>
+                 <p>
+                 Maxime nemo non similique. Qui veritatis reprehenderit ea. Minima iste qui dolore. Voluptatem aperiam consequatur iste consequuntur quia.
+                 </p>
+                 <p>
+                 Sit omnis asperiores consequatur. Cum reprehenderit distinctio fugiat omnis repellat sint nihil. Mollitia quis repellat consequatur quaerat soluta ducimus.
+                 </p>
+                 <p>
+                 Eum in iure optio qui ut qui. Sed eligendi nisi eligendi quia et sed. Aspernatur nam esse sapiente mollitia explicabo.
+                 </p>
+                 <p>
+                 Nesciunt quaerat dignissimos nihil sequi officia sunt. Pariatur eius dolor ipsa quidem. Porro aspernatur consequatur placeat et ab ratione quae. Consequatur non molestias sed debitis dicta. Nobis veniam iure in. Sed perspiciatis quo quibusdam ipsam mollitia sed adipisci voluptatem.
+                 </p>
+                 <p>
+                 Minima vero rerum rem nam rem soluta. Rerum tenetur expedita id eligendi illum. Odit rerum nihil officiis. Corrupti eum odit qui reprehenderit vero aut occaecati.
+                 </p> -->
         </div>
 
-        <footer class="footer">
-            <div class="container">
-                <div class="logo">
-                    <a aria-current="page" title="Hisbaan Noorani" class="" href="index.html">
-                        <!-- <div class="circleborder"><img src="img/favicon.png" /></div> -->
-                        <img class="rounded" src="img/favicon.png" alt="Hisbaan Noorani" />
-                    </a>
-                </div>
-                <div class="navlinks text-secondary">
-                    <ul class="navbar-links">
-                        <li> <a aria-current="page" title="Home" class="" href="index.html">HOME</a> </li>
-                        <li> <a aria-current="page" title="About" class="active" href="about.html">ABOUT</a> </li>
-                        <li> <a aria-current="page" title="Projects" class="" href="projects.html">PROJECTS</a> </li>
-                        <li> <a aria-current="page" title="Contact" class="" href="contact.html">CONTACT</a> </li>
-                    </ul>
-                    <!-- </div><a href="https://github.com/hisbaan" class="fa fa-github fa-3x"></a> -->
-                    <div class="navlinks text-secondary" style="margin-top: 22px; margin-bottom: 20px;">
-                        <ul class="navbar-links">
-                            <li><a href="https://github.com/hisbaan" class="fa fa-github fa-2x"></a></li>
-                            <li><a href="https://twitter.com/hisbaan" class="fa fa-twitter fa-2x"></a></li>
-                            <li><a href="mailto:hisbaan@gmail.com" class="fa fa-envelope fa-2x"></a></li>
-                        </ul>
-                    </div>
-                    <p class="text-tertiary">
-                        <a href="FEEDBACK FORM" target="new">
-                            Have feedback for me? Please let me know using this
-                            <span class="text-secondary">feedback form</span>.
-                        </a>
-                    </p>
-                    <p class="text-primary f-d">
-                        Copyright © Hisbaan Noorani 2021
-                    </p>
-                </div>
+        <footer>
+            <div class="footer-content">
+                <img class="footer-logo" src="img/favicon.png" />
+                <ul class="footer-links">
+                    <li> <a aria-current="page" title="Home" class="" href="index.html">Home</a> </li>
+                    <li> <a aria-current="page" title="About" class="active" href="about.html">About</a> </li>
+                    <li> <a aria-current="page" title="Projects" class="" href="projects.html">Projects</a> </li>
+                    <li> <a aria-current="page" title="Contact" class="" href="contact.html">Contact</a> </li>
+                </ul>
+                <ul class="socials">
+                    <li><a href="https://github.com/hisbaan" class="fa fa-github fa-2x"></a></li>
+                    <li><a href="https://twitter.com/hisbaannoorani" class="fa fa-twitter fa-2x"></a></li>
+                    <li><a href="https://www.linkedin.com/in/hisbaan-noorani-252654203/" class="fa fa-linkedin-square fa-2x"></a></li>
+                    <li><a href="mailto:hisbaan@gmail.com" class="fa fa-envelope fa-2x"></a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <a href="#" target="new">Have feedback? Let me know</a>
+                <p>Copyright &copy; Hisbaan Noorani 2021</p>
+            </div>
         </footer>
     </body>
 
