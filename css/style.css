@@ -221,93 +221,6 @@ transform: translateY(+3px);
 }
 /* end nav bar */
 
-/* start footer */
-/* footer { */
-/*   background: var(--base00); */
-/*   position: absolute; */
-/*   bottom: 0; */
-/*   width: 100%; */
-/*   text-align: center; */
-/*   padding: 30px 0; */
-/* } */
-
-/* footer ul { */
-/*   list-style: none; */
-/*   position: relative; */
-/* } */
-
-/* footer ul li a { */
-/*   list-style: none; */
-/*   padding: 2em 4em; */
-/*   color: var(--base07); */
-
-/*   align-items: center; */
-
-/*   text-align: center; */
-
-/*   text-transform: uppercase; */
-/*   text-decoration: none; */
-/* } */
-
-/* footer .logo { */
-/*   margin-bottom:15px */
-/* } */
-
-/* footer .logo img { */
-/*   width:50px */
-/* } */
-
-/* footer .navlinks ul { */
-/*   list-style:none */
-/* } */
-
-/* footer .navlinks ul li { */
-/*   display:inline-block; */
-/*   margin:0 10px */
-/* } */
-
-/* footer .f-d { */
-/*   margin-top:15px */
-/* } */
-/* end footer */
-
-h1 {
-  font-size:3em
-}
-
-h2 {
-  font-size:2.8em
-}
-
-h3 {
-  font-size:2.2em
-}
-
-h4 {
-  font-size:1.9em
-}
-
-h5 {
-  font-size:1.4em
-}
-
-a {
-  color: var(--base0E);
-  text-decoration: none;
-}
-
-/* my own ending stuff? */
-
-@media only screen and (max-width:800px) {
-  .event .content {
-    padding:0 10px
-  }
-}
-
-.rounded {
-  clip-path: circle();
-}
-
 /* begin footer */
 footer {
   background-color: var(--base00);
@@ -326,7 +239,7 @@ footer {
   width: 5em;
   clip-path: circle();
 
-  /* margin-top: 1em; */
+  /* padding-top: 1em; */
   /* position: relative; */
   /* overflow: hidden; */
   /* border-radius: 50%; */
@@ -388,9 +301,6 @@ footer {
 }
 
 .socials li a {
-  /* align-content: center; */
-  /* justify-content: center; */
-  /* text-align: center; */
   text-decoration: none;
   color: var(--base07);
   transition: color 400ms ease;
@@ -411,4 +321,109 @@ footer {
 .footer-bottom p {
   font-size: 14px;
   text-transform: capitalize;
+}
+/* end footer */
+
+h1 {
+  font-size:3em
+}
+
+h2 {
+  font-size:2.8em
+}
+
+h3 {
+  font-size:2.2em
+}
+
+h4 {
+  font-size:1.9em
+}
+
+h5 {
+  font-size:1.4em
+}
+
+a {
+  color: var(--base0E);
+  text-decoration: none;
+}
+
+/* my own ending stuff? */
+
+@media only screen and (max-width:800px) {
+  .event .content {
+    padding:0 10px
+  }
+}
+
+.rounded {
+  clip-path: circle();
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--base00);
+  font-size: 3rem;
+  color: var(--base07);
+  box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem, rgba(2, 6, 20, 0.1) 0px, 0.075rem, 0.157rem;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  transition: all 500ms;
+  overflow: hidden;
+  cursor: pointer;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card:hover {
+  box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+  transform: translateY(-3px) scale(1.1);
+}
+
+.card .card-header {
+  background: black;
+  height: 2.5em;
+}
+
+.background-image {
+  /* inset: 0px; */
+  opacity: 0.4;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 100% 0;
+  z-index: -1;
+  background-position: center center;
+  background-size: cover;
+}
+
+.card h1 {
+  position: absolute;
+  padding: 0 1em;
+  font-size: 20px;
+  z-index: 1;
+  text-decoration: none;
+  margin-top: 1em;
+}
+
+.card h1 a, .card h1 span {
+  color: var(--base07);
+}
+
+.card p {
+  padding: 0 1em;
+  font-size: 14px;
+  margin-bottom: 1em;
+}
+
+.projects {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  padding-bottom: 1em;
 }
