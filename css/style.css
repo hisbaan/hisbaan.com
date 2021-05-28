@@ -28,6 +28,13 @@ body {
   min-height: 100vh;
 }
 
+code {
+  background: var(--base01);
+  border-radius: 3px;
+  font-family: courirer, monospace;
+  padding: 0 3px;
+}
+
 .container {
   width: 90%;
   margin: 0 auto;
@@ -40,6 +47,7 @@ header {
   left: 0;
   width: 100%;
   position: relative;
+  z-index: 10;
 }
 
 /* clear fix */
@@ -397,7 +405,7 @@ a {
   height: 100%;
   object-fit: cover;
   object-position: 100% 0;
-  z-index: -1;
+  z-index: -10;
   background-position: center center;
   background-size: cover;
 }
