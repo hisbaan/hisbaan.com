@@ -104,8 +104,10 @@ header::after {
   text-decoration: none;
 }
 
-.site-nav ul li a:hover {
-  color: var(--base0E);
+@media (hover:hover) {
+  .site-nav ul li a:hover {
+    color: var(--base0E);
+  }
 }
 
 .site-nav ul li a::before {
@@ -120,9 +122,11 @@ header::after {
   width: 0;
 }
 
-.site-nav ul li a:hover::before {
-  width: 0;
-  transition: all ease-in-out 175ms;
+@media (hover:hover) {
+  .site-nav ul li a:hover::before {
+    width: 0;
+    transition: all ease-in-out 175ms;
+  }
 }
 
 .menu-toggle {
@@ -206,8 +210,14 @@ transform: translateY(+3px);
     padding: 0;
   }
 
-  .site-nav ul li a:hover, .site-nav ul li a.active {
-    color: var(--base0E);
+  @media (hover:hover) {
+    .site-nav ul li a:hover, .site-nav ul li a.active {
+      color: var(--base0E);
+    }
+    .site-nav ul li a:hover::before {
+      width: 100%;
+      transition: all ease-in-out 175ms;
+    }
   }
 
   .site-nav ul li a::before {
@@ -220,11 +230,6 @@ transform: translateY(+3px);
     position: absolute;
     top: 0;
     width: 0;
-  }
-
-  .site-nav ul li a:hover::before {
-    width: 100%;
-    transition: all ease-in-out 175ms;
   }
 }
 /* end nav bar */
@@ -288,8 +293,10 @@ footer {
   transition: color 400ms ease;
 }
 
-.footer-links li a:hover {
-  color: var(--base0E)
+@media (hover:hover) {
+  .footer-links li a:hover {
+    color: var(--base0E)
+  }
 }
 
 .socials {
@@ -314,8 +321,10 @@ footer {
   transition: color 400ms ease;
 }
 
-.socials a:hover {
-  color: var(--base0E)
+@media (hover:hover) {
+  .socials a:hover {
+    color: var(--base0E)
+  }
 }
 
 .footer-bottom {
@@ -381,25 +390,26 @@ a {
   border-radius: 4px;
   transition: all 500ms;
   overflow: hidden;
-  cursor: pointer;
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-.card:hover {
-  box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
-  transform: translateY(-3px) scale(1.05);
+@media (hover:hover) {
+  .card:hover {
+    box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+    transform: translateY(-3px) scale(1.05);
+  }
 }
 
 .card .card-header {
   background: black;
   height: 2.5em;
+  cursor: pointer;
 }
 
 .background-image {
-  /* inset: 0px; */
   opacity: 0.4;
   width: 100%;
   height: 100%;
@@ -417,9 +427,6 @@ a {
   z-index: 1;
   text-decoration: none;
   margin-top: 1em;
-}
-
-.card h1 a, .card h1 span {
   color: var(--base07);
 }
 

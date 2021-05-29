@@ -4,3 +4,10 @@ $(document).ready(function() {
         $(this).toggleClass('open');
     });
 });
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     document.querySelector('.menu-toggle').addEventListener("click", (e) => {
+//         document.querySelector('.site-nav').classList.toggle('site-nav--open');
+//         e.target.classList.toggle('open');
+//     })
+// })
