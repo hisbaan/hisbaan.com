@@ -28,6 +28,11 @@ body {
   min-height: 100vh;
 }
 
+.outline {
+  border-color: var(--base07);
+  border-width: 1px;
+}
+
 code {
   background: var(--base01);
   border-radius: 3px;
@@ -38,6 +43,11 @@ code {
 .container {
   width: 90%;
   margin: 0 auto;
+}
+
+.center {
+  justify-content: center;
+  text-align: center;
 }
 
 /* start nav bar */

@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <link rel="icon" href="img/favicon.png">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
         <script
             src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -44,14 +45,150 @@
         </header>
 
         <div class="container">
+
             <div class="center">
-                <h1>
-                    Hi there! I'm Hisbaan
+
+                <!--
+                     Do something to have this at the center for now,
+                     regardless of the screen size and then have the
+                     next section start just after it
+                -->
+
+                <h1 style="padding-bottom: 0; margin-bottom: 0;">
+                    Hello, I'm <a href=".">Hisbaan Noorani</a>.
                 </h1>
-                <p>
-                    I'm a computer science student at the University of Toronto. I'm passionate about Linux and open source development. I like working on side projects in my free time to learn and create. You can check some of them out <a href="projects.html">here</a>.
+                <h3 style="padding-top: 10px; margin-top: 0;">
+                    I'm a computer science student
+                </h3>
                 </p>
             </div>
+        </div>
+
+        <div class="container">
+            <h1>Projects</h1>
+            <p style="padding-bottom: 1em">
+                These are some of my projects. I've only included some highlights here but if you'd like to see more, take a look at my <a href="https://github.com/hisbaan">github</a>.
+            </p>
+            <div class="projects">
+                <div class="card">
+                    <a class="card-header" href="https://github.com/hisbaan/dotfiles-laptop">
+                        <h1>
+                            <span class="material-icons" style="font-size: 14px;"> book </span>
+                            dotfiles
+                        </h1>
+                        <img class="background-image" src="img/projects/dotfiles.png"></img>
+                    </a>
+                    <p>
+                        There's no place like <code>~/*</code>. My custom linux configuration.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <a class="card-header" href="https://github.com/hisbaan/latex-copy-scripts">
+                        <h1>
+                            <span class="material-icons" style="font-size: 14px;"> book </span>
+                            latex-copy-scripts
+                        </h1>
+                        <img class="background-image" src="img/projects/latex-scripts.png"></img>
+                    </a>
+                    <p>
+                        Some cool scripts to make using LaTeX in non-supported apps less painful.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <a class="card-header" href="https://github.com/hisbaan/sticky">
+                        <h1>
+                            <span class="material-icons" style="font-size: 14px;"> book </span>
+                            sticky
+                        </h1>
+                        <img class="background-image" src="img/projects/sticky.jpg"></img>
+                    </a>
+                    <p>
+                        An android app for scanning and organizing sticky notes.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <a class="card-header" href="https://github.com/hisbaan/uoft-notes">
+                        <h1>
+                            <span class="material-icons" style="font-size: 14px;"> book </span>
+                            uoft-notes
+                        </h1>
+                        <img class="background-image" src="img/projects/uoft-notes.png"></img>
+                    </a>
+                    <p>
+                        All the notes I bothered to digitize while at the university of Toronto.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <a class="card-header" href="https://github.com/eamonma/wikigraph">
+                        <h1>
+                            <span class="material-icons" style="font-size: 14px;"> book </span>
+                            wikigraph
+                        </h1>
+                        <img class="background-image" src="img/projects/wikigraph.png"></img>
+                    </a>
+                    <p>
+                        A python library for processing and extrapolating data from Wikipedia data-dumps, written primarily by myself and <a href="https://eamonma.com">Eamon Ma</a>.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <a class="card-header" href="http://ihsinformatics.com/products/">
+                        <h1>
+                            <span class="material-icons" style="font-size: 14px;"> book </span>
+                            Hydra
+                        </h1>
+                        <img class="background-image" src="img/projects/hydra.png"></img>
+                    </a>
+                    <p>
+                        As a Software Development intern at Interactive Health Solutions I helped work on and document Hydra, a mass screening program.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <a class="card-header" href="https://github.com/hisbaan/hisbaan.com">
+                        <h1>
+                            <span class="material-icons" style="font-size: 14px;"> book </span>
+                            hisbaan.com
+                        </h1>
+                        <img class="background-image" src="img/projects/hisbaan.com.png"></img>
+                    </a>
+                    <p>
+                        This website! Written by me in html, css, and some js.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <a class="card-header" href="https://github.com/hisbaan/hass">
+                        <h1>
+                            <span class="material-icons" style="font-size: 14px;"> book </span>
+                            hass
+                        </h1>
+                        <img class="background-image" src="img/projects/hass.png"></img>
+                    </a>
+                    <p>
+                        Hisbaan's Arch Setup Script. This is a script written to deploy my programs and dotfiles onto and Arch based.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Add programming language icons -->
+
+        <div class="container outline">
+            <h1>Skills</h1>
+            <ul><li>Python</li></ul>
+            <ul><li>Java</li></ul>
+            <ul><li>Android Development</li></ul>
+            <ul><li>Shell Script</li></ul>
+            <ul><li>HTML</li></ul>
+            <ul><li>CSS</li></ul>
+            <ul><li>JavaScript</li></ul>
+            <ul><li>LaTeX</li></ul>
         </div>
 
         <footer>
