@@ -23,6 +23,8 @@
 
     <body>
 
+        <div class="id" id="top" style="height: 60px;"> </div>
+
         <header>
             <div class="container">
                 <a class="logo" href="index.html">
@@ -31,10 +33,11 @@
 
                 <nav class="site-nav">
                     <ul>
-                        <li><a aria-current="page" title="hisbaan.com" class="active" href="index.html">Home</a></li>
-                        <li><a aria-current="page" title="About" class="" href="about.html">About</a></li>
-                        <li><a aria-current="page" title="Projects" class="" href="projects.html">Projects</a></li>
-                        <li><a aria-current="page" title="Contact" class="" href="contact.html">Contact</a></li>
+                        <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="#top">Home</a></li>
+                        <li><a aria-current="page" title="Projects" class="site-nav-button" href="#projects">Projects</a></li>
+                        <li><a aria-current="page" title="Skills" class="site-nav-button" href="#skills">Skills</a></li>
+                        <li><a aria-current="page" title="About" class="site-nav-button" href="#about">About</a></li>
+                        <li><a aria-current="page" title="Contact" class="site-nav-button" href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
 
@@ -44,25 +47,24 @@
             </div>
         </header>
 
-        <div class="container">
+        <div class="intro">
 
             <div class="center">
-
-                <!--
-                     Do something to have this at the center for now,
-                     regardless of the screen size and then have the
-                     next section start just after it
-                -->
-
                 <h1 style="padding-bottom: 0; margin-bottom: 0;">
-                    Hello, I'm <a href=".">Hisbaan Noorani</a>.
+                    <a href=".">Hisbaan Noorani</a>
                 </h1>
-                <h3 style="padding-top: 10px; margin-top: 0;">
-                    I'm a computer science student
-                </h3>
+                <p>Programming. Computer Science. Linux. Open Source.</p>
+                <!-- <h1 style="padding-bottom: 0; margin-bottom: 0;">
+                     Hello, I'm <a href=".">Hisbaan Noorani</a>
+                     </h1> -->
+                <!-- <h3 style="padding-top: 10px; margin-top: 0;">
+                     I'm a computer science student
+                     </h3> -->
                 </p>
             </div>
         </div>
+
+        <div class="id" id="projects"> </div>
 
         <div class="container">
             <h1>Projects</h1>
@@ -84,12 +86,12 @@
                 </div>
 
                 <div class="card">
-                    <a class="card-header" href="https://github.com/hisbaan/latex-copy-scripts">
+                    <a class="card-header" href="https://github.com/hisbaan/latex-copy">
                         <h1>
                             <span class="material-icons" style="font-size: 14px;"> book </span>
-                            latex-copy-scripts
+                            latex-copy
                         </h1>
-                        <img class="background-image" src="img/projects/latex-scripts.png"></img>
+                        <img class="background-image" src="img/projects/latex-copy.png"></img>
                     </a>
                     <p>
                         Some cool scripts to make using LaTeX in non-supported apps less painful.
@@ -118,7 +120,7 @@
                         <img class="background-image" src="img/projects/uoft-notes.png"></img>
                     </a>
                     <p>
-                        All the notes I bothered to digitize while at the university of Toronto.
+                        All the notes I bothered to digitize while at the University of Toronto.
                     </p>
                 </div>
 
@@ -139,7 +141,7 @@
                     <a class="card-header" href="http://ihsinformatics.com/products/">
                         <h1>
                             <span class="material-icons" style="font-size: 14px;"> book </span>
-                            Hydra
+                            hydra
                         </h1>
                         <img class="background-image" src="img/projects/hydra.png"></img>
                     </a>
@@ -165,7 +167,7 @@
                     <a class="card-header" href="https://github.com/hisbaan/hass">
                         <h1>
                             <span class="material-icons" style="font-size: 14px;"> book </span>
-                            hass
+                            HASS
                         </h1>
                         <img class="background-image" src="img/projects/hass.png"></img>
                     </a>
@@ -177,19 +179,90 @@
 
         </div>
 
-        <!-- Add programming language icons -->
+        <div class="id" id="skills"> </div>
 
-        <div class="container outline">
+        <div class="container">
             <h1>Skills</h1>
-            <ul><li>Python</li></ul>
-            <ul><li>Java</li></ul>
-            <ul><li>Android Development</li></ul>
-            <ul><li>Shell Script</li></ul>
-            <ul><li>HTML</li></ul>
-            <ul><li>CSS</li></ul>
-            <ul><li>JavaScript</li></ul>
-            <ul><li>LaTeX</li></ul>
+
+            <div class="skills">
+                <div class="skill">
+                    <img src="img/skills/python.svg"></img>
+                    <p>Python</p>
+                </div>
+                <div class="skill">
+                    <img src="img/skills/java.svg"></img>
+                    <p>Java</p>
+                </div>
+                <div class="skill">
+                    <img src="img/skills/android-os.svg"></img>
+                    <p>Android</p>
+                </div>
+                <div class="skill">
+                    <img src="img/skills/bash.svg"></img>
+                    <p>Shell Script</p>
+                </div>
+                <div class="skill">
+                    <img src="img/skills/html-5.svg"></img>
+                    <p>HTML</p>
+                </div>
+                <div class="skill">
+                    <img src="img/skills/css3.svg"></img>
+                    <p>CSS</p>
+                </div>
+                <div class="skill">
+                    <img src="img/skills/javascript.svg"></img>
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill">
+                    <img src="img/skills/latex.svg"></img>
+                    <p>LaTeX</p>
+                </div>
+                <div class="skill">
+                    <img src="img/skills/git.svg"></img>
+                    <p>Git</p>
+                </div>
+            </div>
         </div>
+
+        <div class="id" id="about"> </div>
+
+        <div class="container">
+            <h1>About</h1>
+            <p>I am a second year Computer Science Specialist at the University of Toronto. I'm passionate about Linux, open source development, mathematics, and a whole host of other things. This website is a collection of all my projects and skills.</p>
+        </div>
+
+        <div class="container">
+            <h1>Contact</h1>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted)  {window.location='form-submitted.html';}"></iframe>
+            <form class="form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSezWQ3Z13HIyI3zVUnhNZImA0MSyoIr1ZwHY-DVdgACWmviTA/formResponse" method="post" onsubmit="submitted=!0" target="hidden_iframe">
+                <!-- look at some forms online and reorder this so that the big boxes look good in conjucntion with the small boxes -->
+                <!-- Maybe center it too and ensure to space some things out -->
+                <div class="name-and-email">
+                    <div class="name">
+                        <label for="name"><b>Name:</b></label>
+                        <br>
+                        <input class="input small-input" type="text" placeholder="Enter Name" name="entry.98628199" required />
+                    </div>
+                    <div class="email">
+                        <label for="email"><b>Email:</b></label>
+                        <br>
+                        <input class="input small-input" type="email" placeholder="Enter Email" name="entry.1342815142" required />
+                    </div>
+                </div>
+
+
+                <label class="message-label" for="message"><b>Message:</b></label>
+                <br>
+                <textarea class="input large-input message" rows="10" type="text" placeholder="Enter Message" name="entry.2081519174" required></textarea>
+                <br>
+
+                <div class="form-buttons">
+                    <input class="form-button" type="reset" value="Reset">
+                    <input class="form-button" type="submit" value="Send">
+                </div>
+            </form>
+        </div>
+
 
         <footer>
             <div class="footer-content">
