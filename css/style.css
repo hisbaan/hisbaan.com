@@ -578,71 +578,71 @@ a {
   margin-right: 20px;
 }
 
-.form {
-width: 80%;
-}
-
-.message-label {
-margin: 0.5em;
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.5em;
 }
 
 .name-and-email {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  height: 100%;
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  border-radius: 4px;
-  overflow: hidden;
-  background-repeat: no-repeat;
-  margin: 0.5em;
-  margin-bottom: 1em;
+  gap: 0.5em;
+}
+
+@media(max-width: 500px) {
+  .name-and-email {
+    flex-direction: column;
+  }
 }
 
 .name {
-margin-left: 2px;
-margin-bottom: 1em;
+  flex: 1;
+}
+
+.email {
+  flex: 1;
 }
 
 .input {
-  padding: 1em;
-  margin-top: 0.5em;
+  box-sizing: border-box;
   font-size: 14px;
   color: var(--base07);
   background-color: var(--base00);
   border: none;
   border-radius: 4px;
-}
-
-.small-input {
-width: 90%
-}
-
-.large-input {
-width: 100%;
-margin: 0.5em;
-}
-
-.form-button:hover {
-  background-color: var(--base0E);
-  color: var(--base00);
+  padding: 0.5em;
+  width: 100%;
+  margin-top: 0.5em;
 }
 
 .form-buttons {
-display: flex;
-flex-direction: row;
-width: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 0.5em;
 }
 
 .form-button {
-  font-weight: bold;
-  background-color: var(--base00);
   color: var(--base07);
-  border: none;
-  padding: 1em;
-  margin-top: 0.5em;
+  font-weight: bold;
   font-size: 14px;
-  transition: all ease-in-out 175ms;
-  width: 100%;
+  background-color: var(--base00);
+  border: none;
   border-radius: 4px;
-  margin: 0.5em;
+  transition: all ease-in-out 175ms;
+  cursor: pointer;
+
+  padding: 0.5em;
+  flex: 1;
+}
+
+
+@media (hover:hover) {
+  .form-button:hover {
+    background-color: var(--base0E);
+    color: var(--base00);
+  }
 }

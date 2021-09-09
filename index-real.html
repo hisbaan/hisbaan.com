@@ -228,15 +228,14 @@
 
         <div class="container">
             <h1>About</h1>
-            <p>I am a second year Computer Science Specialist at the University of Toronto. I'm passionate about Linux, open source development, mathematics, and a whole host of other things. This website is a collection of all my projects and skills.</p>
+            <p>I am a second year Computer Science Specialist at the University of Toronto. I'm passionate about Linux, open source development, mathematics, and other related fields. This website is a collection of all my projects and skills.</p>
         </div>
 
         <div class="container">
             <h1>Contact</h1>
+
             <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted)  {window.location='form-submitted.html';}"></iframe>
-            <form class="form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSezWQ3Z13HIyI3zVUnhNZImA0MSyoIr1ZwHY-DVdgACWmviTA/formResponse" method="post" onsubmit="submitted=!0" target="hidden_iframe">
-                <!-- look at some forms online and reorder this so that the big boxes look good in conjucntion with the small boxes -->
-                <!-- Maybe center it too and ensure to space some things out -->
+            <form class="form contact-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSezWQ3Z13HIyI3zVUnhNZImA0MSyoIr1ZwHY-DVdgACWmviTA/formResponse" method="post" onsubmit="submitted=!0" target="hidden_iframe">
                 <div class="name-and-email">
                     <div class="name">
                         <label for="name"><b>Name:</b></label>
@@ -250,11 +249,11 @@
                     </div>
                 </div>
 
-
-                <label class="message-label" for="message"><b>Message:</b></label>
-                <br>
-                <textarea class="input large-input message" rows="10" type="text" placeholder="Enter Message" name="entry.2081519174" required></textarea>
-                <br>
+                <div class="message">
+                    <label for="message"><b>Message:</b></label>
+                    <br>
+                    <textarea class="input large-input message" rows="10" type="text" placeholder="Enter Message" name="entry.2081519174" required></textarea>
+                </div>
 
                 <div class="form-buttons">
                     <input class="form-button" type="reset" value="Reset">
@@ -262,7 +261,6 @@
                 </div>
             </form>
         </div>
-
 
         <footer>
             <div class="footer-content">
