@@ -1,0 +1,26 @@
+{
+  "name": "hisbaan.com",
+  "version": "1.0.0",
+  "description": "The source code for hisbaan.com",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hisbaan/hisbaan.com.git"
+  },
+  "keywords": [],
+  "author": "Hisbaan Noorani",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/hisbaan/hisbaan.com/issues"
+  },
+  "homepage": "https://github.com/hisbaan/hisbaan.com#readme",
+  "dependencies": {
+    "parcel": "^2.0.0-rc.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-image": "^2.0.0-rc.0"
+  }
+}

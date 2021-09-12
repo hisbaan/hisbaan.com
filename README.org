@@ -1,3 +1,24 @@
 #+TITLE: Hisbaan.com
 
 This is the source code for [[hisbaan.com]]. The website is being run right here on github pages.
+
+* Development
+
+Clone the repository:
+
+#+begin_src sh
+git clone git@github.com:hisbaan/hisbaan.com
+cd hisbaan.com
+#+end_src
+
+Install parcel:
+
+#+begin_src sh
+npm install parcel
+#+end_src
+
+Run a local version of the site at [[http://localhost:1234]]:
+
+#+begin_src sh
+npm start
+#+end_src
