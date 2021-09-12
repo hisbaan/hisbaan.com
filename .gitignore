@@ -13,5 +13,4 @@ yarn-error.log*
 .eslintcache
 .cache
 dist
-package.json
-package-lock.json
+.parcel-cache
