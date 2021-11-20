@@ -20,6 +20,7 @@
             crossorigin="anonymous"></script>
         <script language="JavaScript" src='js/hamburger.js'></script>
         <script language="JavaScript" src='js/smooth-scroll.js'></script>
+        <script language="JavaScript" src='js/modal.js'></script>
     </head>
 
     <body>
@@ -181,13 +182,21 @@
             <h1>Skills</h1>
 
             <div class="skills">
-                <div class="skill">
+                <div id="skill" class="skill" onclick="pop()">
                     <img src="img/skills/python.svg"></img>
                     <p>Python</p>
                 </div>
                 <div class="skill">
                     <img src="img/skills/java.svg"></img>
                     <p>Java</p>
+                </div>
+                <div class="skill">
+                    <img style="width: 30px; height: 30px;" src="img/skills/kotlin.svg"></img>
+                    <p>Kotlin</p>
+                </div>
+                <div class="skill">
+                    <img src="img/skills/jetpack-compose.png"></img>
+                    <p>Jetpack Compose</p>
                 </div>
                 <div class="skill">
                     <img src="img/skills/android-os.svg"></img>
@@ -217,6 +226,21 @@
                     <img src="img/skills/git.svg"></img>
                     <p>Git</p>
                 </div>
+                <div class="skill">
+                    <img src="img/skills/r.svg"></img>
+                    <p>R</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal" class="modal">
+            <div class="skill-popup">
+                <i id="close" class="close-skill-popup fa fa-times"></i>
+                <div class="header">
+                    <img src="img/skills/python.svg"></img>
+                    <h5>Python</h5>
+                </div>
+                <p>I learned python in CSC110 and CSC111 at the University of Toronto. Some of my projects in Python inclue <a href="https://github.com/eamonma/wikigraph">wikigraph</a> and some parts of <a href="https://github.com/hisbaan/latex-copy">latex-copy</a>.</p>
             </div>
         </div>
 
