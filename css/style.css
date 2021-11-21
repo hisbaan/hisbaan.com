@@ -800,6 +800,8 @@ a {
 .skill-popup .header {
   display: flex;
   flex-direction: row;
+  align-content: center;
+  align-items: center;
 }
 
 .skill-popup .header img {
@@ -812,9 +814,9 @@ a {
 .skill-popup .header h5 {
   padding: 0;
   margin-top: 0px;
-  margin-bottom: 0;
+  margin-bottom: 10px;
   padding-top: 10px;
-  padding-left: 5px;
+  padding-left: 10px;
 }
 
 .skill-popup p {
