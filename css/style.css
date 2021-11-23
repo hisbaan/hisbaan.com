@@ -623,6 +623,8 @@ a {
   border-radius: 4px;
   transition: all 500ms;
   overflow: hidden;
+  border: none;
+  font: inherit;
 
   background-size: cover;
   background-position: center;
