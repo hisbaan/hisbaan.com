@@ -6,8 +6,55 @@ layout: default
     These are the articles I have written over the years. The main reason I write these is to help those who find themselves in similar situations or predicaments to myself. Enjoy!
 </p>
 <br />
+
+<div id="post-filter" class="post-filter hidden">
+    <h5 id="post-filter-text" class="hidden"></h5>
+    <button id="post-filter-button" onclick="clear_filter()" class="clear-button hidden">Clear Filter</button>
+</div>
+
+<script>
+function filter(tag) {
+    document.getElementById('post-filter-text').innerHTML = "Filtering post by <span style=\"color: var(--base09)\">#" + tag+"</span>";
+    document.getElementById('post-filter').setAttribute('class', 'post-filter');
+    document.getElementById('post-filter-text').setAttribute('class', '');
+    document.getElementById('post-filter-button').setAttribute('class', 'clear-button');
+
+    // Set all posts that do not have the tag to hidden
+    var posts = document.getElementsByClassName('post');
+    for (var i = 0; i < posts.length; i++) {
+        // Get all the tags for a given post.
+        // TODO find a better way to get this element
+        var tags_container = posts[i].children[2].children[2];
+        var tags = tags_container.children;
+        console.log(tags)
+        var tags_string = "";
+        for (var j = 0; j < tags.length; j++) {
+            tags_string += tags[j].textContent;
+        }
+
+        // If the post has the tag, show the post, otherwise hide it.
+        if (tags_string.includes(tag)) {
+            posts[i].setAttribute('class', 'post');
+        } else {
+            posts[i].setAttribute('class', 'post hidden');
+        }
+    }
+}
+
+function clear_filter() {
+    document.getElementById('post-filter').setAttribute('class', 'post-filter hidden');
+    document.getElementById('post-filter-text').setAttribute('class', 'hidden');
+    document.getElementById('post-filter-button').setAttribute('class', 'clear-button hidden');
+    var posts = document.getElementsByClassName('post');
+    for (var i = 0; i < posts.length; i++) {
+        posts[i].setAttribute('class', 'post');
+    }
+}
+</script>
+
 <ul class="posts">
-    {% for post in site.posts %}
+    {% assign posts = site.posts %}
+    {% for post in posts %}
     <li class="post" >
         <div class="post-title">
             <a href="{{ post.url | relative_url }}"> {{ post.title }} </a>
@@ -20,7 +67,7 @@ layout: default
             {% endif %}
             <li> <i class="fa fa-clock-o"></i> {{ post.date | date: "%d/%m/%y" }} </li>
             {% if post.tags %}
-            <li> {% for tag in post.tags %}#{{ tag }} {% endfor %} </li>
+            <li class="tags-container"> {% for tag in post.tags %} <a class="tag" onclick="filter('{{ tag }}')">#{{ tag }}</a> {% endfor %} </li>
             {% endif %}
         </ul>
     </li>
