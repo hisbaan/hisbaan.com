@@ -2,7 +2,11 @@
 <html lang="en">
 
     <head>
-        <meta name="description" content="Programming, open source, linux, computer science." />
+        {% if page.is_post %}
+            <meta name="description" content="{{ page.excerpt | truncate: 153 }}" />
+        {% else %}
+            <meta name="description" content="Programming, open source, linux, computer science." />
+        {% endif %}
         <title>{{ page.title }}</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -54,8 +58,8 @@
                 <div class="footer-content">
                     <img class="footer-logo" src="/img/favicon.png" />
                     <ul class="footer-links">
-                            <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="/">Home</a></li>
-                            <li><a aria-current="page" title="Articles" class="site-nav-button" href="/articles">Articles</a></li>
+                        <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="/">Home</a></li>
+                        <li><a aria-current="page" title="Articles" class="site-nav-button" href="/articles">Articles</a></li>
                     </ul>
                     <ul class="socials">
                         <li><a href="https://github.com/hisbaan" class="fa fa-github fa-2x"></a></li>
