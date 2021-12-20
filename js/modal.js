@@ -41,4 +41,4 @@ indow.addEventListener("DOMContentLoaded", () => {
             openPopup.style.display = "none";
         }
     }
-}
+})
