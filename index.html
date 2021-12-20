@@ -1,483 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta name="description" content="Programming, open source, linux, computer science." />
-    <title>Hisbaan Noorani</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link rel="icon" href="img/favicon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    <head>
+        <meta name="description" content="Programming, open source, linux, computer science." />
+        <title>Hisbaan Noorani</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="icon" href="img/favicon.png">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
         integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
-    <script language="JavaScript" src='js/hamburger.js'></script>
-    <script language="JavaScript" src='js/smooth-scroll.js'></script>
-    <script language="JavaScript" src='js/modal.js'></script>
-</head>
+        <script language="JavaScript" src='js/hamburger.js'></script>
+        <script language="JavaScript" src='js/smooth-scroll.js'></script>
+        <script language="JavaScript" src='js/modal.js'></script>
+    </head>
 
-<body>
+    <body>
 
-    <div class="id" id="top" style="height: 60px;"> </div>
+        <div class="content-wrap">
+            <div class="id" id="top" style="height: 60px;"> </div>
 
-    <header>
-        <div class="header-container">
-            <a class="logo" href="https://hisbaan.com">
-                <span>Hisbaan Noorani</span>
+            <header>
+                <div class="header-container">
+                    <a class="logo" href="https://hisbaan.com">
+                        <span>Hisbaan Noorani</span>
+                    </a>
+
+                    <nav class="site-nav">
+                        <ul>
+                            <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="#top">Home</a></li>
+                            <li><a aria-current="page" title="Projects" class="site-nav-button" href="#projects">Projects</a> </li>
+                            <li><a aria-current="page" title="Skills" class="site-nav-button" href="#skills">Skills</a></li>
+                            <li><a aria-current="page" title="Articles" class="site-nav-button" href="articles">Articles</a></li>
+                            <li><a aria-current="page" title="About" class="site-nav-button" href="#about">About</a></li>
+                            <li><a aria-current="page" title="Contact" class="site-nav-button" href="#contact">Contact</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="menu-toggle">
+                        <div class="hamburger" />
+                    </div>
+                </div>
+            </header>
+
+
+            <section class="spikes">
+                <div class="intro">
+                    <h1 class="intro-heading" style="padding-bottom: 0; margin-bottom: 0;">
+                        Hisbaan Noorani
+                    </h1>
+                    <p class=".intro-tagline">Programming.&nbspOpen-Source. Linux.&nbspComputer&nbspScience.</p>
+                </div>
+            </section>
+
+            <a href="#projects">
+                <div class="scroll-hint"> </div>
             </a>
 
-            <nav class="site-nav">
-                <ul>
-                    <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="#top">Home</a></li>
-                    <li><a aria-current="page" title="Projects" class="site-nav-button" href="#projects">Projects</a> </li>
-                    <li><a aria-current="page" title="Skills" class="site-nav-button" href="#skills">Skills</a></li>
-                    <li><a aria-current="page" title="Articles" class="site-nav-button" href="articles">Articles</a></li>
-                    <li><a aria-current="page" title="About" class="site-nav-button" href="#about">About</a></li>
-                    <li><a aria-current="page" title="Contact" class="site-nav-button" href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+            <div class="id" id="projects"> </div>
 
-            <div class="menu-toggle">
-                <div class="hamburger" />
-            </div>
-        </div>
-    </header>
-
-
-    <section class="spikes">
-        <div class="intro">
-            <h1 class="intro-heading" style="padding-bottom: 0; margin-bottom: 0;">
-                Hisbaan Noorani
-            </h1>
-            <p class=".intro-tagline">Programming.&nbspOpen-Source. Linux.&nbspComputer&nbspScience.</p>
-        </div>
-    </section>
-
-    <a href="#projects">
-        <div class="scroll-hint"> </div>
-    </a>
-
-    <div class="id" id="projects"> </div>
-
-    <div class="container">
-        <h1>Projects</h1>
-        <p style="padding-bottom: 1em">
-            These are some of my projects. I've only included some highlights here but if you'd like to see more, take a
-            look at my <a href="https://github.com/hisbaan">github</a>.
-        </p>
-        <div class="projects">
-            <div class="card">
-                <a class="card-header" href="https://github.com/hisbaan/dotfiles-laptop">
-                    <h1>
-                        <span class="material-icons" style="font-size: 14px;"> book </span>
-                        dotfiles
-                    </h1>
-                    <img class="background-image" src="img/projects/dotfiles.png"></img>
-                </a>
-                <p>
-                    There's no place like <code>~/*</code>. My custom linux configuration.
+            <div class="container">
+                <h1>Projects</h1>
+                <p style="padding-bottom: 1em">
+                    These are some of my projects. I've only included some highlights here but if you'd like to see more, take a
+                    look at my <a href="https://github.com/hisbaan">github</a>.
                 </p>
-            </div>
+                <div class="projects">
+                    <div class="card">
+                        <a class="card-header" href="https://github.com/hisbaan/dotfiles-laptop">
+                            <h1>
+                                <span class="material-icons" style="font-size: 14px;"> book </span>
+                                dotfiles
+                            </h1>
+                            <img class="background-image" src="img/projects/dotfiles.png"></img>
+                        </a>
+                        <p>
+                            There's no place like <code>~/*</code>. My custom linux configuration.
+                        </p>
+                    </div>
 
-            <div class="card">
-                <a class="card-header" href="https://github.com/hisbaan/latex-copy">
-                    <h1>
-                        <span class="material-icons" style="font-size: 14px;"> book </span>
-                        latex-copy
-                    </h1>
-                    <img class="background-image" src="img/projects/latex-copy.png"></img>
-                </a>
-                <p>
-                    Some cool scripts to make using LaTeX in non-supported apps less painful.
-                </p>
-            </div>
+                    <div class="card">
+                        <a class="card-header" href="https://github.com/hisbaan/latex-copy">
+                            <h1>
+                                <span class="material-icons" style="font-size: 14px;"> book </span>
+                                latex-copy
+                            </h1>
+                            <img class="background-image" src="img/projects/latex-copy.png"></img>
+                        </a>
+                        <p>
+                            Some cool scripts to make using LaTeX in non-supported apps less painful.
+                        </p>
+                    </div>
 
-            <div class="card">
-                <a class="card-header" href="https://github.com/hisbaan/sticky">
-                    <h1>
-                        <span class="material-icons" style="font-size: 14px;"> book </span>
-                        sticky
-                    </h1>
-                    <img class="background-image" src="img/projects/sticky.jpg"></img>
-                </a>
-                <p>
-                    An android app for scanning and organizing sticky notes.
-                </p>
-            </div>
+                    <div class="card">
+                        <a class="card-header" href="https://github.com/hisbaan/sticky">
+                            <h1>
+                                <span class="material-icons" style="font-size: 14px;"> book </span>
+                                sticky
+                            </h1>
+                            <img class="background-image" src="img/projects/sticky.jpg"></img>
+                        </a>
+                        <p>
+                            An android app for scanning and organizing sticky notes.
+                        </p>
+                    </div>
 
-            <div class="card">
-                <a class="card-header" href="https://github.com/hisbaan/uoft-notes">
-                    <h1>
-                        <span class="material-icons" style="font-size: 14px;"> book </span>
-                        uoft-notes
-                    </h1>
-                    <img class="background-image" src="img/projects/uoft-notes.png"></img>
-                </a>
-                <p>
-                    All the notes I bothered to digitize while at the University of Toronto.
-                </p>
-            </div>
+                    <div class="card">
+                        <a class="card-header" href="https://github.com/hisbaan/uoft-notes">
+                            <h1>
+                                <span class="material-icons" style="font-size: 14px;"> book </span>
+                                uoft-notes
+                            </h1>
+                            <img class="background-image" src="img/projects/uoft-notes.png"></img>
+                        </a>
+                        <p>
+                            All the notes I bothered to digitize while at the University of Toronto.
+                        </p>
+                    </div>
 
-            <div class="card">
-                <a class="card-header" href="https://github.com/eamonma/wikigraph">
-                    <h1>
-                        <span class="material-icons" style="font-size: 14px;"> book </span>
-                        wikigraph
-                    </h1>
-                    <img class="background-image" src="img/projects/wikigraph.png"></img>
-                </a>
-                <p>
-                    A python library for processing and extrapolating data from Wikipedia data-dumps, written primarily
-                    by myself and <a href="https://eamonma.com">Eamon Ma</a>.
-                </p>
-            </div>
+                    <div class="card">
+                        <a class="card-header" href="https://github.com/eamonma/wikigraph">
+                            <h1>
+                                <span class="material-icons" style="font-size: 14px;"> book </span>
+                                wikigraph
+                            </h1>
+                            <img class="background-image" src="img/projects/wikigraph.png"></img>
+                        </a>
+                        <p>
+                            A python library for processing and extrapolating data from Wikipedia data-dumps, written primarily
+                            by myself and <a href="https://eamonma.com">Eamon Ma</a>.
+                        </p>
+                    </div>
 
-            <div class="card">
-                <a class="card-header" href="http://ihsinformatics.com/products/">
-                    <h1>
-                        <span class="material-icons" style="font-size: 14px;"> book </span>
-                        hydra
-                    </h1>
-                    <img class="background-image" src="img/projects/hydra.png"></img>
-                </a>
-                <p>
-                    As a Software Development intern at Interactive Health Solutions I worked on and documented Hydra, a
-                    mass screening program.
-                </p>
-            </div>
+                    <div class="card">
+                        <a class="card-header" href="http://ihsinformatics.com/products/">
+                            <h1>
+                                <span class="material-icons" style="font-size: 14px;"> book </span>
+                                hydra
+                            </h1>
+                            <img class="background-image" src="img/projects/hydra.png"></img>
+                        </a>
+                        <p>
+                            As a Software Development intern at Interactive Health Solutions I worked on and documented Hydra, a
+                            mass screening program.
+                        </p>
+                    </div>
 
-            <div class="card">
-                <a class="card-header" href="https://github.com/hisbaan/hisbaan.com">
-                    <h1>
-                        <span class="material-icons" style="font-size: 14px;"> book </span>
-                        hisbaan.com
-                    </h1>
-                    <img class="background-image" src="img/projects/hisbaan.com.png"></img>
-                </a>
-                <p>
-                    This website! Written by me in html, css, and some js.
-                </p>
-            </div>
+                    <div class="card">
+                        <a class="card-header" href="https://github.com/hisbaan/hisbaan.com">
+                            <h1>
+                                <span class="material-icons" style="font-size: 14px;"> book </span>
+                                hisbaan.com
+                            </h1>
+                            <img class="background-image" src="img/projects/hisbaan.com.png"></img>
+                        </a>
+                        <p>
+                            This website! Written by me in html, css, and some js.
+                        </p>
+                    </div>
 
-            <div class="card">
-                <a class="card-header" href="https://github.com/hisbaan/hass">
-                    <h1>
-                        <span class="material-icons" style="font-size: 14px;"> book </span>
-                        HASS
-                    </h1>
-                    <img class="background-image" src="img/projects/hass.png"></img>
-                </a>
-                <p>
-                    Hisbaan's Arch Setup Script. This is a script written to deploy my programs and dotfiles onto and
-                    Arch based.
-                </p>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="id" id="skills"> </div>
-
-    <div class="container">
-        <h1>Skills</h1>
-            <p>These are some of the skills I have acquired through formal learning, and necessity for side projects. I tend to pick up new languages and frameworks very quickly when I use them in the real world for projects.</p>
-
-        <div class="skills">
-            <button class="skill" data-skill="python">
-                <img src="img/skills/python.svg"></img>
-                <p>Python</p>
-            </button>
-            <button class="skill" data-skill="java">
-                <img src="img/skills/java.svg"></img>
-                <p>Java</p>
-            </button>
-            <button class="skill" data-skill="kotlin">
-                <img style="width: 30px; height: 30px;" src="img/skills/kotlin.svg"></img>
-                <p>Kotlin</p>
-            </button>
-            <button class="skill" data-skill="compose">
-                <img src="img/skills/jetpack-compose.png"></img>
-                <p>Jetpack Compose</p>
-            </button>
-            <button class="skill" data-skill="android">
-                <img src="img/skills/android-os.svg"></img>
-                <p>Android</p>
-            </button>
-            <button class="skill" data-skill="shell">
-                <img src="img/skills/bash.svg"></img>
-                <p>Shell Script</p>
-            </button>
-            <button class="skill" data-skill="html">
-                <img src="img/skills/html-5.svg"></img>
-                <p>HTML</p>
-            </button>
-            <button class="skill" data-skill="css">
-                <img src="img/skills/css3.svg"></img>
-                <p>CSS</p>
-            </button>
-            <button class="skill" data-skill="javascript">
-                <img src="img/skills/javascript.svg"></img>
-                <p>JavaScript</p>
-            </button>
-            <button class="skill" data-skill="latex">
-                <img src="img/skills/latex.svg"></img>
-                <p>LaTeX</p>
-            </button>
-            <button class="skill" data-skill="git">
-                <img src="img/skills/git.svg"></img>
-                <p>Git</p>
-            </button>
-            <button class="skill" data-skill="r">
-                <img src="img/skills/r.svg"></img>
-                <p>R</p>
-            </button>
-        </div>
-    </div>
-
-    <div id="modal" class="modal">
-        <div class="skill-popup" data-skill="python">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/python.svg"></img>
-                <h5>Python</h5>
-            </div>
-            <p>
-                I learned Python in <a href="https://artsci.calendar.utoronto.ca/course/csc110y1">CSC110: Foundations of Computer Science I</a>
-                and <a href="https://artsci.calendar.utoronto.ca/course/csc111h1">CSC111: Foundations of Computer Science II</a>
-                at the University of Toronto. Some of my projects in Python include
-                <a href="https://github.com/eamonma/wikigraph">wikigraph</a> and some parts of
-                <a href="https://github.com/hisbaan/latex-copy">latex-copy</a>.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="java">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/java.svg"></img>
-                <h5>Java</h5>
-            </div>
-            <p>
-                I learned Java in high school at Ursula Franklin Academy. My projects in Java include
-                <a href="https://github.com/hisbaan/sticky">sticky</a>,
-                <a href="https://github.com/hisbaan/connectX">connectX</a>,
-                and <a href="https://github.com/hisbaan?tab=repositories&q=&type=&language=java&sort=">others</a>.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="kotlin">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img style="width: 30px; height: 30px;" src="img/skills/kotlin.svg"></img>
-                <h5>Kotlin</h5>
-            </div>
-            <p>
-                I learned Kotlin on my own for <a href="https://artsci.calendar.utoronto.ca/course/csc207h1">CSC207: Software Design</a>
-                at the University of Toronto. During this course, my team and I developed
-                <a href="https://github.com/tminions/binocularss">BinoculaRSS</a>, an Android RSS reader.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="compose">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/jetpack-compose.png"></img>
-                <h5>Jetpack Compose</h5>
-            </div>
-            <p>
-                I learned Jetpack Compose along with Kotlin on my own for <a href="https://artsci.calendar.utoronto.ca/course/csc207h1">CSC207: Software Design</a>
-                at the University of Toronto. During this course, my team and I developed
-                <a href="https://github.com/tminions/binocularss">BinoculaRSS</a>, an Android RSS reader.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="android">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/android-os.svg"></img>
-                <h5>Android</h5>
-            </div>
-            <p>
-                I learned Android development on my own for various school projects and my own ideas.
-                Some of my Android applications include
-                <a href="https://github.com/tminions/binocularss">BinoculaRSS</a>, an RSS reader;
-                <a href="https://github.com/hisbaan/sticky">Sticky</a>, an sticky note scanning and organization app;
-                and <a href="https://github.com/ReadingLight">ReadingLight</a>, a reading light app.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="shell">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/bash.svg"></img>
-                <h5>Shell Script</h5>
-            </div>
-            <p>
-                I learned shell scripting on my own to help fix small problems around my operating system,
-                after I switched to Arch Linux as my full time operating system on both my desktop and laptop.
-                Some of my projects that include shell script are <a href="https://github.com/hisbaan/hass">HASS</a>,
-                my config installation script; <a href="https://github.com/hisbaan/latex-copy">latex-copy</a>,
-                some script so make using latex on non-supporting platforms less painful; and <a href="https://github.com/hisbaan/dotfiles-laptop">dotfiles</a>,
-                the <a href="https://github.com/hisbaan/dotfiles-laptop/blob/master/.local/bin/scripts">scripts folder</a> of my dofiles repository.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="html">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/html-5.svg"></img>
-                <h5>HTML</h5>
-            </div>
-            <p>
-                I learned HTML on my own for this website. You can view the source code <a href="https://github.com/hisbaan/hisbaan.com">here</a>.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="css">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/css3.svg"></img>
-                <h5>CSS</h5>
-            </div>
-            <p>
-                I learned CSS on my own for this website. You can view the source code <a href="https://github.com/hisbaan/hisbaan.com">here</a>.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="javascript">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/javascript.svg"></img>
-                <h5>JavaScript</h5>
-            </div>
-            <p>
-                I learned JavaScript on my own for this website. You can view the source code <a href="https://github.com/hisbaan/hisbaan.com">here</a>.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="latex">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/latex.svg"></img>
-                <h5>LaTeX</h5>
-            </div>
-            <p>
-                I learned LaTeX to help writing notes, problem sets, assignments, and papers. My notes from my time at the University of Toronto are available
-                <a href="https://github.com/hisbaan/uoft-notes">here</a>
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="git">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/git.svg"></img>
-                <h5>Git</h5>
-            </div>
-            <p>
-                I learned Git to level up my development skills. I use it on a day to day basis. Take a look at my
-                <a href="https://github.com/hisbaan">GitHub</a> and <a href="https://gitlab.com/hisbaan">GitLab</a>.
-            </p>
-        </div>
-
-        <div class="skill-popup" data-skill="r">
-            <i id="close" class="close-skill-popup fa fa-times"></i>
-            <div class="header">
-                <img src="img/skills/r.svg"></img>
-                <h5>R</h5>
-            </div>
-            <p>
-                I learned R in <a href="https://artsci.calendar.utoronto.ca/course/sta247h1">STA247: Probability with Computer Applications</a>.
-                I do not have any public projects using R.
-            </p>
-        </div>
-    </div>
-
-    <div class="id" id="about"> </div>
-
-    <div class="container">
-        <h1>About
-            <img class="turtle" src="img/turtle.png" />
-        </h1>
-        <p>
-            I am a second year Computer Science Specialist at the University of Toronto.
-            I'm passionate about Linux, open source development, mathematics, and other related fields.
-            This website is a collection of all my projects and skills.
-        </p>
-        <p>
-            My main programming language are Python and Java, however I find Shell Scripting to be the easist way to
-            solve a small problem.
-            I have experience in other languages (such as the ones listed above), however I would not consider them to
-            be my main languages.
-            I'm planning to learn C and Rust soon but I have not gotten around to it yet.
-        </p>
-    </div>
-
-
-    <div class="id" id="contact"> </div>
-
-    <div class="container">
-        <h1>Contact</h1>
-
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
-            onload="if(submitted)  {window.location='form-submitted.html';}"></iframe>
-        <form class="form contact-form"
-            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSezWQ3Z13HIyI3zVUnhNZImA0MSyoIr1ZwHY-DVdgACWmviTA/formResponse"
-            method="post" onsubmit="submitted=!0" target="hidden_iframe">
-            <div class="name-and-email">
-                <div class="name">
-                    <label for="name"><b>Name:</b></label>
-                    <br>
-                    <input class="input small-input" type="text" placeholder="Enter Name" name="entry.98628199"
-                        required />
+                    <div class="card">
+                        <a class="card-header" href="https://github.com/hisbaan/hass">
+                            <h1>
+                                <span class="material-icons" style="font-size: 14px;"> book </span>
+                                HASS
+                            </h1>
+                            <img class="background-image" src="img/projects/hass.png"></img>
+                        </a>
+                        <p>
+                            Hisbaan's Arch Setup Script. This is a script written to deploy my programs and dotfiles onto and
+                            Arch based.
+                        </p>
+                    </div>
                 </div>
-                <div class="email">
-                    <label for="email"><b>Email:</b></label>
-                    <br>
-                    <input class="input small-input" type="email" placeholder="Enter Email" name="entry.1342815142"
-                        required />
+
+            </div>
+
+            <div class="id" id="skills"> </div>
+
+            <div class="container">
+                <h1>Skills</h1>
+                <p>These are some of the skills I have acquired through formal learning, and necessity for side projects. I tend to pick up new languages and frameworks very quickly when I use them in the real world for projects.</p>
+
+                <div class="skills">
+                    <button class="skill" data-skill="python">
+                        <img src="img/skills/python.svg"></img>
+                        <p>Python</p>
+                    </button>
+                    <button class="skill" data-skill="java">
+                        <img src="img/skills/java.svg"></img>
+                        <p>Java</p>
+                    </button>
+                    <button class="skill" data-skill="kotlin">
+                        <img style="width: 30px; height: 30px;" src="img/skills/kotlin.svg"></img>
+                        <p>Kotlin</p>
+                    </button>
+                    <button class="skill" data-skill="compose">
+                        <img src="img/skills/jetpack-compose.png"></img>
+                        <p>Jetpack Compose</p>
+                    </button>
+                    <button class="skill" data-skill="android">
+                        <img src="img/skills/android-os.svg"></img>
+                        <p>Android</p>
+                    </button>
+                    <button class="skill" data-skill="shell">
+                        <img src="img/skills/bash.svg"></img>
+                        <p>Shell Script</p>
+                    </button>
+                    <button class="skill" data-skill="html">
+                        <img src="img/skills/html-5.svg"></img>
+                        <p>HTML</p>
+                    </button>
+                    <button class="skill" data-skill="css">
+                        <img src="img/skills/css3.svg"></img>
+                        <p>CSS</p>
+                    </button>
+                    <button class="skill" data-skill="javascript">
+                        <img src="img/skills/javascript.svg"></img>
+                        <p>JavaScript</p>
+                    </button>
+                    <button class="skill" data-skill="latex">
+                        <img src="img/skills/latex.svg"></img>
+                        <p>LaTeX</p>
+                    </button>
+                    <button class="skill" data-skill="git">
+                        <img src="img/skills/git.svg"></img>
+                        <p>Git</p>
+                    </button>
+                    <button class="skill" data-skill="r">
+                        <img src="img/skills/r.svg"></img>
+                        <p>R</p>
+                    </button>
                 </div>
             </div>
 
-            <div class="message">
-                <label for="message"><b>Message:</b></label>
-                <br>
-                <textarea class="input large-input message" rows="10" type="text" placeholder="Enter Message"
-                    name="entry.2081519174" required></textarea>
+            <div id="modal" class="modal">
+                <div class="skill-popup" data-skill="python">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/python.svg"></img>
+                        <h5>Python</h5>
+                    </div>
+                    <p>
+                        I learned Python in <a href="https://artsci.calendar.utoronto.ca/course/csc110y1">CSC110: Foundations of Computer Science I</a>
+                        and <a href="https://artsci.calendar.utoronto.ca/course/csc111h1">CSC111: Foundations of Computer Science II</a>
+                        at the University of Toronto. Some of my projects in Python include
+                        <a href="https://github.com/eamonma/wikigraph">wikigraph</a> and some parts of
+                        <a href="https://github.com/hisbaan/latex-copy">latex-copy</a>.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="java">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/java.svg"></img>
+                        <h5>Java</h5>
+                    </div>
+                    <p>
+                        I learned Java in high school at Ursula Franklin Academy. My projects in Java include
+                        <a href="https://github.com/hisbaan/sticky">sticky</a>,
+                        <a href="https://github.com/hisbaan/connectX">connectX</a>,
+                        and <a href="https://github.com/hisbaan?tab=repositories&q=&type=&language=java&sort=">others</a>.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="kotlin">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img style="width: 30px; height: 30px;" src="img/skills/kotlin.svg"></img>
+                        <h5>Kotlin</h5>
+                    </div>
+                    <p>
+                        I learned Kotlin on my own for <a href="https://artsci.calendar.utoronto.ca/course/csc207h1">CSC207: Software Design</a>
+                        at the University of Toronto. During this course, my team and I developed
+                        <a href="https://github.com/tminions/binocularss">BinoculaRSS</a>, an Android RSS reader.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="compose">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/jetpack-compose.png"></img>
+                        <h5>Jetpack Compose</h5>
+                    </div>
+                    <p>
+                        I learned Jetpack Compose along with Kotlin on my own for <a href="https://artsci.calendar.utoronto.ca/course/csc207h1">CSC207: Software Design</a>
+                        at the University of Toronto. During this course, my team and I developed
+                        <a href="https://github.com/tminions/binocularss">BinoculaRSS</a>, an Android RSS reader.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="android">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/android-os.svg"></img>
+                        <h5>Android</h5>
+                    </div>
+                    <p>
+                        I learned Android development on my own for various school projects and my own ideas.
+                        Some of my Android applications include
+                        <a href="https://github.com/tminions/binocularss">BinoculaRSS</a>, an RSS reader;
+                        <a href="https://github.com/hisbaan/sticky">Sticky</a>, an sticky note scanning and organization app;
+                        and <a href="https://github.com/ReadingLight">ReadingLight</a>, a reading light app.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="shell">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/bash.svg"></img>
+                        <h5>Shell Script</h5>
+                    </div>
+                    <p>
+                        I learned shell scripting on my own to help fix small problems around my operating system,
+                        after I switched to Arch Linux as my full time operating system on both my desktop and laptop.
+                        Some of my projects that include shell script are <a href="https://github.com/hisbaan/hass">HASS</a>,
+                        my config installation script; <a href="https://github.com/hisbaan/latex-copy">latex-copy</a>,
+                        some script so make using latex on non-supporting platforms less painful; and <a href="https://github.com/hisbaan/dotfiles-laptop">dotfiles</a>,
+                        the <a href="https://github.com/hisbaan/dotfiles-laptop/blob/master/.local/bin/scripts">scripts folder</a> of my dofiles repository.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="html">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/html-5.svg"></img>
+                        <h5>HTML</h5>
+                    </div>
+                    <p>
+                        I learned HTML on my own for this website. You can view the source code <a href="https://github.com/hisbaan/hisbaan.com">here</a>.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="css">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/css3.svg"></img>
+                        <h5>CSS</h5>
+                    </div>
+                    <p>
+                        I learned CSS on my own for this website. You can view the source code <a href="https://github.com/hisbaan/hisbaan.com">here</a>.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="javascript">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/javascript.svg"></img>
+                        <h5>JavaScript</h5>
+                    </div>
+                    <p>
+                        I learned JavaScript on my own for this website. You can view the source code <a href="https://github.com/hisbaan/hisbaan.com">here</a>.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="latex">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/latex.svg"></img>
+                        <h5>LaTeX</h5>
+                    </div>
+                    <p>
+                        I learned LaTeX to help writing notes, problem sets, assignments, and papers. My notes from my time at the University of Toronto are available
+                        <a href="https://github.com/hisbaan/uoft-notes">here</a>
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="git">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/git.svg"></img>
+                        <h5>Git</h5>
+                    </div>
+                    <p>
+                        I learned Git to level up my development skills. I use it on a day to day basis. Take a look at my
+                        <a href="https://github.com/hisbaan">GitHub</a> and <a href="https://gitlab.com/hisbaan">GitLab</a>.
+                    </p>
+                </div>
+
+                <div class="skill-popup" data-skill="r">
+                    <i id="close" class="close-skill-popup fa fa-times"></i>
+                    <div class="header">
+                        <img src="img/skills/r.svg"></img>
+                        <h5>R</h5>
+                    </div>
+                    <p>
+                        I learned R in <a href="https://artsci.calendar.utoronto.ca/course/sta247h1">STA247: Probability with Computer Applications</a>.
+                        I do not have any public projects using R.
+                    </p>
+                </div>
             </div>
 
-            <div class="form-buttons">
-                <input class="form-button" type="reset" value="Reset">
-                <input class="form-button" type="submit" value="Send">
-            </div>
-        </form>
-    </div>
+            <div class="id" id="about"> </div>
 
-    <footer>
-        <div class="footer-content">
-            <img class="footer-logo" src="img/favicon.png" />
-            <ul class="footer-links">
-                <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="#top">Top</a></li>
-                <li><a aria-current="page" title="Projects" class="site-nav-button" href="#projects">Projects</a></li>
-                <li><a aria-current="page" title="Skills" class="site-nav-button" href="#skills">Skills</a></li>
-                <li><a aria-current="page" title="Articles" class="site-nav-button" href="articles">Articles</a></li>
-                <li><a aria-current="page" title="About" class="site-nav-button" href="#about">About</a></li>
-                <li><a aria-current="page" title="Contact" class="site-nav-button" href="#contact">Contact</a></li>
-            </ul>
-            <ul class="socials">
-                <li><a href="https://github.com/hisbaan" class="fa fa-github fa-2x"></a></li>
-                <li><a href="https://twitter.com/hisbaannoorani" class="fa fa-twitter fa-2x"></a></li>
-                <li><a href="https://www.linkedin.com/in/hisbaan-noorani-252654203/"
-                        class="fa fa-linkedin-square fa-2x"></a></li>
-                <li><a href="mailto:hisbaan@gmail.com" class="fa fa-envelope fa-2x"></a></li>
-            </ul>
+            <div class="container">
+                <h1>About
+                    <img class="turtle" src="img/turtle.png" />
+                </h1>
+                <p>
+                    I am a second year Computer Science Specialist at the University of Toronto.
+                    I'm passionate about Linux, open source development, mathematics, and other related fields.
+                    This website is a collection of all my projects and skills.
+                </p>
+                <p>
+                    My main programming language are Python and Java, however I find Shell Scripting to be the easist way to
+                    solve a small problem.
+                    I have experience in other languages (such as the ones listed above), however I would not consider them to
+                    be my main languages.
+                    I'm planning to learn C and Rust soon but I have not gotten around to it yet.
+                </p>
+            </div>
+
+
+            <div class="id" id="contact"> </div>
+
+            <div class="container">
+                <h1>Contact</h1>
+
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+                    onload="if(submitted)  {window.location='form-submitted.html';}"></iframe>
+                <form class="form contact-form"
+                    action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSezWQ3Z13HIyI3zVUnhNZImA0MSyoIr1ZwHY-DVdgACWmviTA/formResponse"
+                    method="post" onsubmit="submitted=!0" target="hidden_iframe">
+                    <div class="name-and-email">
+                        <div class="name">
+                            <label for="name"><b>Name:</b></label>
+                            <br>
+                            <input class="input small-input" type="text" placeholder="Enter Name" name="entry.98628199"
+                                required />
+                        </div>
+                        <div class="email">
+                            <label for="email"><b>Email:</b></label>
+                            <br>
+                            <input class="input small-input" type="email" placeholder="Enter Email" name="entry.1342815142"
+                                required />
+                        </div>
+                    </div>
+
+                    <div class="message">
+                        <label for="message"><b>Message:</b></label>
+                        <br>
+                        <textarea class="input large-input message" rows="10" type="text" placeholder="Enter Message"
+                            name="entry.2081519174" required></textarea>
+                    </div>
+
+                    <div class="form-buttons">
+                        <input class="form-button" type="reset" value="Reset">
+                        <input class="form-button" type="submit" value="Send">
+                    </div>
+                </form>
+            </div>
+
+            <footer>
+                <div class="footer-content">
+                    <img class="footer-logo" src="img/favicon.png" />
+                    <ul class="footer-links">
+                        <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="#top">Top</a></li>
+                        <li><a aria-current="page" title="Projects" class="site-nav-button" href="#projects">Projects</a></li>
+                        <li><a aria-current="page" title="Skills" class="site-nav-button" href="#skills">Skills</a></li>
+                        <li><a aria-current="page" title="Articles" class="site-nav-button active" href="/articles">Articles</a></li>
+                        <li><a aria-current="page" title="About" class="site-nav-button" href="#about">About</a></li>
+                        <li><a aria-current="page" title="Contact" class="site-nav-button" href="#contact">Contact</a></li>
+                    </ul>
+                    <ul class="socials">
+                        <li><a href="https://github.com/hisbaan" class="fa fa-github fa-2x"></a></li>
+                        <li><a href="https://twitter.com/hisbaannoorani" class="fa fa-twitter fa-2x"></a></li>
+                        <li><a href="https://www.linkedin.com/in/hisbaan-noorani-252654203/"
+                            class="fa fa-linkedin-square fa-2x"></a></li>
+                        <li><a href="mailto:hisbaan@gmail.com" class="fa fa-envelope fa-2x"></a></li>
+                    </ul>
+                </div>
+                <div class="footer-bottom">
+                    <span>Have feedback? <a href="#contact">Let me know</a></span>
+                    <p>Copyright &copy; Hisbaan Noorani 2021</p>
+                </div>
+            </footer>
         </div>
-        <div class="footer-bottom">
-            <span>Have feedback? <a href="#contact">Let me know</a></span>
-            <p>Copyright &copy; Hisbaan Noorani 2021</p>
-        </div>
-    </footer>
-</body>
+    </body>
 
 </html>

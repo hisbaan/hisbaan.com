@@ -21,59 +21,61 @@
 
     <body>
 
-        <div class="id" id="top" style="height: 60px;"> </div>
+        <div class="content-wrap">
+            <div class="id" id="top" style="height: 60px;"> </div>
 
-        <header>
-            <div class="header-container">
-                <a class="logo" href="https://hisbaan.com">
-                    <span>Hisbaan Noorani</span>
-                </a>
+            <header>
+                <div class="header-container">
+                    <a class="logo" href="https://hisbaan.com">
+                        <span>Hisbaan Noorani</span>
+                    </a>
 
-                <nav class="site-nav">
-                    <ul>
-                        <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="../index.html#top">Home</a></li>
-                        <li><a aria-current="page" title="Projects" class="site-nav-button" href="../index.html#projects">Projects</a></li>
-                        <li><a aria-current="page" title="Skills" class="site-nav-button" href="../index.html#skills">Skills</a></li>
-                        <li><a aria-current="page" title="Articles" class="site-nav-button active" href="/articles">Articles</a></li>
-                        <li><a aria-current="page" title="About" class="site-nav-button" href="../index.html#about">About</a></li>
-                        <li><a aria-current="page" title="Contact" class="site-nav-button" href="../index.html#contact">Contact</a></li>
-                    </ul>
-                </nav>
+                    <nav class="site-nav">
+                        <ul>
+                            <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="../index.html#top">Home</a></li>
+                            <li><a aria-current="page" title="Projects" class="site-nav-button" href="../index.html#projects">Projects</a></li>
+                            <li><a aria-current="page" title="Skills" class="site-nav-button" href="../index.html#skills">Skills</a></li>
+                            <li><a aria-current="page" title="Articles" class="site-nav-button active" href="/articles">Articles</a></li>
+                            <li><a aria-current="page" title="About" class="site-nav-button" href="../index.html#about">About</a></li>
+                            <li><a aria-current="page" title="Contact" class="site-nav-button" href="../index.html#contact">Contact</a></li>
+                        </ul>
+                    </nav>
 
-                <div class="menu-toggle">
-                    <div class="hamburger" />
+                    <div class="menu-toggle">
+                        <div class="hamburger" />
+                    </div>
                 </div>
+            </header>
+
+            <div class="container">
+                {{ content }}
             </div>
-        </header>
 
-        <div class="container">
-            {{ content }}
-        </div>
-
-        <footer>
-            <div class="footer-content">
-                <img class="footer-logo" src="../img/favicon.png" />
-                <ul class="footer-links">
+            <footer>
+                <div class="footer-content">
+                    <img class="footer-logo" src="../img/favicon.png" />
+                    <ul class="footer-links">
                         <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="../index.html#top">Home</a></li>
                         <li><a aria-current="page" title="Projects" class="site-nav-button" href="../index.html#projects">Projects</a></li>
                         <li><a aria-current="page" title="Skills" class="site-nav-button" href="../index.html#skills">Skills</a></li>
                         <li><a aria-current="page" title="Articles" class="site-nav-button" href="../articles">Articles</a></li>
                         <li><a aria-current="page" title="About" class="site-nav-button" href="../index.html#about">About</a></li>
                         <li><a aria-current="page" title="Contact" class="site-nav-button" href="../index.html#contact">Contact</a></li>
-                </ul>
-                <ul class="socials">
-                    <li><a href="https://github.com/hisbaan" class="fa fa-github fa-2x"></a></li>
-                    <li><a href="https://twitter.com/hisbaannoorani" class="fa fa-twitter fa-2x"></a></li>
-                    <li><a href="https://www.linkedin.com/in/hisbaan-noorani-252654203/"
-                        class="fa fa-linkedin-square fa-2x"></a></li>
-                    <li><a href="mailto:hisbaan@gmail.com" class="fa fa-envelope fa-2x"></a></li>
-                </ul>
-            </div>
-            <div class="footer-bottom">
-                <span>Have feedback? <a href="#contact">Let me know</a></span>
-                <p>Copyright &copy; Hisbaan Noorani 2021</p>
-            </div>
-        </footer>
+                    </ul>
+                    <ul class="socials">
+                        <li><a href="https://github.com/hisbaan" class="fa fa-github fa-2x"></a></li>
+                        <li><a href="https://twitter.com/hisbaannoorani" class="fa fa-twitter fa-2x"></a></li>
+                        <li><a href="https://www.linkedin.com/in/hisbaan-noorani-252654203/"
+                            class="fa fa-linkedin-square fa-2x"></a></li>
+                        <li><a href="mailto:hisbaan@gmail.com" class="fa fa-envelope fa-2x"></a></li>
+                    </ul>
+                </div>
+                <div class="footer-bottom">
+                    <span>Have feedback? <a href="#contact">Let me know</a></span>
+                    <p>Copyright &copy; Hisbaan Noorani 2021</p>
+                </div>
+            </footer>
+        </div>
     </body>
 
 </html>
