@@ -3,7 +3,7 @@
 
     <head>
         {% if page.is_post %}
-            <meta name="description" content="{{ page.excerpt | truncate: 153 }}" />
+            <meta name="description" content="{{ page.excerpt | strip_html | truncate: 153 }}" />
         {% else %}
             <meta name="description" content="Programming, open source, linux, computer science." />
         {% endif %}
