@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+{% if page.title %}
+	<h1>{{page.title}}</h1>
+{% else %}
+	<h1>Untitled post</h1>
+{% endif %}
+
+<p>{{ page.date | date: "%b %d, %Y" }} {% if page.author %} - {{ page.author }} {% endif %}</p>
+
+{{ content }}
