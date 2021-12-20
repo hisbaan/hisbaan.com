@@ -1,4 +1,4 @@
----
+--
 layout: default
 ---
 <h1>Articles</h1>
@@ -19,7 +19,7 @@ layout: default
             {% if post.author %}
             <li> <i class="fa fa-user"></i> {{ post.author }} </li>
             {% endif %}
-            <li> <i class="fa fa-clock-o"></i> {{ post.date | date: "%d/%m/%y" }} {% if post.category.size > 0 %}({{ post.category }}){% endif %} </li>
+            <li> <i class="fa fa-clock-o"></i> {{ post.date | date: "%d/%m/%y" }} </li>
             {% if post.tags %}
             <li> {% for tag in post.tags %}#{{ tag }} {% endfor %} </li>
             {% endif %}

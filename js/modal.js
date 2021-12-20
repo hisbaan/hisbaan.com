@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", () => {
+indow.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("modal");
     const buttons = document.getElementsByClassName("skill");
     const popups = document.getElementsByClassName("skill-popup");
@@ -41,4 +41,4 @@ window.addEventListener("DOMContentLoaded", () => {
             openPopup.style.display = "none";
         }
     }
-})
+}

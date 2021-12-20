@@ -110,12 +110,6 @@ body {
     border-width: 1px;
 }
 
-code {
-    background: var(--base01);
-    border-radius: 3px;
-    font-family: courirer, monospace;
-    padding: 0 3px;
-}
 
 .intro {
     transform: translateY(-50%);
@@ -869,3 +863,47 @@ a {
 .post-info li {
     list-style: none;
 }
+
+/* code { */
+/*     background: var(--base01); */
+/*     /1* border-radius: 3px; *1/ */
+/*     font-family: courirer, monospace; */
+/*     padding: 0 3px; */
+/* } */
+
+/* code, */
+/* samp, */
+/* time { */
+/*   background: var(--base01); */
+/*   color: var(--code); */
+/*   padding: 2.5px; */
+/*   border-radius: 8px; */
+/* } */
+
+/* pre > code { */
+/*   padding: 10px; */
+/*   display: block; */
+/*   border-radius: 8px; */
+/*   overflow-x: auto; */
+/* } */
+
+/* code { */
+/*     background: var(--base01); */
+/*     /1* border-radius: 3px; *1/ */
+/*     font-family: courirer, monospace; */
+/*     padding: 0 3px; */
+/* } */
+
+/* var { */
+/*   color: var(--variable); */
+/*   font-style: normal; */
+/*   font-family: monospace; */
+/* } */
+
+/* kbd { */
+/*   background: var(--background); */
+/*   border: 1px solid var(--border); */
+/*   border-radius: 2px; */
+/*   color: var(--text-main); */
+/*   padding: 2px 4px 2px 4px; */
+/* } */
