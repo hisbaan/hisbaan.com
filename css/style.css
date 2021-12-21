@@ -491,6 +491,10 @@ footer {
 }
 /* end footer */
 
+h3, h4, h5 {
+    opacity: 0.8;
+}
+
 a {
     color: var(--base09);
     text-decoration: none;
