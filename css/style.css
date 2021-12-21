@@ -887,3 +887,22 @@ a {
         color: var(--base00);
     }
 }
+
+table {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table, th, td {
+    border: 1px solid var(--base07);
+    padding: 10px;
+}
+
+th {
+    text-align: left;
+}
+
+td {
+    text-align: left;
+}
