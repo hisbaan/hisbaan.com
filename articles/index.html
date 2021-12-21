@@ -8,13 +8,13 @@ layout: default
 <br />
 
 <div id="post-filter" class="post-filter hidden">
-    <h5 id="post-filter-text" class="hidden"></h5>
+    <h2 id="post-filter-text" class="hidden"></h2>
     <button id="post-filter-button" onclick="clear_filter()" class="clear-button hidden">Clear Filter</button>
 </div>
 
 <script>
 function filter(tag) {
-    document.getElementById('post-filter-text').innerHTML = "Filtering post by <span style=\"color: var(--base09)\">#" + tag+"</span>";
+    document.getElementById('post-filter-text').innerHTML = "Filtering articles by <span style=\"color: var(--base09)\">#" + tag+"</span>";
     document.getElementById('post-filter').setAttribute('class', 'post-filter');
     document.getElementById('post-filter-text').setAttribute('class', '');
     document.getElementById('post-filter-button').setAttribute('class', 'clear-button');
