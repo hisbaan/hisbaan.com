@@ -123,9 +123,16 @@ body {
 .intro-heading {
     justify-content: center;
     color: var(--base09);
+    font-size:3em;
+    line-height: 1.3em;
 }
 .intro-tagline {
     text-align: center;
+}
+
+.section-heading {
+    font-size:3em;
+    line-height: 1.3em;
 }
 
 .spikes {
@@ -483,27 +490,6 @@ footer {
     text-transform: capitalize;
 }
 /* end footer */
-
-h1 {
-    font-size:3em;
-    line-height: 1.3em;
-}
-
-h2 {
-    font-size:2.8em
-}
-
-h3 {
-    font-size:2.2em
-}
-
-h4 {
-    font-size:1.9em
-}
-
-h5 {
-    font-size:1.4em
-}
 
 a {
     color: var(--base09);
