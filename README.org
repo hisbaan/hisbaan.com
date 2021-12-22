@@ -11,14 +11,10 @@ git clone git@github.com:hisbaan/hisbaan.com
 cd hisbaan.com
 #+end_src
 
-Install npm packages:
+Install Jekyll and run the following command:
 
 #+begin_src sh
-npm install
+jekyll serve
 #+end_src
 
-Run a local version of the site using parcel at [[http://localhost:1234]]:
-
-#+begin_src sh
-npm start
-#+end_src
+This will deploy a local version of your site using [[http://localhost:4000]]. Use the ~--port~ flag to change the port if 4000 is occuppied.
