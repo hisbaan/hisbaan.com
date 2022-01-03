@@ -906,3 +906,18 @@ th {
 td {
     text-align: left;
 }
+
+.article-byline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2em;
+    width: 100%;
+    padding: 0;
+}
+
+
+.article-byline li {
+    list-style: none;
+}
