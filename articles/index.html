@@ -1,17 +1,6 @@
 ---
 layout: default
 ---
-<h1 class="section-heading">Articles</h1>
-<p>
-    These are the articles I have written over the years. The main reason I write these is to help those who find themselves in similar situations as myself. Enjoy!
-</p>
-<br />
-
-<div id="post-filter" class="post-filter hidden">
-    <h2 id="post-filter-text" class="hidden"></h2>
-    <button id="post-filter-button" onclick="clear_filter()" class="clear-button hidden">Clear Filter</button>
-</div>
-
 <script>
 function filter(tag) {
     document.getElementById('post-filter-text').innerHTML = "Filtering articles by <span style=\"color: var(--base09)\">#" + tag+"</span>";
@@ -51,6 +40,29 @@ function clear_filter() {
     }
 }
 </script>
+
+<h1 class="section-heading">Articles</h1>
+<p>
+    These are the articles I have written over the years. The main reason I write these is to help those who find themselves in similar situations as myself. Enjoy!
+</p>
+<br />
+
+<div class="tag-title">
+    Tags:
+</div>
+<ul class="tags">
+    {% assign tags = site.tags | sort %}
+    {% for tag in tags %}
+    <li class="tag" onclick="filter('{{ tag[0] }}')">
+        #{{ tag[0] }}
+    </li>
+    {% endfor %}
+</ul>
+
+<div id="post-filter" class="post-filter hidden">
+    <h2 id="post-filter-text" class="hidden"></h2>
+    <button id="post-filter-button" onclick="clear_filter()" class="clear-button hidden">Clear Filter</button>
+</div>
 
 <ul class="posts">
     {% assign posts = site.posts %}
