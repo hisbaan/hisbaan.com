@@ -79,7 +79,7 @@ function clear_filter() {
             {% endif %}
             <li> <i class="fa fa-clock-o"></i> {{ post.date | date: "%d/%m/%y" }} </li>
             {% if post.tags %}
-            <li class="tags-container"> {% for tag in post.tags %} <a class="tag" onclick="filter('{{ tag }}')">#{{ tag }}</a> {% endfor %} </li>
+            <li class="tags-container"> {% for tag in post.tags %} <a onclick="filter('{{ tag }}')">#{{ tag }}</a> {% endfor %} </li>
             {% endif %}
         </ul>
     </li>
