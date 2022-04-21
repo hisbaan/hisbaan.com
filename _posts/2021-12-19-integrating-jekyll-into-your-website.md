@@ -2,7 +2,7 @@
 layout: post
 title: "Integrating Jekyll Into Your Website"
 author: "Hisbaan Noorani"
-tags: jekyll web
+tags: dev jekyll web
 ---
 
 I won't lie to you; working with Jekyll isn't as easy as everyone says it is---at least not when you're working with a pre-existing codebase. That being said, it certainly isn't the hardest thing in the world, and I'm going to talk about how I integrated Jekyll into my pure HTML + CSS (+ some JavaScript) website to bring you this very blog.
@@ -60,7 +60,7 @@ I'm assuming that you already have a static site in place. The source code for m
     ```
     {% endraw %}
 
-    There are two main things to note about this. The first is that `{{ content }}` will be replaced with the contents of whatever is using this layout file. This syntax is called Liquid, and it is the primary syntax used by Jekyll. It can be used to write if statements, for loops, and much more. The second thing to note is that you can reference your CSS and JS files by prefixing the normal path with `/`, signifying the root of the project structure. So if I have my `style.css` file in `css/style.css`, then I would reference it with the path `/css/style.css`.
+    There are two main things to note about this. The first is that `{​{ content }​}` will be replaced with the contents of whatever is using this layout file. This syntax is called Liquid, and it is the primary syntax used by Jekyll. It can be used to write if statements, for loops, and much more. The second thing to note is that you can reference your CSS and JS files by prefixing the normal path with `/`, signifying the root of the project structure. So if I have my `style.css` file in `css/style.css`, then I would reference it with the path `/css/style.css`.
 
     I also created a `post.html` file which is as follows:
 

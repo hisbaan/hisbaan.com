@@ -48,12 +48,12 @@ function clear_filter() {
 <br />
 
 <div class="tag-title">
-    Tags:
+    Filter By:
 </div>
 <ul class="tags">
     {% assign tags = site.tags | sort %}
     {% for tag in tags %}
-    <li class="tag" onclick="filter('{{ tag[0] }}')">
+    <li class="filter-tag" onclick="filter('{{ tag[0] }}')">
         #{{ tag[0] }}
     </li>
     {% endfor %}
