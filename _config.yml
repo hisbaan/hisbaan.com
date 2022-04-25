@@ -5,16 +5,17 @@ collections:
 
 defaults:
   # Set default layout and gemini false
-  -
-    scope:
+  - scope:
       path: ""
     values:
       layout: "default"
   # Use post layouts
-  -
-    scope:
+  - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
       is_post: true
+
+plugins:
+  - jekyll-sitemap

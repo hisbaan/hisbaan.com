@@ -280,6 +280,7 @@ PLATFORMS
 DEPENDENCIES
   github-pages
   jekyll-postcss
+  jekyll-sitemap
 
 BUNDLED WITH
    2.1.4
