@@ -11,10 +11,10 @@ layout: default
 <p>
     <ul class="article-byline">
         {% if page.author %}
-        <li> <i class="fa fa-user"></i> {{ page.author }} </li>
+        <li> <i class="fa fa-user" style="margin-right: 0.5em;"></i> {{ page.author }} </li>
         {% endif %}
         {% if page.date %}
-        <li> <i class="fa fa-clock-o"></i> {{ page.date | date: "%d/%m/%y" }} </li>
+        <li> <i class="fa fa-clock-o" style="margin-right: 0.5em;"></i> {{ page.date | date: "%d %b, %Y" }} </li>
         {% endif %}
     </ul>
 </p>

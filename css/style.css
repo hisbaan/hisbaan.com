@@ -987,3 +987,8 @@ td {
         color: var(--base00);
     }
 }
+
+.comment a {
+    text-decoration-line: underline;
+    color: var(--base03);
+}

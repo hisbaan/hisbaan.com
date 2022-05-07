@@ -117,7 +117,6 @@ I'm assuming that you already have a static site in place. The source code for m
             </div>
 
             {{ post.excerpt | truncate: 153 }}
-            <!-- TODO style this list like tai's blog -->
             <ul class="post-info">
                 {% if post.author %}
                 <li>
