@@ -570,3 +570,7 @@ brew install <package name>
 ```
 
 And just like that, you've packaged your application for Homebrew!
+
+## Conclusion
+
+This brings our journey through packaging to an end... for now! There are lots of things that you can take away from this article. You can apply the things you've learned here to more packaging standards (as I'm sure you've noticed, they're all relatively similar with a few minor tweaks here and there) and applications built in more programming languages. Good luck with your journey ahead, and if you end up releasing anything, shoot a message my way, I'd love to see it!
