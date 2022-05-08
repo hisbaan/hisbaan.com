@@ -18,7 +18,7 @@ bundle install
 
 This will install all the dependencies for the project. Then, run the
 following command to deploy a local version of the website to
-<http://localhost:4000>. Use the `--port <port numbe>` flag to change
+<http://localhost:4000>. Use the `--port <port number>` flag to change
 the port if `4000` is occupied.
 
 ```bash
