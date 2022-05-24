@@ -992,3 +992,17 @@ td {
     text-decoration-line: underline;
     color: var(--base03);
 }
+
+blockquote {
+    background-color: var(--base02);
+    text-align: center;
+    padding: 0.25em 1em;
+    border-left: solid;
+    border-left-color: var(--base0E);
+    border-width: 4px;
+    border-radius: 8px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+

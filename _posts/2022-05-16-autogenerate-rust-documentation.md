@@ -9,9 +9,13 @@ Man pages and shell completions can really put the finishing touches on an alrea
 
 # Why?
 
-First, let's delve into why you would even want to put time into such a thing. Easily the biggest annoyance in my day-to-day is when I'm working with a tool that doesn't have good completions. I'm spoiled by good shell completions, so I'm left disappointed when I press `TAB` and nothing comes up. Even when I'm using a tool that I'm already very used to, it's still annoying not to have that extra bit of help. Is the flag `--new`, `--create`, `--init`, or something else entirely!? Shell completions help to avoid that hassle.
+First, let's delve into why you would even want to put time into such a thing. Easily the biggest annoyance in my day-to-day is when I'm working with a tool that doesn't have good completions. I'm spoiled by good shell completions, so I'm left disappointed when I press `TAB` and nothing comes up. Even when I'm using a tool that I'm already very used to, it's still annoying not to have that extra bit of help.
 
-Thie segues us on to the next piece of this article, the humble `man` page. In this case, `man` stands for `manual`. The `man` page is a documentation standard used on nearly every unix-based system. It's super handy to anyone wishing to dig deeper into your program's functionality.
+> Is the flag `--new`, `--create`, `--init`, or something else entirely!?
+
+Shell completions help to avoid that hassle. Just press `TAB` and you're on your way!
+
+Thie segues us on to the next piece of this article, the humble *man page*. In this case, man stands for manual. The man page is a documentation standard used on nearly every unix-based system. It's super handy to anyone wishing to dig deeper into your program's functionality.
 
 # How?
 
@@ -101,7 +105,7 @@ Also, add a `[build-dependencies]` section to your `Cargo.toml`. This works just
 
 And now we're ready to get started with the generation. As with most things, preparation is the hardest part!
 
-A note before we begin, the path that the `man` page and shell completions are generated to causes some issues with publishing to `crates.io`. I'll add a solution as soon as I can figure one out. Currently, it's recommended to only generate build files in the path specified by the `OUT_DIR`  environment variable; however, those files can be difficult to locate in an installation script, so I've simply generated them in subdirectories of the project root.
+A note before we begin, the path that the man page and shell completions are generated to causes some issues with publishing to `crates.io`. I'll add a solution as soon as I can figure one out. Currently, it's recommended to only generate build files in the path specified by the `OUT_DIR`  environment variable; however, those files can be difficult to locate in an installation script, so I've simply generated them in subdirectories of the project root.
 
 ## Generating Man Pages
 
@@ -138,7 +142,7 @@ std::fs::write(man_dir.join("dym.1"), buffer).expect("Failed to write man page")
 
 And just like that, we're done! Go ahead and run `cargo build`, and you should see a new `man` directory generated with a shiny new man page file inside it. You can test it with `man --local-file man/name.1`
 
-The path for installing `man` pages to your system, place them in the `/usr/share/man/man*/` folder with the permissions `644` where `*` is the category your man page falls into (notice the extension on the generated file):
+The path for installing man pages to your system, place them in the `/usr/share/man/man*/` folder with the permissions `644` where `*` is the category your man page falls into (notice the extension on the generated file):
 
 - 1: User commands (executable programs or shell commands)
 - 2: System calls (functions provided by the kernel)
@@ -197,4 +201,4 @@ To test the file using Zsh, run the command `compdef completions/_dym dym`. This
 
 # Bringing it all together
 
-Now that you have your `man` pages and shell completions generated make sure that you install them in any packages that you've created. If you need to know how to create a package, check out [my article regarding that](https://hisbaan.com/articles/2022-05-04-how-to-package-rust-applications). There are also tools like [cargo-aur](https://github.com/fosskers/cargo-aur) and [cargo-deb](https://github.com/kornelski/cargo-deb) that will make this process easier! Good luck on your journey, and shoot me a message if this article was helpful to you!
+Now that you have your man pages and shell completions generated make sure that you install them in any packages that you've created. If you need to know how to create a package, check out [my article regarding that](https://hisbaan.com/articles/2022-05-04-how-to-package-rust-applications). There are also tools like [cargo-aur](https://github.com/fosskers/cargo-aur) and [cargo-deb](https://github.com/kornelski/cargo-deb) that will make this process easier! Good luck on your journey, and shoot me a message if this article was helpful to you!
