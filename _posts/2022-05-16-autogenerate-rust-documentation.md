@@ -154,7 +154,7 @@ The path for installing man pages to your system, place them in the `/usr/share/
 - 8: System administration commands (usually only for root)
 - 9: Kernel routines (Non-standard)
 
-# Shell completions
+## Shell completions
 
 There are a few different shells that the `clap_complete` crate supports. You can generate shell completions for `Bash`, `Elvish`, `Fish`, `Zsh`, and even `PowerShell`! We will be using the `clap_complete` crate so ensure it is in the `[build-dependencies]` section of your `Cargo.toml`. Place the following code in your `build.rs`, modifying project-specific values as necessary.
 
