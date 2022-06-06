@@ -126,6 +126,7 @@ body {
     font-size:3em;
     line-height: 1.3em;
 }
+
 .intro-tagline {
     text-align: center;
 }
@@ -186,7 +187,6 @@ body {
         width: 90%;
     }
 }
-
 
 .header-container {
     width: 90%;
@@ -515,12 +515,14 @@ a {
     background: var(--base00);
     font-size: 3rem;
     color: var(--base07);
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 0.15rem 0.5rem, rgba(0, 0, 0, 0.2) 0px, 0.075rem, 0.157rem;
+    /* box-shadow: rgba(0, 0, 0, 0.2) 0px 0.15rem 0.5rem, rgba(0, 0, 0, 0.2) 0px, 0.075rem, 0.157rem; */
     height: 100%;
     width: 100%;
     border-radius: 8px;
     transition: all 500ms;
     overflow: hidden;
+
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
 
     background-size: cover;
     background-position: center;
@@ -529,7 +531,7 @@ a {
 
 @media (hover:hover) {
     .card:hover {
-        box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 0.35em 1.175em, rgba(0, 0, 0, 0.20) 0px 0.175em 0.5em;
         transform: translateY(-3px) scale(1.05);
     }
 }
@@ -592,7 +594,6 @@ a {
     background: var(--base00);
     font-size: 3rem;
     color: var(--base07);
-    box-shadow: rgba(3, 8, 20, 0.15) 0px 0.15rem 0.5rem, rgba(2, 6, 20, 0.15) 0px, 0.075rem, 0.157rem;
     height: 100%;
     width: 100%;
     border-radius: 8px;
@@ -600,6 +601,8 @@ a {
     overflow: hidden;
     border: none;
     font: inherit;
+
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
 
     background-size: cover;
     background-position: center;
@@ -611,7 +614,7 @@ a {
 
 @media (hover:hover) {
     .skill:hover {
-        box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em, rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 0.35em 1.175em, rgba(0, 0, 0, 0.20) 0px 0.175em 0.5em;
         transform: translateY(-3px) scale(1.05);
     }
 }
@@ -734,7 +737,7 @@ a {
     display: none;
     place-items: center;
     position: fixed;
-    z-index: 1;
+    z-index: 11;
     left: 0;
     top: 0;
     width: 100%;
@@ -827,7 +830,6 @@ a {
     height: 100%;
     width: 100%;
     border-radius: 8px;
-    /* transition: all 500ms; */
     transition: all 500ms;
     overflow: hidden;
     border: none;
@@ -954,8 +956,17 @@ td {
     color: var(--base09);
     padding: 10px;
     cursor: pointer;
+    transition: all 500ms;
 
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25)
+
+}
+
+@media (hover:hover) {
+    .filter-tag:hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 0.35em 1.175em, rgba(0, 0, 0, 0.20) 0px 0.175em 0.5em;
+        transform: translateY(-3px) scale(1.05);
+    }
 }
 
 .center-button {
