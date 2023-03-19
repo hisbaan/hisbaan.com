@@ -4,6 +4,7 @@ title: "How to Package Rust Applications"
 author: "Hisbaan Noorani"
 tags: dev rust packaging
 ---
+<!-- Copyright 2022 Hisbaan Noorani - All Rights Reserved -->
 
 Packaging applications can be extremely specific, and messing up small details can have huge consequences for your users. In this article, I'll be going over how to package your Rust applications for [crates.io](https://crates.io), the [Archlinux User Repository (AUR)](https://aur.archlinux.org), and [Homebrew](https://brew.sh). The principles I discuss in this article can be applied to other packaging formats like an APT [Personal Package Archive (PPA)](https://help.launchpad.net/Packaging/PPA), [Fedora's Copr Repos](https://docs.pagure.org/copr.copr/screenshots_tutorial.html), or even a [Nixpkg](https://github.com/nixos/nixpkgs). Additionally, the article's contents can also be applied to applications written in other languages; packaging your application is not limited to stuff written in Rust. The only thing that would be different is some of the compile-time dependencies and some of the operations you perform in the respective build functions.
 

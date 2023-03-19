@@ -4,6 +4,7 @@ title: "Integrating Jekyll Into Your Website"
 author: "Hisbaan Noorani"
 tags: dev jekyll web
 ---
+<!-- Copyright 2021 Hisbaan Noorani - All Rights Reserved -->
 
 I won't lie to you; working with Jekyll isn't as easy as everyone says it is---at least not when you're working with a pre-existing codebase. That being said, it certainly isn't the hardest thing in the world, and I'm going to talk about how I integrated Jekyll into my pure HTML + CSS (+ some JavaScript) website to bring you this very blog.
 

@@ -4,6 +4,7 @@ title: "Autogenerate Rust Documentation"
 author: "Hisbaan Noorani"
 tags: dev rust man shell
 ---
+<!-- Copyright 2022 Hisbaan Noorani - All Rights Reserved -->
 
 Man pages and shell completions can really put the finishing touches on an already great CLI app! And thankfully, when using the CLI argument parsing crate `clap`, they're super easy to generate.
 
