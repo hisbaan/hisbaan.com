@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     // Set onclick for the popup background to close the popup.
-    window.onclick = function (event) {
+    window.onclick = (event) => {
         if (event.target == modal) {
             modal.style.display = "none";
             openPopup.style.display = "none";

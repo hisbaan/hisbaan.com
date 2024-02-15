@@ -250,10 +250,12 @@ header::after {
     background: var(--base00);
     height: 0px;
     overflow: hidden;
+    transition: all ease-in-out 200ms;
 }
 
 .site-nav--open {
     height: auto;
+    transition: all ease-in-out 200ms;
 }
 
 .site-nav ul {
