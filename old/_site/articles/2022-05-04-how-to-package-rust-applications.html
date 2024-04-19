@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        
+            <meta name="description" content="
+
+" />
+        
+        <title>How to Package Rust Applications</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/prism.css" />
+        <link rel="stylesheet" type="text/css" href="/css/prism-rose-pine-main.css" />
+        <link rel="icon" href="/img/favicon.webp">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XLT0PE92JK"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XLT0PE92JK');
+        </script>
+    </head>
+
+    <body>
+        <div class="content-wrap">
+            <div class="id" id="top" style="height: 60px;"> </div>
+
+            <header>
+                <div class="header-container">
+                    <a class="logo" href="https://hisbaan.com">
+                        <span>Hisbaan Noorani</span>
+                    </a>
+
+                    <nav class="site-nav">
+                        <ul>
+                            <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="/">Home</a></li>
+                            <li><a aria-current="page" title="Articles" class="site-nav-button active" href="/articles">Articles</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="menu-toggle">
+                        <div class="hamburger" />
+                    </div>
+                </div>
+            </header>
+
+            <div class="container">
+                
+<h1 class="section-heading">How to Package Rust Applications</h1>
+
+
+<p>
+    <ul class="article-byline">
+        
+        <li> <i class="fa fa-user" style="margin-right: 0.5em;"></i> Hisbaan Noorani </li>
+        
+        
+        <li> <i class="fa fa-clock-o" style="margin-right: 0.5em;"></i> 04 May, 2022 </li>
+        
+    </ul>
+</p>
+
+<!-- Copyright 2022 Hisbaan Noorani - All Rights Reserved -->
+
+<p>Packaging applications can be extremely specific, and messing up small details can have huge consequences for your users. In this article, I’ll be going over how to package your Rust applications for <a href="https://crates.io">crates.io</a>, the <a href="https://aur.archlinux.org">Archlinux User Repository (AUR)</a>, and <a href="https://brew.sh">Homebrew</a>. The principles I discuss in this article can be applied to other packaging formats like an APT <a href="https://help.launchpad.net/Packaging/PPA">Personal Package Archive (PPA)</a>, <a href="https://docs.pagure.org/copr.copr/screenshots_tutorial.html">Fedora’s Copr Repos</a>, or even a <a href="https://github.com/nixos/nixpkgs">Nixpkg</a>. Additionally, the article’s contents can also be applied to applications written in other languages; packaging your application is not limited to stuff written in Rust. The only thing that would be different is some of the compile-time dependencies and some of the operations you perform in the respective build functions.</p>
+
+<p>For the purposes of this article, I’ll be using my application <a href="https://github.com/hisbaan/didyoumean">didyoumean</a> as an example; check it out!</p>
+
+<h1 id="cratesio">Crates.io</h1>
+
+<p>Publishing your package to crates.io is the easiest and most accessible way to release your application to the public. It will allow your application to be installed by anyone running Linux, macOS, Windows, or any other operating system that <code class="language-plaintext highlighter-rouge">cargo</code>, the Rust package manager, supports. The caveat to this is that your user will have to have the entire Rust toolchain installed, which is often non-trivial for a non-tech-savvy user. Another caveat is that, unlike the other packaging standards here, crates.io will only accept applications written in Rust. Without further ado, let’s get into it.</p>
+
+<p>Before you write any build files, you need to link your <code class="language-plaintext highlighter-rouge">cargo</code> CLI utility to your <code class="language-plaintext highlighter-rouge">crates.io</code> account. If you don’t already have a crates.io account, go ahead and create one. Then, grab the token from your account settings and link your <code class="language-plaintext highlighter-rouge">cargo</code> utility with your <code class="language-plaintext highlighter-rouge">crates.io</code> account with <code class="language-plaintext highlighter-rouge">cargo login &lt;token&gt;</code>.</p>
+
+<p>You then need to add yourself as an owner by running <code class="language-plaintext highlighter-rouge">cargo owner --add &lt;username&gt;</code>.</p>
+
+<p>The information that crates.io reads comes from your <code class="language-plaintext highlighter-rouge">Cargo.toml</code> configuration file. Some common entries include: <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">version</code>, <code class="language-plaintext highlighter-rouge">authors</code>, <code class="language-plaintext highlighter-rouge">license</code>, <code class="language-plaintext highlighter-rouge">description</code>, <code class="language-plaintext highlighter-rouge">readme</code>, <code class="language-plaintext highlighter-rouge">homepage</code>, <code class="language-plaintext highlighter-rouge">repository</code>, <code class="language-plaintext highlighter-rouge">keywords</code>, and <code class="language-plaintext highlighter-rouge">categories</code>.</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[package]</span>
+<span class="c"># Your package name. This is what people will type in to install your application.</span>
+<span class="py">name</span> <span class="p">=</span> <span class="s">"didyoumean"</span>
+<span class="c"># The name of any authors in a comma-separated list.</span>
+<span class="py">authors</span> <span class="p">=</span> <span class="p">[</span><span class="s">"Hisbaan Noorani"</span><span class="p">]</span>
+<span class="c"># The package version. This needs to be incremented every time you publish.</span>
+<span class="py">version</span> <span class="p">=</span> <span class="s">"1.1.2"</span>
+<span class="c"># The Rust toolchain version your application targets.</span>
+<span class="py">edition</span> <span class="p">=</span> <span class="s">"2021"</span>
+<span class="c"># The license that your application is released under.</span>
+<span class="py">license</span> <span class="p">=</span> <span class="s">"GPL-3.0"</span>
+<span class="c"># A description of your application.</span>
+<span class="py">description</span> <span class="p">=</span> <span class="s">"A CLI spelling corrector"</span>
+<span class="c"># A link to the documentation of your application.</span>
+<span class="py">documentation</span> <span class="p">=</span> <span class="s">"https://docs.rs/packages/didyoumean"</span>
+<span class="c"># A link to the homepage for your application. This can be something like</span>
+<span class="c"># your website or your GitHub readme.</span>
+<span class="py">homepage</span> <span class="p">=</span> <span class="s">"https://github.com/hisbaan/didyoumean"</span>
+<span class="c"># A relative path to your README in the files your upload.</span>
+<span class="py">readme</span> <span class="p">=</span> <span class="s">"docs/README.md"</span>
+<span class="c"># A list of keywords associated with your app. These have a maximum length</span>
+<span class="c"># of x characters, and you can only have 5 of them.</span>
+<span class="py">keywords</span> <span class="p">=</span> <span class="p">[</span><span class="s">"levenshtein"</span><span class="p">,</span> <span class="s">"damerau"</span><span class="p">,</span> <span class="s">"edit-distance"</span><span class="p">,</span> <span class="s">"spelling"</span><span class="p">]</span>
+<span class="c"># A list of categories that apply to your app. These must come from the</span>
+<span class="c"># list [here](https://crates.io/category_slugs)</span>
+<span class="py">categories</span> <span class="p">=</span> <span class="nn">["command-line-utilities"]</span>
+</code></pre></div></div>
+
+<p>There are other optional variables you can define listed <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">here</a>.</p>
+
+<p>You can then run <code class="language-plaintext highlighter-rouge">cargo package --list</code> to list all the files that will be published. If you’re using <code class="language-plaintext highlighter-rouge">git</code> and there is something that you do not want to be included, then you can simply add this file to your <code class="language-plaintext highlighter-rouge">.gitignore</code> file or equivalent for other version control systems. You can also set up a variable if you’re not using a version control system, which is described in the additional variables documentation I’ve linked above.</p>
+
+<p>After this, I recommend you run <code class="language-plaintext highlighter-rouge">cargo clippy</code> to get some suggestions for common mistakes in your code. Then, run <code class="language-plaintext highlighter-rouge">cargo fmt</code> to automatically format your code according to the Rust formatting guidelines.</p>
+
+<p>Then, you can run <code class="language-plaintext highlighter-rouge">cargo publish</code> to try and publish your application to crates.io. This will perform a test build of your application and ensure that everything in your <code class="language-plaintext highlighter-rouge">Cargo.toml</code> is valid. If everything is a-okay, <code class="language-plaintext highlighter-rouge">cargo</code> will publish your application to crates.io, and it will be accessible at <code class="language-plaintext highlighter-rouge">https://crates.io/packages/&lt;package name&gt;</code>.</p>
+
+<p>Congrats! You’ve packaged your application for crates.io. A user can then install your package by running <code class="language-plaintext highlighter-rouge">cargo install &lt;package name&gt;</code>.</p>
+
+<h1 id="archlinux-user-repository-aur">Archlinux User Repository (AUR)</h1>
+
+<p>The AUR is an excellent repository for Archlinux and Archlinux-based Linux distributions. It has a smaller compatibility window than something like <code class="language-plaintext highlighter-rouge">crates.io</code>; however, the users are often more dedicated. It also supports binary packages meaning the user won’t have to have your chosen language’s build tools installed to install your application. I’ll cover the three main kinds of packages in this section. There are stable packages, git packages, and binary packages.</p>
+
+<p>Before publishing anything to the AUR, you must first create an account and add your public ssh key to your account.</p>
+
+<p>If there is anything that you want to know more about <code class="language-plaintext highlighter-rouge">PKGBUILD</code> files or the process of publishing to the AUR, check out <a href="https://wiki.archlinux.org/title/PKGBUILD">this article</a> on the Arch Wiki.</p>
+
+<p>The following three sections cover why you would want to publish each kind of package and how to write the <code class="language-plaintext highlighter-rouge">PKGBUILD</code> file for each. There are common steps that will be covered after the three sections.</p>
+
+<h2 id="git-packages">Git packages</h2>
+
+<p>Git packages are intended to build the application from your latest git revision. This makes them inherently unstable, so these are not the preferred installation method for most users. They are, however, the easiest kind of AUR package to maintain as you can effectively ‘set it and forget it.’ They are given the suffix <code class="language-plaintext highlighter-rouge">-git</code> to differentiate them from stable and binary packages.</p>
+
+<p>Clone the repository at <code class="language-plaintext highlighter-rouge">ssh://aur@aur.archlinux.org/&lt;package name&gt;-git</code>. You can then create a <code class="language-plaintext highlighter-rouge">PKGBUILD</code> file. If you are on an Arch-based distribution, you can run <code class="language-plaintext highlighter-rouge">cp /usr/share/pacman/PKGBUILD-vcs.proto PKGBUILD</code> to get a simple template. Then, perform the following steps.</p>
+
+<ol>
+  <li>Open the file and delete anything related to any version control system other than <code class="language-plaintext highlighter-rouge">git</code>.</li>
+  <li>Remove the comments at the top of the file, except for the <code class="language-plaintext highlighter-rouge"># Maintainer...</code> comment. Change this comment to your information.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgname</code> variable to your application name followed by the <code class="language-plaintext highlighter-rouge">-git</code> suffix.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgver</code> variable to your package version.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgdesc</code> variable to describe what your application does. This should ideally be just one sentence.</li>
+  <li>
+    <p>Add compatible architectures to a space-separated list of strings. This list should only contain valid architecture strings. An example of this variable could be:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> arch=('i686' 'pentium4' 'x86_64' 'arm' 'armv7h' 'armv6h' 'aarch64')
+</code></pre></div>    </div>
+  </li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">url</code> variable to the <code class="language-plaintext highlighter-rouge">https</code> URL of your <code class="language-plaintext highlighter-rouge">git</code> remote. An example of this would be <code class="language-plaintext highlighter-rouge">https://github.com/hisbaan/didyoumean</code>.</li>
+  <li>Add your license(s) to the <code class="language-plaintext highlighter-rouge">license</code> variable. For the GPLv3.0 license, use <code class="language-plaintext highlighter-rouge">GPL3</code>.</li>
+  <li>Add your application’s runtime dependencies to the <code class="language-plaintext highlighter-rouge">dependencies</code> variable. Most Rust applications built against GNU utils will depend on <code class="language-plaintext highlighter-rouge">gcc-libs</code>.</li>
+  <li>Add your application’s build dependencies to the <code class="language-plaintext highlighter-rouge">makedepends</code> variable. This will definitely include <code class="language-plaintext highlighter-rouge">git</code> and <code class="language-plaintext highlighter-rouge">cargo</code> but may include more.</li>
+  <li>
+    <p>If needed, add the <code class="language-plaintext highlighter-rouge">optdepends</code> variable. This is used to define optional dependencies for certain features. It is structured as follows:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> optdepends=('libxcb: X11 clipboard support'
+             'wl-clipboard: Wayland clipboard support')
+</code></pre></div>    </div>
+  </li>
+  <li>Replace <code class="language-plaintext highlighter-rouge">VCS</code> in the <code class="language-plaintext highlighter-rouge">provides</code> and <code class="language-plaintext highlighter-rouge">conflicts</code> variables with <code class="language-plaintext highlighter-rouge">git</code>.</li>
+  <li>If you are publishing a fork of another application, add that application’s package to the <code class="language-plaintext highlighter-rouge">replaces</code> variable, so your package takes precedent over the package you are replacing.</li>
+  <li><code class="language-plaintext highlighter-rouge">backup</code> is for preserving user-made changes to a package. It is primarily intended for any configuration files in <code class="language-plaintext highlighter-rouge">/etc</code>. For example, <code class="language-plaintext highlighter-rouge">/etc/pacman.conf</code>. You can find more information about it <a href="https://wiki.archlinux.org/title/PKGBUILD#backup">here</a>.</li>
+  <li>Unless you need them, remove the <code class="language-plaintext highlighter-rouge">options</code> and <code class="language-plaintext highlighter-rouge">install</code> variables.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">source</code> variable to <code class="language-plaintext highlighter-rouge">git+&lt;your git url&gt;</code>. Since we defined the <code class="language-plaintext highlighter-rouge">url</code> variable above, we could also simply define this as <code class="language-plaintext highlighter-rouge">git+${url}</code>.</li>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">noextract</code> and <code class="language-plaintext highlighter-rouge">md5sums</code> variables.</li>
+  <li>Add the <code class="language-plaintext highlighter-rouge">sha256sums</code> variable with the value <code class="language-plaintext highlighter-rouge">sha256sums=('SKIP')</code>. We only skip this check since this is a <code class="language-plaintext highlighter-rouge">git</code> package, and we do not need to verify the authenticity of these files because of <code class="language-plaintext highlighter-rouge">git</code>’s mechanisms.</li>
+  <li>
+    <p>In the <code class="language-plaintext highlighter-rouge">pkgver</code> function, replace the code present with the following if you have annotated tags as tied to your releases,</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pkgver<span class="o">()</span> <span class="o">{</span>
+ 	<span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-VCS</span><span class="k">}</span><span class="s2">"</span>
+ 	<span class="nb">printf</span> <span class="s2">"%s"</span> <span class="s2">"</span><span class="si">$(</span>git describe <span class="nt">--long</span> | <span class="nb">sed</span> <span class="s1">'s/\([^-]*-\)g/r\1/;s/-/./g'</span><span class="si">)</span><span class="s2">"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>Or the following if you do not</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> pkgver<span class="o">()</span> <span class="o">{</span>
+ 	<span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-VCS</span><span class="k">}</span><span class="s2">"</span>
+ 	<span class="nb">printf</span> <span class="s2">"r%s.%s"</span> <span class="s2">"</span><span class="si">$(</span>git rev-list <span class="nt">--count</span> HEAD<span class="si">)</span><span class="s2">"</span> <span class="s2">"</span><span class="si">$(</span>git rev-parse <span class="nt">--short</span> HEAD<span class="si">)</span><span class="s2">"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>As the comment in the initial function states, these are not absolute commands and need to be adapted to your git repository based on what information is available. The purpose of this function is to update the package version during installation to detect if the version you have installed is newer or older than the version present on the AUR.</p>
+  </li>
+  <li>
+    <p>Replace the contents of the <code class="language-plaintext highlighter-rouge">prepare</code> function with</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> prepare<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">export </span><span class="nv">RUSTUP_TOOLCHAIN</span><span class="o">=</span>stable
+     <span class="nb">export </span><span class="nv">CARGO_TARGET_DIR</span><span class="o">=</span>target
+
+     <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+     cargo fetch <span class="nt">--locked</span> <span class="nt">--target</span> <span class="s2">"</span><span class="nv">$CARCH</span><span class="s2">-unknown-linux-gnu"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>This will fetch the dependencies required for the rest of the installation to be offline. This is good practice but is not strictly needed. If you do not want to do this, you will have to modify the <code class="language-plaintext highlighter-rouge">cargo build</code> command in the <code class="language-plaintext highlighter-rouge">build</code> function in the next step.</p>
+  </li>
+  <li>
+    <p>Replace the contents of the <code class="language-plaintext highlighter-rouge">build</code> function with</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> build<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">export </span><span class="nv">RUSTUP_TOOLCHAIN</span><span class="o">=</span>stable
+     <span class="nb">export </span><span class="nv">CARGO_TARGET_DIR</span><span class="o">=</span>target
+
+     <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+     cargo build <span class="nt">--release</span> <span class="nt">--frozen</span>
+     strip target/release/<span class="k">${</span><span class="nv">pkgname</span><span class="k">}</span> <span class="c"># or the path to the binary</span>
+                                     <span class="c"># if it differs from your package name.</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>This will build the release build of your application and then reduce the binary side by removing unnecessary build information from the produced binary.</p>
+  </li>
+  <li>
+    <p>If you would like to, replace the contents of the <code class="language-plaintext highlighter-rouge">check</code> function to run your tests.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> check<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+     <span class="nb">export </span><span class="nv">RUSTUP_TOOLCHAIN</span><span class="o">=</span>stable
+     <span class="nb">export </span><span class="nv">CARGO_TARGET_DIR</span><span class="o">=</span>target
+     cargo <span class="nb">test</span> <span class="nt">--release</span> <span class="nt">--frozen</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>I do not do this in my packages as I have Github’s CI/CD pipeline do the testing for me. The benefit of not including this is significantly reduced build times. Since Rust has a relatively slow build process, I don’t include this in my packages.</p>
+  </li>
+  <li>
+    <p>Replace the contents of the <code class="language-plaintext highlighter-rouge">package</code> function with</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> package<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+
+     <span class="c"># replace ${pkgname} with the name of your binary if it differs from the package name.</span>
+     <span class="nb">install</span> <span class="nt">-Dm755</span> target/release/<span class="k">${</span><span class="nv">pkgname</span><span class="k">}</span> <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/bin/"</span>
+
+     <span class="c"># you do not need to install the license if it is present under `/usr/share/licenses/common/`.</span>
+     <span class="nb">install</span> <span class="nt">-Dm644</span> LICENSE <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/share/licenses/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">/"</span>
+     <span class="nb">install</span> <span class="nt">-Dm644</span> README.md <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/share/doc/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">/"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>This will install the built binary to the system’s binary directory and install the <code class="language-plaintext highlighter-rouge">LICENSE</code> and <code class="language-plaintext highlighter-rouge">README.md</code> files to their respective locations with the correct permissions.</p>
+  </li>
+</ol>
+
+<p>And voila, you have finished writing the <code class="language-plaintext highlighter-rouge">PKGBUILD</code> file for your <code class="language-plaintext highlighter-rouge">-git</code> package. The following steps are testing it to ensure that you’re not bricking people’s machines with some bad commands.</p>
+
+<p>For reference, my <code class="language-plaintext highlighter-rouge">PKGBUILD</code> for <a href="https://aur.archlinux.org/packages/didyoumean-git"><code class="language-plaintext highlighter-rouge">didyoumean-git</code></a> is as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Maintainer: Hisbaan Noorani &lt;hisbaan@gmail.com&gt;</span>
+<span class="nv">pkgname</span><span class="o">=</span>didyoumean-git
+<span class="nv">pkgver</span><span class="o">=</span>1.1.2.r0.c2c4c10
+<span class="nv">pkgrel</span><span class="o">=</span>1
+<span class="nv">pkgdesc</span><span class="o">=</span><span class="s2">"A CLI spelling corrector"</span>
+<span class="nb">arch</span><span class="o">=(</span><span class="s1">'i686'</span> <span class="s1">'pentium4'</span> <span class="s1">'x86_64'</span> <span class="s1">'arm'</span> <span class="s1">'armv7h'</span> <span class="s1">'armv6h'</span> <span class="s1">'aarch64'</span><span class="o">)</span>
+<span class="nv">url</span><span class="o">=</span><span class="s2">"https://github.com/hisbaan/didyoumean"</span>
+<span class="nv">license</span><span class="o">=(</span><span class="s1">'GPL3'</span><span class="o">)</span>
+<span class="nv">depends</span><span class="o">=(</span><span class="s1">'gcc-libs'</span><span class="o">)</span>
+<span class="nv">makedepends</span><span class="o">=(</span><span class="s1">'git'</span> <span class="s1">'cargo'</span> <span class="s1">'binutils'</span><span class="o">)</span>
+<span class="nv">optdepends</span><span class="o">=(</span><span class="s1">'libxcb: X11 clipboard support'</span>
+            <span class="s1">'wl-clipboard: Wayland clipboard support'</span><span class="o">)</span>
+<span class="nv">provides</span><span class="o">=(</span><span class="s2">"</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span><span class="o">)</span>
+<span class="nv">conflicts</span><span class="o">=(</span><span class="s2">"</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span><span class="o">)</span>
+<span class="nb">source</span><span class="o">=(</span><span class="s1">'git+https://github.com/hisbaan/didyoumean'</span><span class="o">)</span>
+<span class="nv">sha256sums</span><span class="o">=(</span><span class="s1">'SKIP'</span><span class="o">)</span>
+
+pkgver<span class="o">()</span> <span class="o">{</span>
+	<span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+    <span class="nb">printf</span> <span class="s2">"%s"</span> <span class="s2">"</span><span class="si">$(</span>git describe <span class="nt">--long</span> | <span class="nb">sed</span> <span class="s1">'s/v//;s/\([^-]*-\)g/r\1/;s/-/./g'</span><span class="si">)</span><span class="s2">"</span>
+<span class="o">}</span>
+
+prepare<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">export </span><span class="nv">RUSTUP_TOOLCHAIN</span><span class="o">=</span>stable
+    <span class="nb">export </span><span class="nv">CARGO_TARGET_DIR</span><span class="o">=</span>target
+
+    <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+    cargo fetch <span class="nt">--locked</span> <span class="nt">--target</span> <span class="s2">"</span><span class="nv">$CARCH</span><span class="s2">-unknown-linux-gnu"</span>
+<span class="o">}</span>
+
+build<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">export </span><span class="nv">RUSTUP_TOOLCHAIN</span><span class="o">=</span>stable
+    <span class="nb">export </span><span class="nv">CARGO_TARGET_DIR</span><span class="o">=</span>target
+
+    <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+    cargo build <span class="nt">--release</span> <span class="nt">--frozen</span>
+    strip target/release/dym
+<span class="o">}</span>
+
+package<span class="o">()</span> <span class="o">{</span>
+	<span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+
+    <span class="nb">install</span> <span class="nt">-Dm755</span> target/release/dym <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/bin/"</span>
+
+    <span class="nb">install</span> <span class="nt">-Dm644</span> LICENSE <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/share/licenses/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">/"</span>
+    <span class="nb">install</span> <span class="nt">-Dm644</span> docs/README.md <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/share/doc/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">/"</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="binary-packages">Binary Packages</h2>
+
+<p>Binary packages are pre-built packages that a user can simply download and install. The benefit is that there is no build process, meaning that the user does not need to have the whole language toolchain installed nor deal with the overhead that building a package requires in terms of time and CPU usage. The <code class="language-plaintext highlighter-rouge">PKGBUILD</code> file for binary packages is the easiest to write but also the most work to maintain (especially if you are packaging binaries for multiple architectures). They are given the suffix <code class="language-plaintext highlighter-rouge">-bin</code> to distinguish themselves from the stable and git packages for the same application.</p>
+
+<p>Clone the repository at <code class="language-plaintext highlighter-rouge">ssh://aur@aur.archlinux.org/&lt;package name&gt;-bin</code>. You can then create a <code class="language-plaintext highlighter-rouge">PKGBUILD</code> file. If you are on an Arch-based distribution, you can run <code class="language-plaintext highlighter-rouge">cp /usr/share/pacman/PKGBUILD.proto PKGBUILD</code> to get a simple template. Then, perform the following steps.</p>
+
+<ol>
+  <li>Remove the comments at the top of the file, except for the <code class="language-plaintext highlighter-rouge"># Maintainer...</code> comment. Change this comment to your information.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgname</code> variable to your application name followed by the <code class="language-plaintext highlighter-rouge">-bin</code> suffix.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgver</code> variable to your package version.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgrel</code> variable to indicate minor releases or bug fixes.</li>
+  <li>You can remove the <code class="language-plaintext highlighter-rouge">epoch</code> variable. This variable indicates changes even more minuscule than <code class="language-plaintext highlighter-rouge">pkgrel</code> denotes.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgdesc</code> variable to describe what your application does. This should ideally be just one sentence.</li>
+  <li>
+    <p>Add compatible architectures to a space-separated list of strings. This list should only contain valid architecture strings. An example of this variable could be:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> arch=('i686' 'pentium4' 'x86_64' 'arm' 'armv7h' 'armv6h' 'aarch64')
+</code></pre></div>    </div>
+
+    <p>However, for binary packages, you will usually only include one or maybe two of these.</p>
+  </li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">url</code> variable to the <code class="language-plaintext highlighter-rouge">https</code> variable of your <code class="language-plaintext highlighter-rouge">git</code> remote. An example of this would be <code class="language-plaintext highlighter-rouge">https://github.com/hisbaan/didyoumean</code>.</li>
+  <li>Add your license(s) to the <code class="language-plaintext highlighter-rouge">license</code> variable. For the GPLv3.0 license, use <code class="language-plaintext highlighter-rouge">GPL3</code>.</li>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">groups</code> variable.</li>
+  <li>Add your application’s runtime dependencies to the <code class="language-plaintext highlighter-rouge">dependencies</code> variable. Most Rust applications built against GNU utils will depend on <code class="language-plaintext highlighter-rouge">gcc-libs</code>.</li>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">makedepends</code> and <code class="language-plaintext highlighter-rouge">check depends</code> variables as this is a binary package, so there is no build process involved.</li>
+  <li>
+    <p>If needed, add the <code class="language-plaintext highlighter-rouge">optdepends</code> variable. This is used to define optional dependencies for certain features. It is structured as follows:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> optdepends=('libxcb: X11 clipboard support'
+             'wl-clipboard: Wayland clipboard support')
+</code></pre></div>    </div>
+  </li>
+  <li>Add your package name to the <code class="language-plaintext highlighter-rouge">provides</code>  and <code class="language-plaintext highlighter-rouge">conflicts</code> list variables.</li>
+  <li>If you are publishing a fork of another application, add that application’s package to the <code class="language-plaintext highlighter-rouge">replaces</code> variable, so your package takes precedent over the package you are replacing.</li>
+  <li><code class="language-plaintext highlighter-rouge">backup</code> is for preserving user-made changes to a package. It’s primarily intended for any configuration files in <code class="language-plaintext highlighter-rouge">/etc</code>. For example, <code class="language-plaintext highlighter-rouge">/etc/pacman.conf</code>. You can find more information about it <a href="https://wiki.archlinux.org/title/PKGBUILD#backup">here</a>.</li>
+  <li>Unless you need them, remove the <code class="language-plaintext highlighter-rouge">options</code>, <code class="language-plaintext highlighter-rouge">install</code>, and <code class="language-plaintext highlighter-rouge">changelog</code> variables.</li>
+  <li>
+    <p>Change the <code class="language-plaintext highlighter-rouge">source</code> variable to a direct link to your latest tar archive. This can be a linked file in your GitHub releases or anywhere else that you store your releases. You can create this tar archive by copying the files you wish to archive to a temporary directory and then using the <code class="language-plaintext highlighter-rouge">tar</code> command. An example would be as follows (from the project root):</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">mkdir </span>temp
+ <span class="nb">cd </span>temp
+ <span class="nb">cp</span> ../target/release/&lt;binary name&gt; <span class="nb">.</span>
+ <span class="nb">cp</span> ../README.md <span class="nb">.</span>
+ <span class="nb">tar</span> <span class="nt">-czf</span> &lt;binary name&gt;-&lt;version number&gt;-&lt;system architecture&gt;.tar.gz &lt;binary name&gt; README.md
+</code></pre></div>    </div>
+  </li>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">noextract</code>, <code class="language-plaintext highlighter-rouge">md5sums</code>, and <code class="language-plaintext highlighter-rouge">validpgpkeys</code> variables.</li>
+  <li>
+    <p>Add the <code class="language-plaintext highlighter-rouge">sha256sums</code> variable and calculate the <code class="language-plaintext highlighter-rouge">sha256</code> hash of your tar archive by running the <code class="language-plaintext highlighter-rouge">sha256sum</code> command on it, then place the hash into the list. For example,</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">sha256sums</span><span class="o">=(</span><span class="s2">"4c51cd1fcd5160a967c46007742a71aae9cc85dcdcf0c06e82711755f65d413e"</span><span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Remove all functions except for the <code class="language-plaintext highlighter-rouge">package</code> function.</li>
+  <li>
+    <p>Replace the contents of the <code class="language-plaintext highlighter-rouge">package</code> function with</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> package<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/"</span>
+
+     <span class="nb">install</span> <span class="nt">-Dm755</span> &lt;binary name&gt; <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/bin/"</span>
+     <span class="nb">install</span> <span class="nt">-Dm644</span> README.md <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/share/doc/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-bin</span><span class="k">}</span><span class="s2">/"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>This will install the pre-built binary to the system’s binary directory and install the <code class="language-plaintext highlighter-rouge">README.md</code> file to the appropriate location.</p>
+  </li>
+</ol>
+
+<p>And voila, you have finished writing the <code class="language-plaintext highlighter-rouge">PKGBUILD</code> file for your <code class="language-plaintext highlighter-rouge">-bin</code> package. The following steps are testing it to ensure that you’re not bricking people’s machines with some bad commands.</p>
+
+<p>For reference, my <code class="language-plaintext highlighter-rouge">PKGBUILD</code> for <a href="https://aur.archlinux.org/packages/didyoumean-bin"><code class="language-plaintext highlighter-rouge">didyoumean-bin</code></a> is as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Maintainer: Hisbaan Noorani &lt;hisbaan@gmail.com&gt;</span>
+<span class="nv">pkgname</span><span class="o">=</span>didyoumean-bin
+<span class="nv">pkgver</span><span class="o">=</span>1.1.2
+<span class="nv">pkgrel</span><span class="o">=</span>1
+<span class="nv">epoch</span><span class="o">=</span>
+<span class="nv">pkgdesc</span><span class="o">=</span><span class="s2">"A CLI spelling corrector"</span>
+<span class="nb">arch</span><span class="o">=(</span><span class="s1">'x86_64'</span><span class="o">)</span>
+<span class="nv">url</span><span class="o">=</span><span class="s2">"https://github.com/hisbaan/didyoumean"</span>
+<span class="nv">license</span><span class="o">=(</span><span class="s1">'GPL3'</span><span class="o">)</span>
+<span class="nv">depends</span><span class="o">=(</span><span class="s1">'gcc-libs'</span><span class="o">)</span>
+<span class="nv">optdepends</span><span class="o">=(</span><span class="s1">'libxcb: X11 clipboard support'</span>
+            <span class="s1">'wayland: Wayland clipboard support'</span><span class="o">)</span>
+<span class="nv">provides</span><span class="o">=(</span><span class="s1">'didyoumean'</span><span class="o">)</span>
+<span class="nv">conflicts</span><span class="o">=(</span><span class="s1">'didyoumean'</span><span class="o">)</span>
+<span class="nb">source</span><span class="o">=(</span><span class="s2">"https://github.com/hisbaan/didyoumean/releases/download/v</span><span class="k">${</span><span class="nv">pkgver</span><span class="k">}</span><span class="s2">/dym-</span><span class="k">${</span><span class="nv">pkgver</span><span class="k">}</span><span class="s2">-x86_64.tar.gz"</span><span class="o">)</span>
+<span class="nv">sha256sums</span><span class="o">=(</span><span class="s2">"4c51cd1fcd5160a967c46007742a71aae9cc85dcdcf0c06e82711755f65d413e"</span><span class="o">)</span>
+
+package<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/"</span>
+
+    <span class="nb">install</span> <span class="nt">-Dm755</span> dym <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/bin/"</span>
+    <span class="nb">install</span> <span class="nt">-Dm644</span> README.md <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/share/doc/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-bin</span><span class="k">}</span><span class="s2">/"</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="stable-packages">Stable Packages</h2>
+
+<p>Stable packages are intended to build the application from the source of your latest stable release. These have the downsides of both git and binary packages in that, like git packages, they require the user to build the package, and like binary packages, they must be refreshed on every release leading to more maintenance. The benefit of these packages is that the user can get a stable experience while still being able to compile the package themselves for an architecture that you do not package a binary version of. The added benefit is that they can read over the source code for your application before installing it.</p>
+
+<p>Clone the repository at <code class="language-plaintext highlighter-rouge">ssh://aur@aur.archlinux.org/&lt;package name&gt;</code>. You can then create a <code class="language-plaintext highlighter-rouge">PKGBUILD</code> file. If you are on an Arch-based distribution, you can run <code class="language-plaintext highlighter-rouge">cp /usr/share/pacman/PKGBUILD.proto PKGBUILD</code> to get a simple template. Then, perform the following steps.</p>
+
+<ol>
+  <li>Remove the comments at the top of the file, except for the <code class="language-plaintext highlighter-rouge"># Maintainer...</code> comment. Change this comment to your information.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgname</code> variable to your application name followed by the <code class="language-plaintext highlighter-rouge">-git</code> suffix.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgver</code> variable to your package version.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgrel</code> variable to indicate minor releases or bug fixes.</li>
+  <li>You can remove the <code class="language-plaintext highlighter-rouge">epoch</code> variable. This variable indicates changes even more minuscule than <code class="language-plaintext highlighter-rouge">pkgrel</code> denotes.</li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">pkgdesc</code> variable to describe what your application does. This should ideally be just one sentence.</li>
+  <li>
+    <p>Add compatible architectures to a space-separated list of strings. This list should only contain valid architecture strings. An example of this variable could be:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> arch=('i686' 'pentium4' 'x86_64' 'arm' 'armv7h' 'armv6h' 'aarch64')
+</code></pre></div>    </div>
+  </li>
+  <li>Change the <code class="language-plaintext highlighter-rouge">url</code> variable to the <code class="language-plaintext highlighter-rouge">https</code> variable of your <code class="language-plaintext highlighter-rouge">git</code> remote. An example of this would be <code class="language-plaintext highlighter-rouge">https://github.com/hisbaan/didyoumean</code>.</li>
+  <li>Add your license(s) to the <code class="language-plaintext highlighter-rouge">license</code> variable. For the GPLv3.0 license, use <code class="language-plaintext highlighter-rouge">GPL3</code>.</li>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">groups</code> variable.</li>
+  <li>Add your application’s runtime dependencies to the <code class="language-plaintext highlighter-rouge">dependencies</code> variable. Most Rust applications built against GNU utils will depend on <code class="language-plaintext highlighter-rouge">gcc-libs</code>.</li>
+  <li>Add your application’s build dependencies to the <code class="language-plaintext highlighter-rouge">makedepends</code> variable. This will definitely include <code class="language-plaintext highlighter-rouge">git</code> and <code class="language-plaintext highlighter-rouge">cargo</code> but may include more.</li>
+  <li>
+    <p>If needed, add the <code class="language-plaintext highlighter-rouge">optdepends</code> variable. This is used to define optional dependencies for certain features. It is structured as follows:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> optdepends=('libxcb: X11 clipboard support'
+             'wl-clipboard: Wayland clipboard support')
+</code></pre></div>    </div>
+  </li>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">provides</code> and <code class="language-plaintext highlighter-rouge">conficts</code> variables. Since this package does not have the <code class="language-plaintext highlighter-rouge">-git</code> or <code class="language-plaintext highlighter-rouge">-bin</code> suffix, and the package name is automatically added to these two variables, we do not have to put anything in them.</li>
+  <li>If you are publishing a fork of another application, add that application’s package to the <code class="language-plaintext highlighter-rouge">replaces</code> variable, so your package takes precedent over the package you are replacing.</li>
+  <li><code class="language-plaintext highlighter-rouge">backup</code> is for preserving user-made changes to a package. It’s primarily intended for any configuration files in <code class="language-plaintext highlighter-rouge">/etc</code>. For example, <code class="language-plaintext highlighter-rouge">/etc/pacman.conf</code>. You can find more information about it <a href="https://wiki.archlinux.org/title/PKGBUILD#backup">here</a>.</li>
+  <li>Unless you need them, remove the <code class="language-plaintext highlighter-rouge">options</code>, <code class="language-plaintext highlighter-rouge">install</code>, and <code class="language-plaintext highlighter-rouge">changelog</code> variables.</li>
+  <li>
+    <p>Change the <code class="language-plaintext highlighter-rouge">source</code> variable to the source code of the release you are targetting. If you are using GitHub releases, this could be:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> source=("$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz")
+</code></pre></div>    </div>
+  </li>
+  <li>Remove the <code class="language-plaintext highlighter-rouge">noextract</code> and <code class="language-plaintext highlighter-rouge">md5sums</code> variables.</li>
+  <li>
+    <p>Add the <code class="language-plaintext highlighter-rouge">sha256sums</code> variable and calculate the <code class="language-plaintext highlighter-rouge">sha256</code> hash of your tar archive by running the <code class="language-plaintext highlighter-rouge">sha256sum</code> command on it, then place the hash into the list. For example,</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">sha256sums</span><span class="o">=(</span><span class="s2">"4c51cd1fcd5160a967c46007742a71aae9cc85dcdcf0c06e82711755f65d413e"</span><span class="o">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Replace the contents of the <code class="language-plaintext highlighter-rouge">prepare</code> function with</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> prepare<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">export </span><span class="nv">RUSTUP_TOOLCHAIN</span><span class="o">=</span>stable
+     <span class="nb">export </span><span class="nv">CARGO_TARGET_DIR</span><span class="o">=</span>target
+
+     <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+     cargo fetch <span class="nt">--locked</span> <span class="nt">--target</span> <span class="s2">"</span><span class="nv">$CARCH</span><span class="s2">-unknown-linux-gnu"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>This will fetch the dependencies required for the rest of the installation to be offline. This is good practice but is not strictly needed. If you do not want to do this, you will have to modify the <code class="language-plaintext highlighter-rouge">cargo build</code> command in the <code class="language-plaintext highlighter-rouge">build</code> function in the next step.</p>
+  </li>
+  <li>
+    <p>Replace the contents of the <code class="language-plaintext highlighter-rouge">build</code> function with</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> build<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">export </span><span class="nv">RUSTUP_TOOLCHAIN</span><span class="o">=</span>stable
+     <span class="nb">export </span><span class="nv">CARGO_TARGET_DIR</span><span class="o">=</span>target
+
+     <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+     cargo build <span class="nt">--release</span> <span class="nt">--frozen</span>
+     strip target/release/<span class="k">${</span><span class="nv">pkgname</span><span class="k">}</span> <span class="c"># or the path to the binary</span>
+                                     <span class="c"># if it differs from your package name.</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>This will build the release build of your application and then reduce the binary size by removing unnecessary build information from the produced binary.</p>
+  </li>
+  <li>
+    <p>If you would like to, replace the contents of the <code class="language-plaintext highlighter-rouge">check</code> function to run your tests.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> check<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+     <span class="nb">export </span><span class="nv">RUSTUP_TOOLCHAIN</span><span class="o">=</span>stable
+     <span class="nb">export </span><span class="nv">CARGO_TARGET_DIR</span><span class="o">=</span>target
+     cargo <span class="nb">test</span> <span class="nt">--release</span> <span class="nt">--frozen</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>I do not do this in my packages as I have Github’s CI/CD pipeline do the testing for me. The benefit of not including this is significantly reduced build times. Since Rust has a relatively slow build process, I don’t include this in my packages.</p>
+  </li>
+  <li>
+    <p>Replace the contents of the <code class="language-plaintext highlighter-rouge">package</code> function with</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> package<span class="o">()</span> <span class="o">{</span>
+     <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$srcdir</span><span class="s2">/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">"</span>
+
+     <span class="c"># replace ${pkgname} with the name of your binary if it differs from the package name.</span>
+     <span class="nb">install</span> <span class="nt">-Dm755</span> target/release/<span class="k">${</span><span class="nv">pkgname</span><span class="k">}</span> <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/bin/"</span>
+
+     <span class="c"># you do not need to install the license if it is present under `/usr/share/licenses/common/`.</span>
+     <span class="nb">install</span> <span class="nt">-Dm644</span> LICENSE <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/share/licenses/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">/"</span>
+     <span class="nb">install</span> <span class="nt">-Dm644</span> README.md <span class="nt">-t</span> <span class="s2">"</span><span class="k">${</span><span class="nv">pkgdir</span><span class="k">}</span><span class="s2">/usr/share/doc/</span><span class="k">${</span><span class="nv">pkgname</span><span class="p">%-git</span><span class="k">}</span><span class="s2">/"</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+
+    <p>This will install the built binary to the system’s binary directory and install the <code class="language-plaintext highlighter-rouge">LICENSE</code> and <code class="language-plaintext highlighter-rouge">README.md</code> files to their respective locations with the correct permissions.</p>
+  </li>
+</ol>
+
+<p>And voila, you have finished writing the <code class="language-plaintext highlighter-rouge">PKGBUILD</code> file for your stable package. The following steps are testing it to ensure that you’re not bricking people’s machines with some bad commands.</p>
+
+<p>For reference, <a href="https://github.com/orhun">orhun</a>’s <code class="language-plaintext highlighter-rouge">PKGBUILD</code> for <a href="https://aur.archlinux.org/packages/didyoumean"><code class="language-plaintext highlighter-rouge">didyoumean</code></a> is as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Maintainer: orhun &lt;orhunparmaksiz@gmail.com&gt;</span>
+<span class="c"># https://github.com/orhun/pkgbuilds</span>
+
+<span class="nv">pkgname</span><span class="o">=</span>didyoumean
+<span class="nv">pkgver</span><span class="o">=</span>1.1.2
+<span class="nv">pkgrel</span><span class="o">=</span>1
+<span class="nv">pkgdesc</span><span class="o">=</span><span class="s2">"A CLI spelling corrector"</span>
+<span class="nb">arch</span><span class="o">=(</span><span class="s1">'x86_64'</span><span class="o">)</span>
+<span class="nv">url</span><span class="o">=</span><span class="s2">"https://github.com/hisbaan/didyoumean"</span>
+<span class="nv">license</span><span class="o">=(</span><span class="s1">'GPL3'</span><span class="o">)</span>
+<span class="nv">depends</span><span class="o">=(</span><span class="s1">'gcc-libs'</span> <span class="s1">'libxcb'</span> <span class="s1">'openssl'</span><span class="o">)</span>
+<span class="nv">makedepends</span><span class="o">=(</span><span class="s1">'cargo'</span><span class="o">)</span>
+<span class="nb">source</span><span class="o">=(</span><span class="s2">"</span><span class="nv">$pkgname</span><span class="s2">-</span><span class="nv">$pkgver</span><span class="s2">.tar.gz::</span><span class="nv">$url</span><span class="s2">/archive/v</span><span class="nv">$pkgver</span><span class="s2">.tar.gz"</span><span class="o">)</span>
+<span class="nv">sha512sums</span><span class="o">=(</span><span class="s1">'1e6cce23bdbb70b4039e252058141a4dc7705f312cd1ed7dc7a8fd389e7f3a975527b2033ac2e3e89b2b1daeea46970b630c763d904e5aa299e643b229bbfbb9'</span><span class="o">)</span>
+
+prepare<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$pkgname</span><span class="s2">-</span><span class="nv">$pkgver</span><span class="s2">"</span>
+  cargo fetch <span class="nt">--locked</span> <span class="nt">--target</span> <span class="s2">"</span><span class="nv">$CARCH</span><span class="s2">-unknown-linux-gnu"</span>
+<span class="o">}</span>
+
+build<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$pkgname</span><span class="s2">-</span><span class="nv">$pkgver</span><span class="s2">"</span>
+  <span class="nb">export </span><span class="nv">RUSTUP_TOOLCHAIN</span><span class="o">=</span>stable
+  <span class="nb">export </span><span class="nv">CARGO_TARGET_DIR</span><span class="o">=</span>target
+  cargo build <span class="nt">--release</span> <span class="nt">--frozen</span>
+<span class="o">}</span>
+
+check<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$pkgname</span><span class="s2">-</span><span class="nv">$pkgver</span><span class="s2">"</span>
+  cargo <span class="nb">test</span> <span class="nt">--frozen</span> <span class="nt">--lib</span>
+<span class="o">}</span>
+
+package<span class="o">()</span> <span class="o">{</span>
+  <span class="nb">cd</span> <span class="s2">"</span><span class="nv">$pkgname</span><span class="s2">-</span><span class="nv">$pkgver</span><span class="s2">"</span>
+  <span class="nb">install</span> <span class="nt">-Dm</span> 755 <span class="s2">"target/release/dym"</span> <span class="nt">-t</span> <span class="s2">"</span><span class="nv">$pkgdir</span><span class="s2">/usr/bin"</span>
+  <span class="nb">install</span> <span class="nt">-Dm</span> 644 docs/README.md <span class="nt">-t</span> <span class="s2">"</span><span class="nv">$pkgdir</span><span class="s2">/usr/share/doc/</span><span class="nv">$pkgname</span><span class="s2">"</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="testing-and-publishing">Testing and Publishing</h2>
+
+<p>Now for the common parts of all three types of AUR packages. We will test that the package is building correctly. Go ahead and run <code class="language-plaintext highlighter-rouge">makepkg</code> in the same directory as your <code class="language-plaintext highlighter-rouge">PKGBUILD</code>. This will build your package and produce a <code class="language-plaintext highlighter-rouge">.tar</code> file of the output directories. To ensure that your package build is installing files to the correct location, run <code class="language-plaintext highlighter-rouge">tar -tf &lt;package name&gt;-&lt;version number&gt;-&lt;system architecture&gt;.pkg.tar</code>, which should produce something similar to:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.BUILDINFO
+.MTREE
+.PKGINFO
+usr/
+usr/bin/
+usr/bin/dym
+usr/share/
+usr/share/doc/
+usr/share/doc/didyoumean/
+usr/share/doc/didyoumean/README.md
+usr/share/licenses/
+usr/share/licenses/didyoumean/
+usr/share/licenses/didyoumean/LICENSE
+</code></pre></div></div>
+
+<p>This command will show all the directories and files in the tar archive. Ensure that your binary is in <code class="language-plaintext highlighter-rouge">/usr/bin/&lt;binary name&gt;</code>, and your license and readme are in the respective place if need be.</p>
+
+<p>Additionally, you can build the package on a <code class="language-plaintext highlighter-rouge">chroot</code> or fresh install to ensure that you have not missed any dependencies that you already had installed. I won’t cover that in this article, but there are many guides online.</p>
+
+<p>To get the information that the AUR uses to describe the package, the AUR uses a pre-generated <code class="language-plaintext highlighter-rouge">.SRCINFO</code> file. This is because it may be potentially unsafe to read from or run an untrusted <code class="language-plaintext highlighter-rouge">PKGBUILD</code> file on the AUR’s servers. To generate this file, run <code class="language-plaintext highlighter-rouge">makepkg --printsrcinfo &gt; .SRCINFO</code>.</p>
+
+<p>And you’re just about done. Delete any build artifacts from our previous <code class="language-plaintext highlighter-rouge">makepkg</code> runs and push the <code class="language-plaintext highlighter-rouge">PKGBUILD</code> and <code class="language-plaintext highlighter-rouge">.SRCINFO</code> files to the AUR’s git server.</p>
+
+<p>Congrats! You’ve published your first AUR package. Users will be able to install it through their AUR helper of choice. With <code class="language-plaintext highlighter-rouge">paru</code>, the command would be:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>paru <span class="nt">-S</span> &lt;package name&gt;
+</code></pre></div></div>
+
+<h1 id="homebrew">Homebrew</h1>
+
+<p>Homebrew is a package manager primarily targetting macOS. It works on other operating systems too, but it’s safe to assume that the majority (if not all) of your users wanting your package on Homebrew will be running on macOS. This is an excellent point to do a sanity check and test whether your app actually works on macOS. Now that we’ve gone through that let’s get on to actually packaging it. In this article, I’ll only be covering binary packaging in Homebrew.</p>
+
+<p>First, you will need to build a binary. If you’re on macOS, then simply run <code class="language-plaintext highlighter-rouge">cargo build --release</code> as you usually would; however, there are some steps required to build a macOS binary if you’re on another platform. Personally, I would recommend finding an Apple machine and simply building on that. However, if that is not an option, check out this <a href="https://wapl.es/rust/2019/02/17/rust-cross-compile-linux-to-macos.html">excellent article by James Waples</a> about cross-compiling to macOS. Additionally, it’s good to run <code class="language-plaintext highlighter-rouge">strip</code> on the binary to remove any unnecessary build information.</p>
+
+<p>Now that you have a built binary go ahead and compress it as a <code class="language-plaintext highlighter-rouge">tar.gz</code> archive by running the command <code class="language-plaintext highlighter-rouge">tar -czf &lt;binary name&gt;-&lt;version number&gt;-&lt;system architecture&gt;.tar.gz &lt;binary name&gt;</code>. Then make this archive accessible through some means. I personally put the binary release in my GitHub releases.</p>
+
+<p>Next, create a GitHub repository with the prefix <code class="language-plaintext highlighter-rouge">homebrew-</code>. For example, my Homebrew Formula repository is titled <a href="https://github.com/hisbaan/homebrew-tap"><code class="language-plaintext highlighter-rouge">homebrew-tap</code></a>. This allows users to add your repository using the <code class="language-plaintext highlighter-rouge">brew tap</code> command. So to add my <code class="language-plaintext highlighter-rouge">homebrew-tap</code> repository, the user would run.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew tap hisbaan/tap
+</code></pre></div></div>
+
+<p>Notice that the initial <code class="language-plaintext highlighter-rouge">homebrew-</code> is omitted from the command. This is intentional and is how the <code class="language-plaintext highlighter-rouge">brew</code> CLI is designed.</p>
+
+<p>Now we’ll get onto the repository structure. It should look something like this. The main files you should pay attention to are the <code class="language-plaintext highlighter-rouge">Formula</code> directory and the <code class="language-plaintext highlighter-rouge">didyuomean.rb</code> file. The <code class="language-plaintext highlighter-rouge">LICENSE</code> and <code class="language-plaintext highlighter-rouge">README.md</code> files are optional (but recommended).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>homebrew-tap
+├── Formula
+│   └── didyoumean.rb
+├── LICENSE
+└── README.md
+</code></pre></div></div>
+
+<p>You can have more than one Formula in a single Homebrew tap, hence the Formula directory. Now we will explore the contents of the <code class="language-plaintext highlighter-rouge">didyoumean.rb</code> file. This Ruby file contains the necessary information to install the pre-built binary that we tar’d earlier.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Didyoumean</span> <span class="o">&lt;</span> <span class="no">Formula</span>
+    <span class="n">desc</span> <span class="s2">"A CLI spelling corrector"</span>
+    <span class="n">homepage</span> <span class="s2">"https://github.com/hisbaan/didyoumean"</span>
+    <span class="n">url</span> <span class="s2">"https://github.com/hisbaan/didyoumean/releases/download/v1.1.2/dym-1.1.2-x86_64-apple-darwin.tar.gz"</span>
+    <span class="n">sha256</span> <span class="s2">"06167f4bd847f86b22440e0e51e7ab2b0ff38efe1e914c0e2650fff0433f229f"</span>
+    <span class="n">version</span> <span class="s2">"1.1.2"</span>
+
+    <span class="k">def</span> <span class="nf">install</span>
+        <span class="n">bin</span><span class="p">.</span><span class="nf">install</span> <span class="s2">"dym"</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<ul>
+  <li>The <code class="language-plaintext highlighter-rouge">desc</code> variable is a description of your package</li>
+  <li>The <code class="language-plaintext highlighter-rouge">homepage</code> variable links to the project’s home page. This could be a website or just a <code class="language-plaintext highlighter-rouge">git</code> repo.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">url</code> is a direct download link to your tarball.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">sha256</code> variable is a <code class="language-plaintext highlighter-rouge">sha256</code> hash of the tarball obtained by running <code class="language-plaintext highlighter-rouge">sha256sum</code> on the tarball.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">version</code> variable is the version number of your package.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">install</code> function is the process that will install your binary. We will use the built-in <code class="language-plaintext highlighter-rouge">bin.install</code> command. The only argument to the command should be the name of the binary in the tarball.</li>
+</ul>
+
+<p>Go ahead and push your changes, and your program will b installable as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew tap &lt;username&gt;/tap <span class="c"># or a different repository if you have a different name.</span>
+brew <span class="nb">install</span> &lt;package name&gt;
+</code></pre></div></div>
+
+<p>And just like that, you’ve packaged your application for Homebrew!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This brings our journey through packaging to an end… for now! There are lots of things that you can take away from this article. You can apply the things you’ve learned here to more packaging standards (as I’m sure you’ve noticed, they’re all relatively similar with a few minor tweaks here and there) and applications built in more programming languages. Good luck with your journey ahead, and if you end up releasing anything, shoot a message my way, I’d love to see it!</p>
+
+
+            </div>
+
+            <footer>
+                <div class="footer-content">
+                    <img class="footer-logo" src="/img/favicon.svg" />
+                    <ul class="footer-links">
+                        <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="/">Home</a></li>
+                        <li><a aria-current="page" title="Articles" class="site-nav-button" href="/articles">Articles</a></li>
+                    </ul>
+                    <ul class="socials">
+                        <li><a href="https://github.com/hisbaan" class="fa fa-github fa-2x"></a></li>
+                        <li><a href="https://twitter.com/hisbaannoorani" class="fa fa-twitter fa-2x"></a></li>
+                        <li><a href="https://www.linkedin.com/in/hisbaan-noorani-252654203/"
+                            class="fa fa-linkedin-square fa-2x"></a></li>
+                        <li><a href="mailto:hisbaan@gmail.com" class="fa fa-envelope fa-2x"></a></li>
+                    </ul>
+                </div>
+                <div class="footer-bottom">
+                    <p>Have feedback? Let me know!</p>
+                    <p>Support me on <a href="https://github.com/sponsors/hisbaan">GitHub Sponsors</a></p>
+                    <p>&copy; <script>document.write(new Date().getFullYear())</script> Hisbaan Noorani — All Rights Reserved</p>
+                    <p><a href="../disclaimer">Disclaimer</a></p>
+                </div>
+            </footer>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+        <script language="JavaScript" src='/js/hamburger.js'></script>
+        <script language="JavaScript" src='/js/smooth-scroll.js'></script>
+        <script language="JavaScript" src='/js/modal.js'></script>
+        <script language="JavaScript" src='/js/prism.js'></script>
+    </body>
+
+</html>

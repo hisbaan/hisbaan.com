@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        
+            <meta name="description" content="Programming, open source, linux, computer science." />
+        
+        <title>Articles</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/prism.css" />
+        <link rel="stylesheet" type="text/css" href="/css/prism-rose-pine-main.css" />
+        <link rel="icon" href="/img/favicon.webp">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XLT0PE92JK"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XLT0PE92JK');
+        </script>
+    </head>
+
+    <body>
+        <div class="content-wrap">
+            <div class="id" id="top" style="height: 60px;"> </div>
+
+            <header>
+                <div class="header-container">
+                    <a class="logo" href="https://hisbaan.com">
+                        <span>Hisbaan Noorani</span>
+                    </a>
+
+                    <nav class="site-nav">
+                        <ul>
+                            <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="/">Home</a></li>
+                            <li><a aria-current="page" title="Articles" class="site-nav-button active" href="/articles">Articles</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="menu-toggle">
+                        <div class="hamburger" />
+                    </div>
+                </div>
+            </header>
+
+            <div class="container">
+                <script>
+function filter(tag) {
+    document.getElementById('post-filter-text').innerHTML = "Filtering articles by <span style=\"color: var(--base09)\">#" + tag+"</span>";
+    document.getElementById('post-filter').setAttribute('class', 'post-filter');
+    document.getElementById('post-filter-text').setAttribute('class', '');
+    document.getElementById('post-filter-button').setAttribute('class', 'clear-button');
+
+    // Set all posts that do not have the tag to hidden
+    var posts = document.getElementsByClassName('post');
+    for (var i = 0; i < posts.length; i++) {
+        // Get all the tags for a given post.
+        // TODO find a better way to get this element
+        var tags_container = posts[i].children[2].children[2];
+        var tags = tags_container.children;
+        console.log(tags)
+        var tags_string = "";
+        for (var j = 0; j < tags.length; j++) {
+            tags_string += tags[j].textContent;
+        }
+
+        // If the post has the tag, show the post, otherwise hide it.
+        if (tags_string.includes(tag)) {
+            posts[i].setAttribute('class', 'post');
+        } else {
+            posts[i].setAttribute('class', 'post hidden');
+        }
+    }
+}
+
+function clear_filter() {
+    document.getElementById('post-filter').setAttribute('class', 'post-filter hidden');
+    document.getElementById('post-filter-text').setAttribute('class', 'hidden');
+    document.getElementById('post-filter-button').setAttribute('class', 'clear-button hidden');
+    var posts = document.getElementsByClassName('post');
+    for (var i = 0; i < posts.length; i++) {
+        posts[i].setAttribute('class', 'post');
+    }
+}
+</script>
+
+<h1 class="section-heading">Articles</h1>
+<p>
+    These are the articles I have written over the years. The main reason I write these is to help those who find themselves in similar situations as myself. Enjoy!
+</p>
+<br />
+
+<div class="tag-title">
+    Filter By:
+</div>
+<ul class="tags">
+    
+    
+    <li class="filter-tag" onclick="filter('2020F')">
+        #2020F
+    </li>
+    
+    <li class="filter-tag" onclick="filter('2021S')">
+        #2021S
+    </li>
+    
+    <li class="filter-tag" onclick="filter('ant193')">
+        #ant193
+    </li>
+    
+    <li class="filter-tag" onclick="filter('csc199')">
+        #csc199
+    </li>
+    
+    <li class="filter-tag" onclick="filter('dev')">
+        #dev
+    </li>
+    
+    <li class="filter-tag" onclick="filter('hps110')">
+        #hps110
+    </li>
+    
+    <li class="filter-tag" onclick="filter('jekyll')">
+        #jekyll
+    </li>
+    
+    <li class="filter-tag" onclick="filter('man')">
+        #man
+    </li>
+    
+    <li class="filter-tag" onclick="filter('packaging')">
+        #packaging
+    </li>
+    
+    <li class="filter-tag" onclick="filter('review')">
+        #review
+    </li>
+    
+    <li class="filter-tag" onclick="filter('rust')">
+        #rust
+    </li>
+    
+    <li class="filter-tag" onclick="filter('shell')">
+        #shell
+    </li>
+    
+    <li class="filter-tag" onclick="filter('uoft')">
+        #uoft
+    </li>
+    
+    <li class="filter-tag" onclick="filter('vic122')">
+        #vic122
+    </li>
+    
+    <li class="filter-tag" onclick="filter('web')">
+        #web
+    </li>
+    
+</ul>
+
+<div id="post-filter" class="post-filter hidden">
+    <h2 id="post-filter-text" class="hidden"></h2>
+    <button id="post-filter-button" onclick="clear_filter()" class="clear-button hidden">Clear Filter</button>
+</div>
+
+<ul class="posts">
+    
+    
+    <li class="post" >
+        <div class="post-title">
+            <a href="/articles/2022-05-16-autogenerate-rust-documentation"> Autogenerate Rust Documentation </a>
+        </div>
+
+        <!-- Copyright 2022 Hisbaan Noorani - All Rights Reserved -->
+
+
+        <ul class="post-info">
+            
+            <li> <i class="fa fa-user"></i> Hisbaan Noorani </li>
+            
+            <li> <i class="fa fa-clock-o"></i> 16/05/22 </li>
+            
+            <li class="tags-container">  <a onclick="filter('dev')">#dev</a>  <a onclick="filter('rust')">#rust</a>  <a onclick="filter('man')">#man</a>  <a onclick="filter('shell')">#shell</a>  </li>
+            
+        </ul>
+    </li>
+    
+    <li class="post" >
+        <div class="post-title">
+            <a href="/articles/2022-05-04-how-to-package-rust-applications"> How to Package Rust Applications </a>
+        </div>
+
+        <!-- Copyright 2022 Hisbaan Noorani - All Rights Reserved -->
+
+
+        <ul class="post-info">
+            
+            <li> <i class="fa fa-user"></i> Hisbaan Noorani </li>
+            
+            <li> <i class="fa fa-clock-o"></i> 04/05/22 </li>
+            
+            <li class="tags-container">  <a onclick="filter('dev')">#dev</a>  <a onclick="filter('rust')">#rust</a>  <a onclick="filter('packaging')">#packaging</a>  </li>
+            
+        </ul>
+    </li>
+    
+    <li class="post" >
+        <div class="post-title">
+            <a href="/articles/2022-04-14-hps110-review"> HPS110 - The Science of Human Nature </a>
+        </div>
+
+        <!-- Copyright 2022 Hisbaan Noorani - All Rights Reserved -->
+
+
+        <ul class="post-info">
+            
+            <li> <i class="fa fa-user"></i> Hisbaan Noorani </li>
+            
+            <li> <i class="fa fa-clock-o"></i> 14/04/22 </li>
+            
+            <li class="tags-container">  <a onclick="filter('uoft')">#uoft</a>  <a onclick="filter('review')">#review</a>  <a onclick="filter('hps110')">#hps110</a>  <a onclick="filter('2020F')">#2020F</a>  </li>
+            
+        </ul>
+    </li>
+    
+    <li class="post" >
+        <div class="post-title">
+            <a href="/articles/2021-12-31-csc199-review"> CSC199 - Intelligence: Artificial and Human </a>
+        </div>
+
+        <!-- Copyright 2021 Hisbaan Noorani - All Rights Reserved -->
+
+
+        <ul class="post-info">
+            
+            <li> <i class="fa fa-user"></i> Hisbaan Noorani </li>
+            
+            <li> <i class="fa fa-clock-o"></i> 31/12/21 </li>
+            
+            <li class="tags-container">  <a onclick="filter('uoft')">#uoft</a>  <a onclick="filter('review')">#review</a>  <a onclick="filter('csc199')">#csc199</a>  <a onclick="filter('2020F')">#2020F</a>  </li>
+            
+        </ul>
+    </li>
+    
+    <li class="post" >
+        <div class="post-title">
+            <a href="/articles/2021-12-21-vic122-review"> VIC122 - Scientific Evidence in Public Policy </a>
+        </div>
+
+        <!-- Copyright 2021 Hisbaan Noorani - All Rights Reserved -->
+
+
+        <ul class="post-info">
+            
+            <li> <i class="fa fa-user"></i> Hisbaan Noorani </li>
+            
+            <li> <i class="fa fa-clock-o"></i> 21/12/21 </li>
+            
+            <li class="tags-container">  <a onclick="filter('uoft')">#uoft</a>  <a onclick="filter('review')">#review</a>  <a onclick="filter('vic122')">#vic122</a>  <a onclick="filter('2021S')">#2021S</a>  </li>
+            
+        </ul>
+    </li>
+    
+    <li class="post" >
+        <div class="post-title">
+            <a href="/articles/2021-12-20-ant193-review"> ANT193 - Stone Tools </a>
+        </div>
+
+        <!-- Copyright 2021 Hisbaan Noorani - All Rights Reserved -->
+
+
+        <ul class="post-info">
+            
+            <li> <i class="fa fa-user"></i> Hisbaan Noorani </li>
+            
+            <li> <i class="fa fa-clock-o"></i> 20/12/21 </li>
+            
+            <li class="tags-container">  <a onclick="filter('uoft')">#uoft</a>  <a onclick="filter('review')">#review</a>  <a onclick="filter('ant193')">#ant193</a>  <a onclick="filter('2021S')">#2021S</a>  </li>
+            
+        </ul>
+    </li>
+    
+    <li class="post" >
+        <div class="post-title">
+            <a href="/articles/2021-12-19-integrating-jekyll-into-your-website"> Integrating Jekyll Into Your Website </a>
+        </div>
+
+        <!-- Copyright 2021 Hisbaan Noorani - All Rights Reserved -->
+
+
+        <ul class="post-info">
+            
+            <li> <i class="fa fa-user"></i> Hisbaan Noorani </li>
+            
+            <li> <i class="fa fa-clock-o"></i> 19/12/21 </li>
+            
+            <li class="tags-container">  <a onclick="filter('dev')">#dev</a>  <a onclick="filter('jekyll')">#jekyll</a>  <a onclick="filter('web')">#web</a>  </li>
+            
+        </ul>
+    </li>
+    
+</ul>
+
+            </div>
+
+            <footer>
+                <div class="footer-content">
+                    <img class="footer-logo" src="/img/favicon.svg" />
+                    <ul class="footer-links">
+                        <li><a aria-current="page" title="hisbaan.com" class="site-nav-button" href="/">Home</a></li>
+                        <li><a aria-current="page" title="Articles" class="site-nav-button" href="/articles">Articles</a></li>
+                    </ul>
+                    <ul class="socials">
+                        <li><a href="https://github.com/hisbaan" class="fa fa-github fa-2x"></a></li>
+                        <li><a href="https://twitter.com/hisbaannoorani" class="fa fa-twitter fa-2x"></a></li>
+                        <li><a href="https://www.linkedin.com/in/hisbaan-noorani-252654203/"
+                            class="fa fa-linkedin-square fa-2x"></a></li>
+                        <li><a href="mailto:hisbaan@gmail.com" class="fa fa-envelope fa-2x"></a></li>
+                    </ul>
+                </div>
+                <div class="footer-bottom">
+                    <p>Have feedback? Let me know!</p>
+                    <p>Support me on <a href="https://github.com/sponsors/hisbaan">GitHub Sponsors</a></p>
+                    <p>&copy; <script>document.write(new Date().getFullYear())</script> Hisbaan Noorani — All Rights Reserved</p>
+                    <p><a href="../disclaimer">Disclaimer</a></p>
+                </div>
+            </footer>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+        integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+        <script language="JavaScript" src='/js/hamburger.js'></script>
+        <script language="JavaScript" src='/js/smooth-scroll.js'></script>
+        <script language="JavaScript" src='/js/modal.js'></script>
+        <script language="JavaScript" src='/js/prism.js'></script>
+    </body>
+
+</html>
