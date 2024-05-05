@@ -17,11 +17,4 @@
     @apply font-bold;
     @apply text-lg;
   }
-
-  a {
-    @apply underline;
-    @apply decoration-neutral-500;
-    @apply transition-colors;
-    @apply hover:decoration-neutral-400;
-  }
 }

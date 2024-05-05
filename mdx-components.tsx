@@ -43,6 +43,14 @@ export function useMDXComponents(components: MDXComponents) {
     ul: ({ children }: { children: React.ReactNode }) => (
       <ul className="flex list-disc flex-col gap-2 [&>*]:ml-4">{children}</ul>
     ),
+    a: ({ children, href }: { children: React.ReactNode; href: string }) => (
+      <a
+        href={href}
+        className="underline decoration-neutral-500 transition-colors hover:decoration-neutral-400"
+      >
+        {children}
+      </a>
+    ),
     ...components,
   }
 }
