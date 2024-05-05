@@ -3,6 +3,7 @@ import TopNav from "@/components/top-nav"
 import "@/styles/globals.css"
 import { Metadata } from "next"
 import Footer from "@/components/footer"
+import { GoogleAnalytics } from "@next/third-parties/google"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,8 +30,9 @@ export default function RootLayout({
           <TopNav />
           {children}
         </div>
-        <Footer/>
+        <Footer />
       </body>
+      <GoogleAnalytics gaId="G-XLT0PE92JK" />
     </html>
   )
 }
