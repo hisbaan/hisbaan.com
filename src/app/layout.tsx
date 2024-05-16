@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body
-        className={`m-auto flex h-dvh w-full max-w-2xl flex-col justify-between gap-5 bg-neutral-900 text-neutral-300 [&>*]:mx-10 ${inter.className}`}
+        className={`m-auto flex h-dvh w-full max-w-2xl flex-col justify-between gap-5 bg-neutral-900 text-neutral-300 [&>*]:mx-3 ${inter.className}`}
         suppressHydrationWarning={true}
       >
         <div>

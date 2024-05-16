@@ -23,9 +23,9 @@ export default function Footer() {
         </div>
       </div>
       <div className="flex items-center justify-between text-sm text-neutral-500">
-        <div>
-          &copy; {new Date().getFullYear()} Hisbaan Noorani — All Rights
-          Reserved
+        <div className="flex flex-col">
+          <div>&copy; {new Date().getFullYear()} Hisbaan Noorani</div>
+          <div>All Rights Reserved</div>
         </div>
         <Link href="/disclaimer">disclaimer</Link>
       </div>
