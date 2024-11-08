@@ -27,6 +27,8 @@
     "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.14.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.5",
