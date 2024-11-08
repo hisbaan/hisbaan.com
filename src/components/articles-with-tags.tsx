@@ -1,50 +1,31 @@
-"use client"
+"use client";
 
-import { ArticleList } from "@/components/article-list"
-import { ArticleWithSlug } from "@/lib/articles"
-import { useMemo, useState } from "react"
+import { useSearchParams } from "next/navigation";
+import { Suspense, useMemo } from "react";
+import { ArticleList } from "@/components/article-list";
+import { useTags } from "@/hooks/use-tags";
+import { ArticleWithSlug } from "@/lib/articles";
+import { Tags } from "./tags";
 
 export default function Articles(props: { articles: ArticleWithSlug[] }) {
-  // TODO maybe make this a set?
-  const [currentTags, setCurrentTags] = useState<string[]>([])
+  return <Suspense>
+    <ArticlesContent articles={props.articles} />
+  </Suspense>
+}
 
-  function toggleTag(tag: string) {
-    if (currentTags.includes(tag)) {
-      setCurrentTags(currentTags.filter((t) => t !== tag))
-    } else {
-      setCurrentTags([...currentTags, tag])
-    }
-  }
-
-  const allTags: Set<string> = new Set()
-  props.articles.forEach((article) => {
-    article.tags.forEach((tag) => allTags.add(tag))
-  })
+function ArticlesContent(props: { articles: ArticleWithSlug[]}) {
+  const { currentTags, allTags, toggleTag, hasAllSelectedTags } = useTags({
+    allTags: [...new Set(props.articles.flatMap((article) => article.tags))],
+    initialTags: useSearchParams().getAll("tag"),
+  });
 
   const filteredArticles: ArticleWithSlug[] = useMemo(() => {
-    if (currentTags.length === 0) {
-      return props.articles
-    }
-    return props.articles.filter((article) => {
-      return currentTags.every((tag) => article.tags.includes(tag))
-    })
-  }, [currentTags, props.articles])
+    return props.articles.filter((article) => hasAllSelectedTags(article.tags));
+  }, [props.articles, hasAllSelectedTags]);
 
   return (
     <>
-      <div className="flex w-full cursor-pointer flex-wrap gap-5">
-        {[...allTags].map((tag: string) => {
-          return (
-            <div
-              key={tag}
-              onClick={() => toggleTag(tag)}
-              className={`decoration-neutral-500 transition-colors hover:text-neutral-300 hover:decoration-neutral-400 ${currentTags.includes(tag) ? "underline" : "text-neutral-400"}`}
-            >
-              {tag}
-            </div>
-          )
-        })}
-      </div>
+      <Tags allTags={allTags} currentTags={currentTags} toggleTag={toggleTag} />
       <div className="flex w-full flex-col gap-10">
         {filteredArticles.length ? (
           <ArticleList articles={filteredArticles} showDescription={true} />
@@ -58,5 +39,5 @@ export default function Articles(props: { articles: ArticleWithSlug[] }) {
         )}
       </div>
     </>
-  )
+  );
 }

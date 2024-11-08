@@ -1,7 +1,15 @@
 {
   "trailingComma": "es5",
   "tabWidth": 2,
-  "semi": false,
+  "semi": true,
   "singleQuote": false,
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "plugins": [ "prettier-plugin-tailwindcss" ],
+  "importOrder": [
+    "^@/app/(.*)$",
+    "^@/components/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/queries/(.*)$",
+    "^[./]"
+  ]
 }
