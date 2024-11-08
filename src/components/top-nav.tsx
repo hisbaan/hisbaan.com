@@ -17,6 +17,12 @@ export default function TopNav() {
           >
             blog
           </Link>
+          <Link
+            className="transition-colors hover:text-neutral-400"
+            href="/photos"
+          >
+            photos
+          </Link>
         </div>
       </div>
     </>

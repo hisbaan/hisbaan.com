@@ -1,38 +1,23 @@
-import { Inter } from "next/font/google"
-import TopNav from "@/components/top-nav"
-import "@/styles/globals.css"
-import { Metadata } from "next"
-import Footer from "@/components/footer"
-import { GoogleAnalytics } from "@next/third-parties/google"
+import "@/styles/globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { Inter } from "next/font/google";
+import Footer from "@/components/footer";
+import TopNav from "@/components/top-nav";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
-})
-
-export const metadata: Metadata = {
-  title: "hisbaan • home",
-  description: "Personal website of Hisbaan Noorani",
-}
+});
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body
-        className={`m-auto flex h-dvh w-full max-w-2xl flex-col justify-between gap-5 bg-neutral-900 text-neutral-300 [&>*]:mx-3 ${inter.className}`}
-        suppressHydrationWarning={true}
-      >
-        <div>
-          <TopNav />
-          {children}
-        </div>
-        <Footer />
-      </body>
+      {children}
       <GoogleAnalytics gaId="G-XLT0PE92JK" />
     </html>
-  )
+  );
 }

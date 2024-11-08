@@ -1,5 +1,6 @@
 import { ArticleList } from "@/components/article-list"
 import { getAllArticles } from "@/lib/articles"
+import { Metadata } from "next"
 import Link from "next/link"
 import { FaChevronRight } from "react-icons/fa"
 
@@ -36,6 +37,11 @@ const projects: Array<{ title: string; description: string; url: string }> = [
     url: "https://github.com/hisbaan/hisbaan.com",
   },
 ]
+
+export const metadata: Metadata = {
+  title: "hisbaan • home",
+  description: "Personal website of Hisbaan Noorani",
+};
 
 export default async function Home() {
   const articles = (await getAllArticles()).splice(0, 4)

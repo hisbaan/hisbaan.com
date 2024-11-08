@@ -1,5 +1,13 @@
-import type { Config } from "tailwindcss"
-import { fontFamily } from "tailwindcss/defaultTheme"
+import type { Config } from "tailwindcss";
+
+export const breakpoints = {
+  xs: 360,
+  sm: 640,
+  md: 768,
+  lg: 1024,
+  xl: 1280,
+  "2xl": 1536,
+};
 
 const config: Config = {
   content: [
@@ -14,7 +22,14 @@ const config: Config = {
         sans: ["Helvetica", "sans-serif"],
       },
     },
+    screens: Object.fromEntries(
+      Object.entries(breakpoints).map((key, value) => [
+        key,
+        value.toString() + "px",
+      ])
+    ),
   },
   plugins: [],
-}
-export default config
+};
+
+export default config;
