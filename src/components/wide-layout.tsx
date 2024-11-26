@@ -1,18 +1,13 @@
-import { GoogleAnalytics } from "@next/third-parties/google";
-import Footer from "./footer";
-import TopNav from "./top-nav";
+import "@/styles/globals.css";
 import { Inter } from "next/font/google";
-import { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import Footer from "@/components/footer";
+import TopNav from "@/components/top-nav";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
-export const metadata: Metadata = {
-  title: "hisbaan • home",
-  description: "Personal website of Hisbaan Noorani",
-};
 
 export default function WideLayout({
   children,

@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   description: "Personal website of Hisbaan Noorani",
 };
 
-
 export default async function Blog() {
   const articles = await getAllArticles()
 

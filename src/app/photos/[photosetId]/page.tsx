@@ -5,6 +5,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "hisbaan • photos",
+  description: "Personal website of Hisbaan Noorani",
 };
 
 export default async function Page(
