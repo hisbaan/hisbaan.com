@@ -23,7 +23,7 @@ const config: Config = {
       },
     },
     screens: Object.fromEntries(
-      Object.entries(breakpoints).map((key, value) => [
+      Object.entries(breakpoints).map(([key, value]) => [
         key,
         value.toString() + "px",
       ])
