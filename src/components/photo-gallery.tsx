@@ -1,11 +1,12 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTags } from "@/hooks/use-tags";
 import { FlickrPhoto } from "@/queries/flickr";
 import { FlickrImage } from "./flickr-image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useKeyPress } from "@/hooks/use-key-press";
 
 export function PhotoGallery(props: {
   photosetId: string;
@@ -30,16 +31,32 @@ export function PhotoGallery(props: {
     selectedPhotoIndex === -1 ? 0 : selectedPhotoIndex
   );
 
-  const setIndexAndUrl = (newIndex: number | ((x: number) => number)) => {
-    const targetIndex =
-      typeof newIndex === "number" ? newIndex : newIndex(index);
-    window.history.pushState(
-      window.history.state,
-      "",
-      `/photos/${props.photosetId}/${photos[targetIndex].id}`
-    );
-    setIndex(newIndex);
-  };
+  const setIndexAndUrl = useCallback(
+    (newIndex: number | ((x: number) => number)) => {
+      const targetIndex =
+        typeof newIndex === "number" ? newIndex : newIndex(index);
+      window.history.pushState(
+        window.history.state,
+        "",
+        `/photos/${props.photosetId}/${photos[targetIndex].id}`
+      );
+      setIndex(newIndex);
+    },
+    [index, photos, props.photosetId]
+  );
+
+  useKeyPress({
+    targetKey: "ArrowLeft",
+    onKeyUp: () => {
+      if (index !== 0) setIndexAndUrl((index) => index - 1);
+    },
+  });
+  useKeyPress({
+    targetKey: "ArrowRight",
+    onKeyUp: () => {
+      if (index !== photos.length - 1) setIndexAndUrl((index) => index + 1);
+    },
+  });
 
   const setPhoto = (photo: FlickrPhoto) =>
     setIndexAndUrl(photos.findIndex((curr) => curr.id === photo.id));
