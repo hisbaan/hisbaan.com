@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   description: "Personal website of Hisbaan Noorani",
 };
 
+export const revalidate = 86400;
+
 export default async function Photos() {
   const photosets = await getPhotosets();
   if (!photosets) {
