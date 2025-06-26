@@ -1,13 +1,5 @@
 import "@/styles/globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Inter } from "next/font/google";
-import Footer from "@/components/footer";
-import TopNav from "@/components/top-nav";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
 
 export default function RootLayout({
   children,
