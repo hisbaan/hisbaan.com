@@ -36,12 +36,12 @@ export function useMDXComponents(components: MDXComponents) {
       <td className="border p-3">{children}</td>
     ),
     ol: ({ children }: { children: React.ReactNode }) => (
-      <ol className="flex list-decimal flex-col gap-2 [&>*]:ml-4">
+      <ol className="flex list-decimal flex-col gap-2 *:ml-4">
         {children}
       </ol>
     ),
     ul: ({ children }: { children: React.ReactNode }) => (
-      <ul className="flex list-disc flex-col gap-2 [&>*]:ml-4">{children}</ul>
+      <ul className="flex list-disc flex-col gap-2 *:ml-4">{children}</ul>
     ),
     a: ({ children, href }: { children: React.ReactNode; href: string }) => (
       <a

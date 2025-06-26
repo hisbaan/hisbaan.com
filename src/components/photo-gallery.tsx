@@ -62,7 +62,7 @@ export function PhotoGallery(props: {
     setIndexAndUrl(photos.findIndex((curr) => curr.id === photo.id));
 
   return (
-    <div className="flex w-full flex-grow flex-col justify-between gap-4">
+    <div className="flex w-full grow flex-col justify-between gap-4">
       <div className="my-auto flex w-full flex-row items-center justify-between gap-2">
         <div
           className={`absolute left-2 z-10 p-2 md:relative md:left-auto ${index === 0 ? "invisible" : "cursor-pointer"}`}
@@ -93,7 +93,7 @@ export function PhotoGallery(props: {
             className={
               "h-full w-auto rounded-md " +
               (photo.id === photos[index].id
-                ? "outline outline-1 outline-offset-[-2px] outline-white"
+                ? "outline-solid outline-1 -outline-offset-2 outline-white"
                 : "")
             }
             onClick={() => setPhoto(photo)}

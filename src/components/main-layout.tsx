@@ -20,7 +20,7 @@ export default function MainLayout({
         className={`m-auto flex min-h-dvh w-full max-w-2xl flex-col justify-between gap-5 bg-neutral-900 px-3 text-neutral-300 ${inter.className}`}
         suppressHydrationWarning={true}
       >
-        <div className="flex flex-grow flex-col">
+        <div className="flex grow flex-col">
           <TopNav />
           {children}
         </div>

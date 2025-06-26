@@ -21,7 +21,7 @@ export default async function Page(
 
   return (
     <>
-      <main className="flex flex-grow flex-col items-center gap-10">
+      <main className="flex grow flex-col items-center gap-10">
         <PhotoGallery
           photosetId={params.photosetId}
           photos={photoset.photo}
