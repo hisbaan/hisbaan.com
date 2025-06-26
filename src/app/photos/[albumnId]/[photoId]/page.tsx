@@ -1,21 +1,20 @@
 import { notFound } from "next/navigation";
 import { PhotoGallery } from "@/components/photo-gallery";
-import { getPhotos } from "@/queries/flickr";
+
 import { Metadata } from "next";
+import { getPhotosByAlbumn } from "@/queries/photos";
 
 export const metadata: Metadata = {
   title: "hisbaan • photos",
   description: "Personal website of Hisbaan Noorani",
 };
 
-export default async function Page(
-  props: {
-    params: Promise<{ photosetId: string; photoId: string }>;
-  }
-) {
+export default async function Page(props: {
+  params: Promise<{ albumnId: string; photoId: string }>;
+}) {
   const params = await props.params;
-  const photoset = await getPhotos(params.photosetId);
-  if (!photoset) {
+  const photos = await getPhotosByAlbumn(params.albumnId);
+  if (photos.length === 0) {
     return notFound();
   }
 
@@ -23,8 +22,8 @@ export default async function Page(
     <>
       <main className="flex grow flex-col items-center gap-10">
         <PhotoGallery
-          photosetId={params.photosetId}
-          photos={photoset.photo}
+          albumnId={params.albumnId}
+          photos={photos}
           selectedPhotoId={params.photoId}
         />
       </main>

@@ -3,14 +3,14 @@ import { withTimestamps } from "./utils";
 
 export const albumns = pgTable("albumns", (t) =>
   withTimestamps({
-    id: t.uuid("albumn_id").primaryKey().defaultRandom(),
-    name: t.text("name"),
+    id: t.uuid("id").primaryKey().defaultRandom(),
+    name: t.text("name").notNull(),
   })
 );
 
-export const photos = pgTable("images", (t) =>
+export const photos = pgTable("photos", (t) =>
   withTimestamps({
-    id: t.uuid("photo_id").primaryKey().defaultRandom(),
+    id: t.uuid("id").primaryKey().defaultRandom(),
     albumnId: t
       .uuid("albumn_id")
       .references(() => albumns.id)

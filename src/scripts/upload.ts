@@ -44,10 +44,10 @@ async function main() {
         }
 
         const files = fs.readdirSync(path);
-        for (const fileName of files) {
+        await Promise.all(files.map(async (fileName) => {
           const filePath = `${path}/${fileName}`;
           if (!fileName.toLowerCase().endsWith(".jpg")) {
-            continue;
+            return;
           }
 
           const fileBuffer = fs.readFileSync(filePath);
@@ -98,7 +98,7 @@ async function main() {
             });
             console.log(`Created photo: ${fileName}`);
           }
-        }
+        }))
       });
     })
   );

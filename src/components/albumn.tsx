@@ -5,27 +5,30 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Tags } from "@/components/tags";
 import { useTags } from "@/hooks/use-tags";
-import { FlickrPhoto, FlickrPhotoset } from "@/queries/flickr";
 import { breakpoints } from "../../tailwind.config";
-import { FlickrImage } from "./flickr-image";
+import { UploadThingImage } from "./uploadthing-image";
+import { AlbumnWithPhotos, Photo } from "@/queries/photos";
 
-export function Albumn(props: { photoset: FlickrPhotoset }) {
-  const { allTags, currentTags, toggleTag, hasAllSelectedTags, getQueryString } =
-    useTags({
-      allTags: [
-        ...new Set(
-          props.photoset.photo.flatMap((photo) => photo.tags.split(" "))
-        ),
-      ].toSorted(),
-      initialTags: useSearchParams().getAll("tag"),
-    });
+export function Albumn(props: { albumn: AlbumnWithPhotos }) {
+  const {
+    allTags,
+    currentTags,
+    toggleTag,
+    hasAllSelectedTags,
+    getQueryString,
+  } = useTags({
+    allTags: [
+      ...new Set(props.albumn.photos.flatMap((photo) => photo.tags)),
+    ].toSorted(),
+    initialTags: useSearchParams().getAll("tag"),
+  });
 
-  const photos = props.photoset.photo.filter((photo) =>
-    hasAllSelectedTags(photo.tags.split(" "))
+  const photos = props.albumn.photos.filter((photo) =>
+    hasAllSelectedTags(photo.tags)
   );
 
   const getPhotoLink = (photoId: string) => {
-    return `/photos/${props.photoset.id}/${photoId}${getQueryString()}`;
+    return `/photos/${props.albumn.id}/${photoId}${getQueryString()}`;
   };
 
   return (
@@ -37,7 +40,7 @@ export function Albumn(props: { photoset: FlickrPhotoset }) {
 }
 
 function MasonryGrid(props: {
-  photos: FlickrPhoto[];
+  photos: Photo[];
   getPhotoLink: (photoId: string) => string;
 }) {
   let columns = 3;
@@ -48,17 +51,21 @@ function MasonryGrid(props: {
     columns = 2;
   }
 
-  const list: FlickrPhoto[][] = [];
+  const list: Photo[][] = [];
   for (let i = 0; i < columns; i++) list.push([]);
   props.photos.forEach((photo, index) => list[index % columns].push(photo));
 
   return (
     <div className="flex flex-row gap-4">
       {list.map((columnList, index) => (
-        <div key={index} className="flex flex-col gap-4 flex-1">
+        <div key={index} className="flex flex-1 flex-col gap-4">
           {columnList.map((photo) => (
             <Link key={photo.id} href={props.getPhotoLink(photo.id)}>
-              <FlickrImage className="h-auto w-full rounded-lg" photo={photo} />
+              <UploadThingImage
+                className="h-auto w-full rounded-lg"
+                photo={photo}
+                thumbnail
+              />
             </Link>
           ))}
         </div>

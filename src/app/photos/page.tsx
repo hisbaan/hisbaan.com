@@ -1,5 +1,6 @@
 import { AlbumnList } from "@/components/albumn-list";
-import { getPhotosets } from "@/queries/flickr";
+import { getAlbumns } from "@/queries/photos";
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -10,8 +11,8 @@ export const metadata: Metadata = {
 export const revalidate = 86400;
 
 export default async function Photos() {
-  const photosets = await getPhotosets();
-  if (!photosets) {
+  const albumns = await getAlbumns();
+  if (!albumns) {
     return <h1>500 - Internal server error. Please try again later</h1>
   }
 
@@ -19,7 +20,7 @@ export default async function Photos() {
     <>
       <main className="flex flex-col items-center gap-10">
         <h1 className="w-full">Photos</h1>
-        <AlbumnList photosets={photosets} />
+        <AlbumnList albumns={albumns} />
       </main>
     </>
   );

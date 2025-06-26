@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { Albumn } from "@/components/albumn";
-import { getPhotos } from "@/queries/flickr";
+
 import { Metadata } from "next";
+import { getAlbumn } from "@/queries/photos";
 
 export const metadata: Metadata = {
   title: "hisbaan • photos",
@@ -10,20 +11,20 @@ export const metadata: Metadata = {
 
 export default async function Page(
   props: {
-    params: Promise<{ photosetId: string }>;
+    params: Promise<{ albumnId: string }>;
   }
 ) {
   const params = await props.params;
-  const photoset = await getPhotos(params.photosetId);
-  if (!photoset) {
+  const albumn = await getAlbumn(params.albumnId);
+  if (!albumn) {
     return notFound();
   }
 
   return (
     <>
       <main className="flex flex-col items-center gap-10">
-        <h1 className="w-full">{photoset.title}</h1>
-        <Albumn photoset={photoset} />
+        <h1 className="w-full">{albumn.name}</h1>
+        <Albumn albumn={albumn} />
       </main>
     </>
   );
