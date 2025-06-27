@@ -44,61 +44,64 @@ async function main() {
         }
 
         const files = fs.readdirSync(path);
-        await Promise.all(files.map(async (fileName) => {
-          const filePath = `${path}/${fileName}`;
-          if (!fileName.toLowerCase().endsWith(".jpg")) {
-            return;
-          }
+        await Promise.all(
+          files.map(async (fileName) => {
+            const filePath = `${path}/${fileName}`;
+            if (!fileName.toLowerCase().endsWith(".jpg")) {
+              return;
+            }
 
-          const fileBuffer = fs.readFileSync(filePath);
-          const hash = crypto
-            .createHash("sha256")
-            .update(fileBuffer)
-            .digest("hex");
+            const fileBuffer = fs.readFileSync(filePath);
+            const hash = crypto
+              .createHash("sha256")
+              .update(fileBuffer)
+              .digest("hex");
 
-          const existingPhoto = await tx.query.photos.findFirst({
-            where: {
-              fileName: fileName,
-              albumnId: albumn.id,
-            },
-          });
+            const existingPhoto = await tx.query.photos.findFirst({
+              where: {
+                fileName: fileName,
+                albumnId: albumn.id,
+              },
+            });
 
-          if (existingPhoto) {
-            if (existingPhoto.hash !== hash) {
-              await utapi.deleteFiles([
-                existingPhoto.key,
-                existingPhoto.thumbnailKey,
-              ]);
-              const tags = getTags(fileBuffer);
+            if (existingPhoto) {
+              if (existingPhoto.hash !== hash) {
+                await utapi.deleteFiles([
+                  existingPhoto.key,
+                  existingPhoto.thumbnailKey,
+                ]);
+                const { tags, createdAt } = getMetadata(fileBuffer);
+                const { key, thumbnailKey } = await uploadFile(
+                  fileName,
+                  fileBuffer
+                );
+                await tx
+                  .update(tb.photos)
+                  .set({ key, thumbnailKey, tags, hash, createdAt })
+                  .where(eq(tb.photos.id, existingPhoto.id));
+                console.log(`Updated photo: ${fileName}`);
+              } else {
+                console.log(`Skipped photo: ${fileName}`);
+              }
+            } else {
+              const { tags, createdAt } = getMetadata(fileBuffer);
               const { key, thumbnailKey } = await uploadFile(
                 fileName,
                 fileBuffer
               );
-              await tx
-                .update(tb.photos)
-                .set({ key, thumbnailKey, tags, hash })
-                .where(eq(tb.photos.id, existingPhoto.id));
-              console.log(`Updated photo: ${fileName}`);
-            } else {
-              console.log(`Skipped photo: ${fileName}`);
+              await tx.insert(tb.photos).values({
+                fileName: fileName,
+                albumnId: albumn.id,
+                key,
+                thumbnailKey,
+                tags,
+                hash,
+                createdAt,
+              });
+              console.log(`Created photo: ${fileName}`);
             }
-          } else {
-            const tags = getTags(fileBuffer);
-            const { key, thumbnailKey } = await uploadFile(
-              fileName,
-              fileBuffer
-            );
-            await tx.insert(tb.photos).values({
-              fileName: fileName,
-              albumnId: albumn.id,
-              key,
-              thumbnailKey,
-              tags,
-              hash,
-            });
-            console.log(`Created photo: ${fileName}`);
-          }
-        }))
+          })
+        );
       });
     })
   );
@@ -107,9 +110,17 @@ async function main() {
   exit(0);
 }
 
-function getTags(fileBuffer: Buffer) {
+function getMetadata(fileBuffer: Buffer) {
   const exif = ExifReader.load(fileBuffer, { expanded: true });
-  return exif.xmp?.subject.description.split(",") ?? [];
+  return {
+    tags: exif.xmp?.subject.description.split(",") ?? [],
+    createdAt: ((date) => (date ? new Date(date) : undefined))(
+      exif.exif?.DateTimeOriginal?.value[0].replace(
+        /(\d{4}):(\d{2}):(\d{2}) /,
+        "$1-$2-$3T"
+      ) + "Z"
+    ),
+  };
 }
 
 async function uploadFile(fileName: string, fileBuffer: Buffer) {
