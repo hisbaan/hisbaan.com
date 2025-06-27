@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTags } from "@/hooks/use-tags";
 import { UploadThingImage } from "./uploadthing-image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -61,6 +61,23 @@ export function PhotoGallery(props: {
   const setPhoto = (photo: Photo) =>
     setIndexAndUrl(photos.findIndex((curr) => curr.id === photo.id));
 
+  const thumbnailContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (thumbnailContainerRef.current) {
+      const selectedThumbnail = thumbnailContainerRef.current.querySelector(
+        `img[data-index="${index}"]`,
+      );
+      if (selectedThumbnail) {
+        selectedThumbnail.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    }
+  }, [index]);
+
   return (
     <div className="flex w-full grow flex-col justify-between gap-4">
       <div className="my-auto flex w-full flex-row items-center justify-between gap-2">
@@ -73,8 +90,10 @@ export function PhotoGallery(props: {
           <FaChevronLeft />
         </div>
         <UploadThingImage
-          className={`mx-auto h-auto max-h-[70vh] w-auto max-w-full justify-self-center overflow-hidden rounded-lg object-contain`}
+          // className={`mx-auto h-auto max-h-[70vh] w-auto max-w-full justify-self-center overflow-hidden rounded-lg object-contain`}
+          className={`mx-auto h-[65vh] w-auto max-w-full justify-self-center overflow-hidden rounded-lg object-contain`}
           photo={photos[index]}
+          showSpinner
         />
         <div
           className={`absolute right-2 z-10 p-2 md:relative md:right-auto ${index === photos.length - 1 ? "invisible" : "cursor-pointer"}`}
@@ -86,7 +105,10 @@ export function PhotoGallery(props: {
           <FaChevronRight />
         </div>
       </div>
-      <div className="flex h-20 flex-row gap-3 overflow-x-scroll">
+      <div
+        ref={thumbnailContainerRef}
+        className="flex h-25 flex-row gap-3 overflow-x-auto pb-3"
+      >
         {photos.map((photo) => (
           <UploadThingImage
             key={photo.id}
