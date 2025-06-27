@@ -14,6 +14,7 @@ export const UploadThingImage: React.FC<{
   thumbnail?: boolean;
   showSpinner?: boolean;
   photo: Photo,
+  "data-index"?: number;
 }> = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -50,6 +51,7 @@ export const UploadThingImage: React.FC<{
         </div>
       )}
       <Image
+        data-index={props["data-index"]}
         className={cn(props.className, isLoading && props.showSpinner && "hidden")}
         onClick={props.onClick}
         src={src}

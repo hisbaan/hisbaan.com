@@ -108,9 +108,10 @@ export function PhotoGallery(props: {
         ref={thumbnailContainerRef}
         className="flex h-25 flex-row gap-3 overflow-x-auto pb-3"
       >
-        {photos.map((photo) => (
+        {photos.map((photo, i) => (
           <UploadThingImage
             key={photo.id}
+            data-index={i}
             className={
               "h-full w-auto rounded-md " +
               (photo.id === photos[index].id

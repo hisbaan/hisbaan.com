@@ -39,5 +39,6 @@ export async function getPhoto(id: string) {
 export async function getPhotosByAlbumn(albumnId: string) {
   return await db.query.photos.findMany({
     where: { albumnId: albumnId },
+    orderBy: (table) => desc(table.createdAt),
   });
 }
