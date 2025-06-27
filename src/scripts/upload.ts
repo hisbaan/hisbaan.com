@@ -44,64 +44,62 @@ async function main() {
         }
 
         const files = fs.readdirSync(path);
-        await Promise.all(
-          files.map(async (fileName) => {
-            const filePath = `${path}/${fileName}`;
-            if (!fileName.toLowerCase().endsWith(".jpg")) {
-              return;
-            }
+        for (const fileName of files) {
+          const filePath = `${path}/${fileName}`;
+          if (!fileName.toLowerCase().endsWith(".jpg")) {
+            return;
+          }
 
-            const fileBuffer = fs.readFileSync(filePath);
-            const hash = crypto
-              .createHash("sha256")
-              .update(fileBuffer)
-              .digest("hex");
+          const fileBuffer = fs.readFileSync(filePath);
+          const hash = crypto
+            .createHash("sha256")
+            .update(fileBuffer)
+            .digest("hex");
 
-            const existingPhoto = await tx.query.photos.findFirst({
-              where: {
-                fileName: fileName,
-                albumnId: albumn.id,
-              },
-            });
+          const existingPhoto = await tx.query.photos.findFirst({
+            where: {
+              fileName: fileName,
+              albumnId: albumn.id,
+            },
+          });
 
-            if (existingPhoto) {
-              if (existingPhoto.hash !== hash) {
-                await utapi.deleteFiles([
-                  existingPhoto.key,
-                  existingPhoto.thumbnailKey,
-                ]);
-                const { tags, createdAt } = getMetadata(fileBuffer);
-                const { key, thumbnailKey } = await uploadFile(
-                  fileName,
-                  fileBuffer
-                );
-                await tx
-                  .update(tb.photos)
-                  .set({ key, thumbnailKey, tags, hash, createdAt })
-                  .where(eq(tb.photos.id, existingPhoto.id));
-                console.log(`Updated photo: ${fileName}`);
-              } else {
-                console.log(`Skipped photo: ${fileName}`);
-              }
-            } else {
+          if (existingPhoto) {
+            if (existingPhoto.hash !== hash) {
+              await utapi.deleteFiles([
+                existingPhoto.key,
+                existingPhoto.thumbnailKey,
+              ]);
               const { tags, createdAt } = getMetadata(fileBuffer);
               const { key, thumbnailKey } = await uploadFile(
                 fileName,
                 fileBuffer
               );
-              await tx.insert(tb.photos).values({
-                fileName: fileName,
-                albumnId: albumn.id,
-                key,
-                thumbnailKey,
-                tags,
-                hash,
-                createdAt,
-              });
-              console.log(`Created photo: ${fileName}`);
+              await tx
+                .update(tb.photos)
+                .set({ key, thumbnailKey, tags, hash, createdAt })
+                .where(eq(tb.photos.id, existingPhoto.id));
+              console.log(`Updated photo: ${fileName}`);
+            } else {
+              console.log(`Skipped photo: ${fileName}`);
             }
-          })
-        );
+          } else {
+            const { tags, createdAt } = getMetadata(fileBuffer);
+            const { key, thumbnailKey } = await uploadFile(
+              fileName,
+              fileBuffer
+            );
+            await tx.insert(tb.photos).values({
+              fileName: fileName,
+              albumnId: albumn.id,
+              key,
+              thumbnailKey,
+              tags,
+              hash,
+              createdAt,
+            });
+            console.log(`Created photo: ${fileName}`);
+          }
+        }
       });
     })
   );
