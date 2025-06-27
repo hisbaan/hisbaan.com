@@ -19,14 +19,10 @@ export default async function Page(props: {
   }
 
   return (
-    <>
-      <main className="flex grow flex-col items-center gap-10">
-        <PhotoGallery
-          albumnId={params.albumnId}
-          photos={photos}
-          selectedPhotoId={params.photoId}
-        />
-      </main>
-    </>
+    <PhotoGallery
+      albumnId={params.albumnId}
+      photos={photos}
+      selectedPhotoId={params.photoId}
+    />
   );
 }

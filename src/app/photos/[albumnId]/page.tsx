@@ -9,11 +9,9 @@ export const metadata: Metadata = {
   description: "Personal website of Hisbaan Noorani",
 };
 
-export default async function Page(
-  props: {
-    params: Promise<{ albumnId: string }>;
-  }
-) {
+export default async function Page(props: {
+  params: Promise<{ albumnId: string }>;
+}) {
   const params = await props.params;
   const albumn = await getAlbumn(params.albumnId);
   if (!albumn) {
@@ -22,10 +20,8 @@ export default async function Page(
 
   return (
     <>
-      <main className="flex flex-col items-center gap-10">
-        <h1 className="w-full">{albumn.name}</h1>
-        <Albumn albumn={albumn} />
-      </main>
+      <h1 className="w-full">{albumn.name}</h1>
+      <Albumn albumn={albumn} />
     </>
   );
 }

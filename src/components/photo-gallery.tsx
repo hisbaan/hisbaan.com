@@ -90,7 +90,6 @@ export function PhotoGallery(props: {
           <FaChevronLeft />
         </div>
         <UploadThingImage
-          // className={`mx-auto h-auto max-h-[70vh] w-auto max-w-full justify-self-center overflow-hidden rounded-lg object-contain`}
           className={`mx-auto h-[65vh] w-auto max-w-full justify-self-center overflow-hidden rounded-lg object-contain`}
           photo={photos[index]}
           showSpinner
