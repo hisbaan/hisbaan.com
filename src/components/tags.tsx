@@ -4,7 +4,7 @@ export function Tags(props: {
   toggleTag: (tag: string) => void;
 }) {
   return (
-    <div className="flex w-full cursor-pointer flex-wrap gap-5">
+    <div className="flex w-full cursor-pointer flex-wrap gap-x-5 gap-y-2">
       {[...props.allTags].map((tag: string) => {
         return (
           <div

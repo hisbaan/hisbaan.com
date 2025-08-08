@@ -7,6 +7,7 @@ import crypto from "node:crypto";
 import ExifReader from "exifreader";
 import sharp from "sharp";
 import { config } from "@/config";
+import imageSize from "image-size";
 
 export const utapi = new UTApi({
   token: config.UPLOADTHING_TOKEN,
@@ -88,6 +89,7 @@ async function main() {
               fileName,
               fileBuffer
             );
+            const dimensions = imageSize(fileBuffer);
             await tx.insert(tb.photos).values({
               fileName: fileName,
               albumnId: albumn.id,
@@ -96,6 +98,9 @@ async function main() {
               tags,
               hash,
               createdAt,
+              // TEST
+              height: dimensions.height,
+              width: dimensions.width,
             });
             console.log(`Created photo: ${fileName}`);
           }

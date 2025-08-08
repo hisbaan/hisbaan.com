@@ -32,10 +32,10 @@ export function Albumn(props: { albumn: AlbumnWithPhotos }) {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <Tags allTags={allTags} currentTags={currentTags} toggleTag={toggleTag} />
       <MasonryGrid photos={photos} getPhotoLink={getPhotoLink} />
-    </>
+    </div>
   );
 }
 
@@ -51,13 +51,22 @@ function MasonryGrid(props: {
     columns = 2;
   }
 
-  const list: Photo[][] = [];
-  for (let i = 0; i < columns; i++) list.push([]);
-  props.photos.forEach((photo, index) => list[index % columns].push(photo));
+  const columnsContent: Photo[][] = Array.from({ length: columns }, () => []);
+  const columnHeights = Array(columns).fill(0);
+
+  props.photos.forEach((photo) => {
+    const shortestColumnIndex = columnHeights.indexOf(
+      Math.min(...columnHeights)
+    );
+    columnsContent[shortestColumnIndex].push(photo);
+    // Since the width of the column is fixed, the image's rendered height
+    // is proportional to its height / width ratio.
+    columnHeights[shortestColumnIndex] += photo.height / photo.width;
+  });
 
   return (
     <div className="flex flex-row gap-4">
-      {list.map((columnList, index) => (
+      {columnsContent.map((columnList, index) => (
         <div key={index} className="flex flex-1 flex-col gap-4">
           {columnList.map((photo) => (
             <Link key={photo.id} href={props.getPhotoLink(photo.id)}>

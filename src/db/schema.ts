@@ -20,5 +20,7 @@ export const photos = pgTable("photos", (t) =>
     key: t.text("key").notNull(),
     thumbnailKey: t.text("thumbnail_key").notNull(),
     tags: t.text("tags").array().notNull(),
+    height: t.integer("height").notNull(),
+    width: t.integer("width").notNull(),
   })
 );
