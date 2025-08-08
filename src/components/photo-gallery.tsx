@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useMemo } from "react";
 import { useTags } from "@/hooks/use-tags";
 import { UploadThingImage } from "./uploadthing-image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -13,16 +13,22 @@ export function PhotoGallery(props: {
   photos: Photo[];
   selectedPhotoId: string;
 }) {
+  const tags = useSearchParams().getAll("tag");
+
+  const tagsQueryString = useMemo(() => {
+    const params = new URLSearchParams();
+    tags.forEach((tag) => params.append("tag", tag));
+    return (tags.length > 0 ? "?" : "") + params.toString();
+  }, [tags]);
+
   const { hasAllSelectedTags } = useTags({
     allTags: [
       ...new Set(props.photos.flatMap((photo) => photo.tags)),
     ].toSorted(),
-    initialTags: useSearchParams().getAll("tag"),
+    initialTags: tags,
   });
 
-  const photos = props.photos.filter((photo) =>
-    hasAllSelectedTags(photo.tags)
-  );
+  const photos = props.photos.filter((photo) => hasAllSelectedTags(photo.tags));
 
   const selectedPhotoIndex = photos.findIndex(
     (photo) => photo.id === props.selectedPhotoId
@@ -38,11 +44,11 @@ export function PhotoGallery(props: {
       window.history.pushState(
         window.history.state,
         "",
-        `/photos/${props.albumnId}/${photos[targetIndex].id}`
+        `/photos/${props.albumnId}/${photos[targetIndex].id}` + tagsQueryString
       );
       setIndex(newIndex);
     },
-    [index, photos, props.albumnId]
+    [index, photos, props.albumnId, tagsQueryString]
   );
 
   useKeyPress({
@@ -66,7 +72,7 @@ export function PhotoGallery(props: {
   useEffect(() => {
     if (thumbnailContainerRef.current) {
       const selectedThumbnail = thumbnailContainerRef.current.querySelector(
-        `img[data-index="${index}"]`,
+        `img[data-index="${index}"]`
       );
       if (selectedThumbnail) {
         selectedThumbnail.scrollIntoView({
@@ -115,7 +121,7 @@ export function PhotoGallery(props: {
             className={
               "h-full w-auto rounded-md " +
               (photo.id === photos[index].id
-                ? "outline-solid outline-1 -outline-offset-2 outline-white"
+                ? "outline-1 -outline-offset-2 outline-white outline-solid"
                 : "")
             }
             onClick={() => setPhoto(photo)}
