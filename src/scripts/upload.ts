@@ -111,7 +111,7 @@ async function main() {
 function getMetadata(fileBuffer: Buffer) {
   const exif = ExifReader.load(fileBuffer, { expanded: true });
   return {
-    tags: exif.xmp?.subject.description.split(",") ?? [],
+    tags: exif.xmp?.subject.description.split(",").map(tag => tag.trim()) ?? [],
     createdAt: ((date) => (date ? new Date(date) : undefined))(
       exif.exif?.DateTimeOriginal?.value[0].replace(
         /(\d{4}):(\d{2}):(\d{2}) /,
