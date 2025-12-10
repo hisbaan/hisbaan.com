@@ -1,5 +1,4 @@
 import { ArticleWithSlug } from "@/lib/articles";
-import React from "react";
 import "@/styles/highlight-js/github-dark.css";
 import { formatDate } from "@/lib/date";
 import MainLayout from "./main-layout";

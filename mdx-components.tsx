@@ -1,5 +1,4 @@
 import { type MDXComponents } from "mdx/types"
-import React from "react"
 import { MdContentCopy } from "react-icons/md"
 
 export function useMDXComponents(components: MDXComponents) {

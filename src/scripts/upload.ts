@@ -134,8 +134,8 @@ async function uploadFile(fileName: string, fileBuffer: Buffer) {
   const thumbnailName = `${splitFileName[0]}-thumbnail.${splitFileName[1]}`;
 
   const [image, thumbnail] = await utapi.uploadFiles([
-    new File([new Blob([fileBuffer])], fileName),
-    new File([thumbnailBuffer], thumbnailName),
+    new File([Buffer.from(fileBuffer)], fileName),
+    new File([Buffer.from(thumbnailBuffer)], thumbnailName),
   ]);
 
   if (image.error || thumbnail.error) {
