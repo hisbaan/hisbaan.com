@@ -2,6 +2,7 @@ pre code.hljs {
   display: block;
   overflow-x: auto;
   padding: 1em;
+  max-width: 100%;
 }
 code.hljs {
   padding: 3px 5px;

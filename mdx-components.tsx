@@ -1,5 +1,5 @@
-import { type MDXComponents } from "mdx/types"
-import { MdContentCopy } from "react-icons/md"
+import { type MDXComponents } from "mdx/types";
+import { MdContentCopy } from "react-icons/md";
 
 export function useMDXComponents(components: MDXComponents) {
   return {
@@ -13,8 +13,8 @@ export function useMDXComponents(components: MDXComponents) {
       <h3 className="mt-3">{children}</h3>
     ),
     pre: ({ children }: { children: React.ReactNode }) => (
-      <pre className="group/copy relative">
-        <div className="absolute right-0 top-0 m-4 size-5 cursor-pointer opacity-0 transition-opacity group-hover/copy:opacity-100">
+      <pre className="group/copy relative min-w-0 overflow-x-auto">
+        <div className="absolute top-0 right-0 m-4 size-5 cursor-pointer opacity-0 transition-opacity group-hover/copy:opacity-100">
           <MdContentCopy size={"1.25rem"} />
         </div>
         {children}
@@ -35,9 +35,7 @@ export function useMDXComponents(components: MDXComponents) {
       <td className="border p-3">{children}</td>
     ),
     ol: ({ children }: { children: React.ReactNode }) => (
-      <ol className="flex list-decimal flex-col gap-2 *:ml-4">
-        {children}
-      </ol>
+      <ol className="flex list-decimal flex-col gap-2 *:ml-4">{children}</ol>
     ),
     ul: ({ children }: { children: React.ReactNode }) => (
       <ul className="flex list-disc flex-col gap-2 *:ml-4">{children}</ul>
@@ -51,5 +49,5 @@ export function useMDXComponents(components: MDXComponents) {
       </a>
     ),
     ...components,
-  }
+  };
 }

@@ -12,7 +12,7 @@ export function ArticleLayout({
 }) {
   return (
     <MainLayout>
-      <div className="flex flex-col gap-5">
+      <div className="flex w-full min-w-0 flex-col gap-5">
         <div className="border-l-2 border-l-neutral-400 pl-2">
           {formatDate(new Date(article.date))}
         </div>
