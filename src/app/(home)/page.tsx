@@ -53,13 +53,12 @@ export default async function Home() {
           Hisbaan — IPA /hɪzbɑːn/
         </div>
         <div className="w-full">
-          Hi there! I&apos;m <strong>Hisbaan</strong>. I&apos;m currently
-          working as a Full Stack Developer at{" "}
+          Hi there! I&apos;m <strong>Hisbaan</strong>. I&apos;m a Software Engineer at{" "}
           <a
             className="underline decoration-neutral-500 transition-colors hover:decoration-neutral-400"
-            href="https://cocoflo.com"
+            href="https://affiniti.com"
           >
-            Cocoflo
+            Affiniti
           </a>
           . I graduated from the University of Toronto with an HBSc in Computer
           Science. I enjoy <strong>programming</strong>,{" "}
