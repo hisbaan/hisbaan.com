@@ -1,6 +1,4 @@
 import nextMDX from "@next/mdx";
-import rehypeHighlight from "rehype-highlight";
-import remarkGfm from "remark-gfm";
 
 const nextConfig = {
   reactStrictMode: true,
@@ -26,8 +24,8 @@ const nextConfig = {
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypeHighlight],
+    remarkPlugins: ["remark-gfm"],
+    rehypePlugins: ["rehype-highlight"],
   },
 });
 

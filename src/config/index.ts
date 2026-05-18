@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { config as dotenvConfig } from "dotenv";
 
-dotenvConfig({ path: ".env" });
+dotenvConfig({ path: ".env", quiet: true });
 
 const EnvSchema = z.object({
   DATABASE_URL: z.string().nonempty(),
